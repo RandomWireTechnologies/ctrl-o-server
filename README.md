@@ -11,10 +11,10 @@ This is the PHP code based on Code Ignitor and Flexi-Auth that provides the data
 ##Setup
 From a fresh Ubuntu install
 
-sudo apt-get update
-sudo apt-get install apache2 mysql-server php5 git libapache2-mod-auth-mysql php5-mysql libapache2-mod-php5 php5-mcrypt
-sudo mysql_install_db
-sudo /usr/bin/mysql_secure_installation
+* sudo apt-get update
+* sudo apt-get install apache2 mysql-server php5 git libapache2-mod-auth-mysql php5-mysql libapache2-mod-php5 php5-mcrypt
+* sudo mysql_install_db
+* sudo /usr/bin/mysql_secure_installation
 
 * edit /etc/apache2/mods-enabled/dir.conf
  * Add "index.php" as first item in DirectoryIndex
