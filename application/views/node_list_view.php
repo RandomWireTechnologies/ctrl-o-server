@@ -40,6 +40,10 @@
 							<tr>
 								<th>Node Name</th>
 								<th>Node Type</th>
+								<th>Hostname</th>
+								<th>IP</th>
+								<th>MAC</th>
+								<th>Enabled</th>
 								<th>Commands</th>
 							</tr>
 						</thead>
@@ -51,6 +55,27 @@
 							</a></td>
 							<td>
 								<?php echo $row['type'];?>
+							</td>
+							<td>
+							    <?php echo $row['hostname'];?>
+							</td>
+							<td>
+							    <?php echo $row['ip'];?>
+							</td>
+							<td>
+							    <?php echo $row['mac'];?>
+							</td>
+							<td>
+							    <?php $yesorno = ""; $enable ="";
+							        if($row['enabled']) {
+							            $yesorno = "Yes";
+							            $enable = "Disable";
+							        } else {
+							            $yesorno = "No";
+							            $enable = "Enable";
+							        }
+							        echo "$yesorno - <a href='".$base_url."node/".$enable."/".$row['id']."'>".$enable."</a>";
+							        ?>
 							</td>
 							<td>
 								<a href="<?php echo $base_url.'node/send/'.$row['id'];?>/open">Open Door</a>
