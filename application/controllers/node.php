@@ -161,7 +161,7 @@ class Node extends CI_Controller {
         $this->nodelist();
     }
     
-    function enable($node_id)
+    function disable($node_id)
     {
         // Check user has privileges to manage nodes, else display a message to notify the user they do not have valid privileges.
         if (! $this->flexi_auth->is_privileged('Manage Nodes'))
