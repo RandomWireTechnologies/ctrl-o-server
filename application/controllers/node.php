@@ -84,6 +84,8 @@ class Node extends CI_Controller {
             $this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges to view nodes.</p>');
             redirect('auth');
         }
+        // Mark that we're in the list for call functions
+        $this->session->set_userdata('called_from', uri_string()); 
         // Load node list data
         $this->load->model('nodes_model');
         $this->data['nodes'] = $this->nodes_model->get_nodes();
@@ -110,6 +112,10 @@ class Node extends CI_Controller {
 	    }
 	    redirect("node/view/$node_id/$page/$limit");
 	}
+	
+        // Mark our location for call functions
+        $this->session->set_userdata('called_from', uri_string()); 
+        
         // Load node data
         $this->load->model('nodes_model');
         $this->data['node'] = $this->nodes_model->get_node($node_id);
@@ -136,12 +142,19 @@ class Node extends CI_Controller {
 	$this->data['message'] = exec("ssh pi@$nodeHostName 'echo $userId > /opt/nfc/doorcmds/$command'");
         // Show update
 	//$this->data['message'] = exec("whoami");
-        //echo "Hello World";
-        $this->data['node'] = $this->nodes_model->get_node($node_id);
-        $this->data['logs'] = $this->nodes_model->get_node_logs($node_id);
-
-        //$this->data['message'] = $this->session->flashdata('message');
-        $this->load->view('node_view', $this->data);
+//        //echo "Hello World";
+//        $this->data['node'] = $this->nodes_model->get_node($node_id);
+//        $this->data['logs'] = $this->nodes_model->get_node_logs($node_id);
+//
+//        //$this->data['message'] = $this->session->flashdata('message');
+//        $this->load->view('node_view', $this->data);
+        // Lets see where we came from
+        $from = $this->session->userdata('called_from');
+        if (isset($from) && $from != '') {
+            redirect($from);
+        } else {
+            redirect('node');
+        }
     }
 
     function enable($node_id)
@@ -157,8 +170,13 @@ class Node extends CI_Controller {
         // Disable Node
         $nodeHostName = $this->nodes_model->enable($node_id);
         
-        // Reload list
-        $this->nodelist();
+        // Lets see where we came from
+        $from = $this->session->userdata('called_from');
+        if (isset($from) && $from != '') {
+            redirect($from);
+        } else {
+            redirect('node');
+        }
     }
     
     function disable($node_id)
@@ -174,8 +192,13 @@ class Node extends CI_Controller {
         // Disable Node
         $nodeHostName = $this->nodes_model->disable($node_id);
         
-        // Reload list
-        $this->nodelist();
+        // Lets see where we came from
+        $from = $this->session->userdata('called_from');
+        if (isset($from) && $from != '') {
+            redirect($from);
+        } else {
+            redirect('node');
+        }
     }
 }
 

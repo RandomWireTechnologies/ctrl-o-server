@@ -32,25 +32,66 @@
 					<fieldset>
 						<?php echo form_open(current_url());    ?>
 						<legend>Pi Node Data</legend>
-						<ul>
-						<li class="info_req">
-							<label for="name">Name:</label>
-							<input name="node[name]" value="<?php echo $node['name'];?>" />
-							<?php echo form_hidden("node[id]",$node['id']);?>
-						</li>
-						<li class="info_req">
-							<label for="type">Type:</label>
-							<input name="node[type]" value="<?php echo $node['type'];?>" />
-						</li>
-						<li>
-							<label for="commands">Commands:</label>
-							<a href=""> </a>
-						</li>
-						<li>
-                                                        <input type=submit name="update_node" value="Update Node" class="link_button large">
-                                                </li>
-
-						</ul>
+						<table>
+						<thead>
+							<tr>
+								<th>Node Name</th>
+								<th>Node Type</th>
+								<th>Hostname</th>
+								<th>IP</th>
+								<th>MAC</th>
+								<th>Enabled</th>
+								<th>Commands</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							<td>
+							    <?php echo form_hidden("node[id]",$node['id']);?>
+							    <input name="node[name]" value="<?php echo $node['name'];?>" />
+							</td>
+							<td>
+								<?php echo $node['type'];?>
+							</td>
+							<td>
+							    <?php echo $node['hostname'];?>
+							</td>
+							<td>
+							    <?php echo $node['ip'];?>
+							</td>
+							<td>
+							    <?php echo $node['mac'];?>
+							</td>
+							<td>
+							    <?php $yesorno = ""; $enable ="";
+							        if($node['enabled']) {
+							            $yesorno = "Yes";
+							            $enable = "Disable";
+							        } else {
+							            $yesorno = "No";
+							            $enable = "Enable";
+							        }
+							        echo "$yesorno - <a href='".$base_url."node/".strtolower($enable)."/".$node['id']."'>".$enable."</a>";
+							        ?>
+							</td>
+							<td>
+								<a href="<?php echo $base_url.'node/send/'.$node['id'];?>/open">Open Door</a>
+								<a href="<?php echo $base_url.'node/send/'.$node['id'];?>/init">Init Card</a>
+							</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+							<td>
+						        <input type=submit name="update_node" value="Update Node" class="link_button large">
+						    </td>
+							<td colspan="6">
+								<!-- input type=submit name="update_cards" value="Update Cards" class="link_button large" -->
+								<!-- input type=submit name="add_card" value="Add New Card" class="link_button large" -->
+							</td>
+							</tr>
+						</tfoot>
+						</table>
 					</fieldset>
 					<fieldset>
 						<legend>Node Log</legend>
@@ -89,7 +130,6 @@
 							</tr>
 						</tfoot>
 						</table>
-						<?php echo form_close();?>
 
 					</fieldset>
 				<?php echo form_close();?>
