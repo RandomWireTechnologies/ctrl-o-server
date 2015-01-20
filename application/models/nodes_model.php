@@ -45,10 +45,16 @@ class Nodes_model extends CI_Model {
 	}
 
 	function get_node_name($node_id) {
-                $query = $this->db->get_where("nodes",array('id' => $node_id));
-                $data = $query->row_array();
-                return $data['name'];
-        }
+        $query = $this->db->get_where("nodes",array('id' => $node_id));
+        $data = $query->row_array();
+        return $data['name'];
+    }
+    
+    function get_node_hostname($node_id) {
+        $query = $this->db->get_where("nodes",array('id' => $node_id));
+        $data = $query->row_array();
+        return $data['hostname'];
+    }
 
 	function update_cards() {
 		if ($is_enabled = $this->input->post('card_enabled')) {
@@ -106,6 +112,20 @@ class Nodes_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+
+    function enable($node_id) {
+        $data = array ('enabled' => 1);
+        $this->db->where('id',$node_id);
+        $this->db->update("nodes",$data);
+        return;
+    }
+    
+    function disable($node_id) {
+        $data = array ('enabled' => 0);
+        $this->db->where('id',$node_id);
+        $this->db->update("nodes",$data);
+        return;
+    }
 
 	function add_new_card() {
 		// Validate data from form

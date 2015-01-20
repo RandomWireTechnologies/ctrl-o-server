@@ -130,10 +130,10 @@ class Node extends CI_Controller {
         // Load node data
         $this->load->model('nodes_model');
         // Get Node address
-	$nodeName = $this->nodes_model->get_node_name($node_id);
+	$nodeHostName = $this->nodes_model->get_node_hostname($node_id);
 	// Send command
 	$userId = $this->flexi_auth->get_user_id();
-	$this->data['message'] = exec("ssh pi@$nodeName 'echo $userId > /opt/nfc/doorcmds/$command'");
+	$this->data['message'] = exec("ssh pi@$nodeHostName 'echo $userId > /opt/nfc/doorcmds/$command'");
         // Show update
 	//$this->data['message'] = exec("whoami");
         //echo "Hello World";
@@ -144,6 +144,39 @@ class Node extends CI_Controller {
         $this->load->view('node_view', $this->data);
     }
 
+    function enable($node_id)
+    {
+        // Check user has privileges to manage nodes, else display a message to notify the user they do not have valid privileges.
+        if (! $this->flexi_auth->is_privileged('Manage Nodes'))
+        {
+            $this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges to manage nodes.</p>');
+            redirect('node');
+        }
+        // Load node data
+        $this->load->model('nodes_model');
+        // Disable Node
+        $nodeHostName = $this->nodes_model->enable($node_id);
+        
+        // Reload list
+        $this->nodelist();
+    }
+    
+    function enable($node_id)
+    {
+        // Check user has privileges to manage nodes, else display a message to notify the user they do not have valid privileges.
+        if (! $this->flexi_auth->is_privileged('Manage Nodes'))
+        {
+            $this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges to manage nodes.</p>');
+            redirect('node');
+        }
+        // Load node data
+        $this->load->model('nodes_model');
+        // Disable Node
+        $nodeHostName = $this->nodes_model->disable($node_id);
+        
+        // Reload list
+        $this->nodelist();
+    }
 }
 
 /* End of file node.php */

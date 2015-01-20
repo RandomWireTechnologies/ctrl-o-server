@@ -74,7 +74,7 @@
 							            $yesorno = "No";
 							            $enable = "Enable";
 							        }
-							        echo "$yesorno - <a href='".$base_url."node/".$enable."/".$row['id']."'>".$enable."</a>";
+							        echo "$yesorno - <a href='".$base_url."node/".strtolower($enable)."/".$row['id']."'>".$enable."</a>";
 							        ?>
 							</td>
 							<td>
@@ -86,7 +86,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-							<td colspan="3">
+							<td colspan="7">
 								<!-- input type=submit name="update_cards" value="Update Cards" class="link_button large" -->
 								<!-- input type=submit name="add_card" value="Add New Card" class="link_button large" -->
 							</td>
