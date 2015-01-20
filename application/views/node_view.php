@@ -30,8 +30,9 @@
 			<?php } ?>
 				
 					<fieldset>
-						<?php echo form_open(current_url());    ?>
 						<legend>Pi Node Data</legend>
+						
+			            <?php echo form_open(current_url());?>
 						<table>
 						<thead>
 							<tr>
@@ -85,16 +86,67 @@
 							<td>
 						        <input type=submit name="update_node" value="Update Node" class="link_button large">
 						    </td>
-							<td colspan="6">
-								<!-- input type=submit name="update_cards" value="Update Cards" class="link_button large" -->
-								<!-- input type=submit name="add_card" value="Add New Card" class="link_button large" -->
-							</td>
+							<td colspan="6"></td>
 							</tr>
 						</tfoot>
 						</table>
 					</fieldset>
 					<fieldset>
+					    <legend>Node Access</legend>
+					    <legend>Add User Privileges</legend>
+					    
+			            <?php echo form_open(current_url());?>
+					    <table>
+					        <thead>
+					            <th>User</th>
+					            <th>Schedule</th>
+					            <th>Membership Type</th>
+					        </thead>
+					        <tbody>
+					            <tr>
+							    <?php echo form_hidden("user_priv[node_id]",$node['id']);?>
+					            <td><?php echo form_dropdown("user_priv[user_id]",$users,$user_priv['user_id']);?></td>
+					            <td><?php echo form_dropdown("user_priv[schedule_id]",$schedules,$user_priv['schedule_id']);?></td>
+					            <td><?php echo form_dropdown("user_priv[membership_type_id]",$membership_types,$user_priv['membership_type_id']);?></td>
+					            </tr>
+					        </tbody>
+					        <tfoot>
+					            <td><input type=submit name="add_privileges" value="Add Privileges" class="link_button large"></td>
+					            <td colspan="2"></td>
+					        </tfoot>
+					    </table>
+				        <?php echo form_close();?>
+					    <legend>Current User Privileges</legend>
+					    <table>
+					        <thead>
+					            <th>User</th>
+					            <th>Schedule</th>
+					            <th>Membership Type</th>
+					            <th>Delete</th>
+					        </thead>
+					        <tbody>
+					            <?php foreach($user_privileges as $user_privilege) : ?>
+			                    <?php echo form_open(current_url());?>
+							    <?php echo form_hidden("user_priv[id]",$user_privilege['id']);?>
+					            <tr>
+    					            <td><?php echo $user_privilege['user'];?></td>
+    					            <td><?php echo $user_privilege['schedule'];?></td>
+    					            <td><?php echo $user_privilege['membership_type'];?></td>
+    					            <td><input type=submit name="delete_privilege" value="Remove" class="link_button large"></td>
+					            </tr>
+				                <?php echo form_close();?>
+					            <?php endforeach;?>
+					        </tbody>
+					        <tfoot>
+					            <td colspan="4"></td>
+					        </tfoot>
+					    </table>
+					</fieldset>
+					
+					<fieldset>
 						<legend>Node Log</legend>
+						
+			            <?php echo form_open(current_url());?>
 						<table>
 						<thead>
 							<tr>
@@ -130,9 +182,9 @@
 							</tr>
 						</tfoot>
 						</table>
+				        <?php echo form_close();?>
 
 					</fieldset>
-				<?php echo form_close();?>
 			</div>
 		</div>
 	</div>	

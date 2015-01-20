@@ -118,7 +118,12 @@ class Node extends CI_Controller {
         
         // Load node data
         $this->load->model('nodes_model');
+        $this->load->model('access_model');
         $this->data['node'] = $this->nodes_model->get_node($node_id);
+        $this->data['users'] = $this->access_model->get_users();
+        $this->data['schedules'] = $this->access_model->get_schedules();
+        $this->data['membership_types'] = $this->access_model->get_membership_types();
+        $this->data['user_privileges'] = $this->access_model->get_user_privileges($node_id);
         $this->data['logs'] = $this->nodes_model->get_node_logs($node_id,$limit,$page*$limit);
 
         $this->data['message'] = $this->session->flashdata('message');
