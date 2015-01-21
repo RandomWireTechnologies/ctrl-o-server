@@ -26,7 +26,7 @@ class Schedules_model extends CI_Model {
     
     function get_days_of_week() {
         // Returns a list of days of week for dropdown
-        return array('null'=>"Any",1=>"Sunday",2=>"Monday",3=>"Tuesday",4=>"Wednesday",5=>"Thursday",6=>"Friday",7=>"Saturday");
+        return array(''=>"Any",1=>"Sunday",2=>"Monday",3=>"Tuesday",4=>"Wednesday",5=>"Thursday",6=>"Friday",7=>"Saturday");
     }
     
     function get_schedule($schedule_id) {
@@ -45,6 +45,13 @@ class Schedules_model extends CI_Model {
     
     function update_schedule_times() {
         $schedule_time = $this->input->post('schedule_time');
+
+        if ($schedule_time['day_of_week'] == "") {$schedule_time['day_of_week'] = null;}
+	if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
+	if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
+	if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
+	if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
+
         if ($schedule_time) {
             $this->db->where('id',$schedule_time['id']);
             $this->db->update('schedule_times',$schedule_time);
@@ -76,8 +83,14 @@ class Schedules_model extends CI_Model {
     
     function add_schedule_times() {
         // Validate data from form
-        $schedule_time = $this->input->post('schedule_time');
+        $schedule_time = $this->input->post('new_schedule_time');
         //************************ ADD CHECKING HERE ********************************************//
+        if ($schedule_time['day_of_week'] == "") {$schedule_time['day_of_week'] = null;}
+	if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
+	if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
+	if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
+	if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
+
         // Insert data into database
         if ($this->db->insert("schedule_times",$schedule_time)) {
             $this->data['message'] = "<p class='status_msg'>Schedule Added</p>";
