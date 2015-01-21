@@ -72,11 +72,11 @@ class Access_model extends CI_Model {
 	 * Gets a list of user privileges set for a perticular node.
 	 */
 	function get_user_privileges($node_id) {
-		$this->db->select("concat(user_profiles.first_name,user_profiles.last_name) as user,schedules.name as schedule,membership_types.name as membership_type");
+		$this->db->select("access_user_priveleges.id as id,ifnull(concat(user_profiles.first_name,' ',user_profiles.last_name),'Any') as user,ifnull(schedules.name,'Any') as schedule,if(access_user_priveleges.membership_type_id=-1,'Any',ifnull(membership_types.name,'None')) as membership_type", FALSE);
 		$this->db->from("access_user_priveleges");
-		$this->db->join("user_profiles","user_profiles.user_id = access_user_priveleges.user_id");
-		$this->db->join("schedules","schedules.id = access_user_priveleges.schedule_id");
-		$this->db->join("membership_types","membership_types.id = access_user_priveleges.membership_type_id");
+		$this->db->join("user_profiles","user_profiles.user_id = access_user_priveleges.user_id",'left');
+		$this->db->join("schedules","schedules.id = access_user_priveleges.schedule_id",'left');
+		$this->db->join("membership_types","membership_types.id = access_user_priveleges.membership_type_id",'left');
 		$this->db->where("access_user_priveleges.node_id",$node_id);
 		$this->db->order_by("user","asc");
 		//$this->db->limit($limit,$offset);
