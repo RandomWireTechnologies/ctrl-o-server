@@ -36,13 +36,15 @@ class Access_model extends CI_Model {
 	 * get_schedules
 	 * Gets a list of schedules including option for no schedule (null).
 	 */
-	function get_schedules() {
+	function get_schedules($add_none=True) {
 		$this->db->select("id,name", FALSE);
 		$this->db->order_by("name", "asc");
 		$query = $this->db->get("schedules");
 		$data = $query->result_array();
 		$result = array();
-		$result['null'] = "None";
+		if ($add_none) {
+			$result['null'] = "None";
+		}
 		foreach ($data as $item) {
 			$result[$item['id']] = $item['name'];
 		}
@@ -96,15 +98,15 @@ class Access_model extends CI_Model {
 	}
 	
 	function enableAutoUnlock($unlock_id) {
-	    $data = array('enabled',1);
+	    $data = array('enabled'=>1);
 	    $this->db->where("id", $unlock_id);
 		$this->db->update("access_manual_unlock", $data);
 	}
 	
 	function disableAutoUnlock($unlock_id) {
-	    $data = array('enabled',0);
+	    $data = array('enabled'=>0);
 	    $this->db->where("id", $unlock_id);
-		$this->db->update("access_manual_unlock", $data);
+            $this->db->update("access_manual_unlock", $data);
 	}
 	
 	function add_unlock()

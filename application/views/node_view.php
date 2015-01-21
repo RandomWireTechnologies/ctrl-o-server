@@ -117,10 +117,10 @@
     							            $yesorno = "No";
     							            $enable = "Enable";
     							        }
-    							        echo "$yesorno - <a href='".$base_url."node/unlock/".$unlock_schedule['id']."/".strtolower($enable)"'>".$enable."</a>";
-    							        ?>
+    							        echo "$yesorno - ";?>
+                                                                <a href="<?php echo $base_url."node/unlock/".$unlock_schedule['id']."/".strtolower($enable);?>"> <?php echo $enable;?></a>
     					            </td>
-    					            <td><input type=submit name="delete_unlock" value "Delete" class="link_button large"></td>
+    					            <td><input type=submit name="delete_unlock" value="Delete" class="link_button large"></td>
 					            </tr>
 					            <?php echo form_close();?>
 					            <?php endforeach;?>
@@ -132,14 +132,14 @@
 					                    <input type=text name="new_unlock[name]" value="<?php echo $new_unlock['name'];?>" />
 					                </td>
 					                <td>
-					                    <?php echo form_dropdown("new_unlock[schedule_id]",$schedules,$new_unlock['schedule_id']);?>
+					                    <?php echo form_dropdown("new_unlock[schedule_id]",$schedules_for_unlock,$new_unlock['schedule_id']);?>
 					                </td>
 					                <td>
 					                    <input type=hidden name="new_unlock[enabled]" value="0"/>
 								        <input type=checkbox name="new_unlock[enabled]" value="1"  <?php echo ($new_unlock['enabled'] == 1) ? 'checked="checked"' : "";?> />
 					                </td>
 					                <td>
-					                    <input type=submit name="add_unlock" value "Add Unlock Schedule" class="link_button large">
+					                    <input type=submit name="add_unlock" value="Add Unlock Schedule" class="link_button large">
 					                </td>
 					            </tr>
 					            <?php echo form_close();?>

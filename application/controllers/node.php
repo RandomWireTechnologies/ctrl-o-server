@@ -148,6 +148,7 @@ class Node extends CI_Controller {
         $this->data['node'] = $this->nodes_model->get_node($node_id);
         $this->data['users'] = $this->access_model->get_users();
         $this->data['schedules'] = $this->access_model->get_schedules();
+        $this->data['schedules_for_unlock'] = $this->access_model->get_schedules(False);
         $this->data['membership_types'] = $this->access_model->get_membership_types();
         $this->data['user_privileges'] = $this->access_model->get_user_privileges($node_id);
         $this->data['unlock_schedules'] = $this->access_model->get_unlock_schedules($node_id);
@@ -243,7 +244,7 @@ class Node extends CI_Controller {
         }
         // Load node data
         $this->load->model('access_model');
-        if ($enableordisable = "enable") {
+        if ($enableordisable == "enable") {
             $this->access_model->enableAutoUnlock($unlock_id);
         } else {
             $this->access_model->disableAutoUnlock($unlock_id);
