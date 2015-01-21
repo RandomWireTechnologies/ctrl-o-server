@@ -90,6 +90,68 @@
 							</tr>
 						</tfoot>
 						</table>
+					    <?php echo form_close();?>
+					</fieldset>
+					<fieldset>
+					    <legend>Automatic Unlock Schedules</legend>
+					    <table>
+					        <thead>
+					            <th>Name</th>
+					            <th>Schedule</th>
+					            <th>Enabled</th>
+					            <th>Add/Delete</th>
+					        </thead>
+					        <tbody>
+					            <?php foreach($unlock_schedules as $unlock_schedule) : ?>
+					            <?php echo form_open(current_url());?>
+					            <tr>
+					                <input type=hidden name="unlock[id]" value="<?php echo $unlock_schedule['id'];?>"/>
+					                <td><?php echo $unlock_schedule['name'];?></td>
+    					            <td><?php echo $unlock_schedule['schedule'];?></td>
+    					            <td>
+    					                <?php $yesorno = ""; $enable ="";
+    							        if($unlock_schedule['enabled']) {
+    							            $yesorno = "Yes";
+    							            $enable = "Disable";
+    							        } else {
+    							            $yesorno = "No";
+    							            $enable = "Enable";
+    							        }
+    							        echo "$yesorno - <a href='".$base_url."node/unlock/".$unlock_schedule['id']."/".strtolower($enable)"'>".$enable."</a>";
+    							        ?>
+    					            </td>
+    					            <td><input type=submit name="delete_unlock" value "Delete" class="link_button large"></td>
+					            </tr>
+					            <?php echo form_close();?>
+					            <?php endforeach;?>
+					            
+					            <?php echo form_open(current_url());?>
+					            <tr>
+					                <td>
+					                    <input type=hidden name="new_unlock[node_id]" value="<?php echo $node['id'];?>"/>
+					                    <input type=text name="new_unlock[name]" value="<?php echo $new_unlock['name'];?>" />
+					                </td>
+					                <td>
+					                    <?php echo form_dropdown("new_unlock[schedule_id]",$schedules,$new_unlock['schedule_id']);?>
+					                </td>
+					                <td>
+					                    <input type=hidden name="new_unlock[enabled]" value="0"/>
+								        <input type=checkbox name="new_unlock[enabled]" value="1"  <?php echo ($new_unlock['enabled'] == 1) ? 'checked="checked"' : "";?> />
+					                </td>
+					                <td>
+					                    <input type=submit name="add_unlock" value "Add Unlock Schedule" class="link_button large">
+					                </td>
+					            </tr>
+					            <?php echo form_close();?>
+					        </tbody>
+					        <tfoot>
+					            <tr>
+					                <td colspan="4">
+					                    
+					                </td>
+					            </tr>
+					        </tfoot>
+					    </table>
 					</fieldset>
 					<fieldset>
 					    <legend>Node Access</legend>
@@ -111,7 +173,7 @@
 					            </tr>
 					        </tbody>
 					        <tfoot>
-					            <td><input type=submit name="add_privileges" value="Add Privileges" class="link_button large"></td>
+					            <td><input type=submit name="add_user_privilege" value="Add Privileges" class="link_button large"></td>
 					            <td colspan="2"></td>
 					        </tfoot>
 					    </table>
@@ -132,7 +194,7 @@
     					            <td><?php echo $user_privilege['user'];?></td>
     					            <td><?php echo $user_privilege['schedule'];?></td>
     					            <td><?php echo $user_privilege['membership_type'];?></td>
-    					            <td><input type=submit name="delete_privilege" value="Remove" class="link_button large"></td>
+    					            <td><input type=submit name="delete_user_privilege" value="Remove" class="link_button large"></td>
 					            </tr>
 				                <?php echo form_close();?>
 					            <?php endforeach;?>

@@ -83,6 +83,75 @@ class Access_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	
+	function get_unlock_schedules($node_id) {
+	    $this->db->select("access_manual_unlock.id as id, access_manual_unlock.name as name, schedules.name as schedule, access_manual_unlock.enabled as enabled");
+	    $this->db->from("access_manual_unlock");
+	    $this->db->join("schedules","schedules.id = access_manual_unlock.schedule_id",'left');
+	    $this->db->where("access_manual_unlock.node_id",$node_id);
+		$this->db->order_by("name","asc");
+		//$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	
+	function enableAutoUnlock($unlock_id) {
+	    $data = array('enabled',1);
+	    $this->db->where("id", $unlock_id);
+		$this->db->update("access_manual_unlock", $data);
+	}
+	
+	function disableAutoUnlock($unlock_id) {
+	    $data = array('enabled',0);
+	    $this->db->where("id", $unlock_id);
+		$this->db->update("access_manual_unlock", $data);
+	}
+	
+	function add_unlock()
+	{
+	    // Validate data from form
+		$unlock = $this->input->post('new_unlock');
+	//************************ ADD CHECKING HERE ********************************************//
+		// Insert data into database
+		if ($this->db->insert("access_manual_unlock",$unlock)) {
+			$this->data['message'] = "<p class='status_msg'>Auto Unlock Schedule Added</p>";
+		} else {
+			$this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
+		}
+	}
+
+    function delete_unlock()
+	{
+	    // Validate data from form
+		$unlock = $this->input->post('unlock');
+		if (isset($unlock['id'])) {
+    		$this->db->where("id", $unlock['id']);
+    		$this->db->delete("access_manual_unlock");
+    	}
+	}
+	
+	function add_user_privilege()
+    {
+	    // Validate data from form
+		$privilege = $this->input->post('user_priv');
+	//************************ ADD CHECKING HERE ********************************************//
+		// Insert data into database
+		if ($this->db->insert("access_user_priveleges",$privilege)) {
+			$this->data['message'] = "<p class='status_msg'>User Privileges Added</p>";
+		} else {
+			$this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
+		}
+    }
+
+    function delete_user_privilege()
+	{
+	    // Validate data from form
+		$privilege = $this->input->post('user_priv');
+		if (isset($privilege['id'])) {
+    		$this->db->where("id", $privilege['id']);
+    		$this->db->delete("access_user_priveleges");
+    	}
+	}
 //
 //	function get_all_user_cards() {
 //		$this->db->select("*,cards.id as card_id");

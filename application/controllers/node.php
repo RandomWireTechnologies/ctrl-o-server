@@ -102,33 +102,55 @@ class Node extends CI_Controller {
             redirect('auth');
         }
 
-	$scroll = $this->input->post('scroll_log');
-	if ($scroll == "Next") {
-	    $page++;
-	    redirect("node/view/$node_id/$page/$limit");
-	} else if ($scroll == "Previous") {
-            if ($page > 0) {
-		$page--;
-	    }
-	    redirect("node/view/$node_id/$page/$limit");
-	}
+        // Load node data
+        $this->load->model('nodes_model');
+        $this->load->model('access_model');
+
+    	$scroll = $this->input->post('scroll_log');
+    	if ($scroll == "Next") {
+    	    $page++;
+    	    redirect("node/view/$node_id/$page/$limit");
+    	} else if ($scroll == "Previous") {
+                if ($page > 0) {
+    		$page--;
+    	    }
+    	    redirect("node/view/$node_id/$page/$limit");
+    	}
+    	if ($this->input->post('update_node')) {
+    	    $this->node_model->update_node();
+    	}
+    	if ($this->input->post('add_unlock')) {
+    	    $this->access_model->add_unlock();
+    	}
+    	if ($this->input->post('delete_unlock')) {
+    	    $this->access_model->delete_unlock();
+    	}
+    	if ($this->input->post('add_user_privilege')) {
+    	    $this->access_model->add_user_privilege();
+    	}
+    	if ($this->input->post('delete_user_privilege')) {
+    	    $this->access_model->delete_user_privilege();
+    	}
 	
         // Mark our location for call functions
         $this->session->set_userdata('called_from', uri_string()); 
         
-        // Load node data
-        $this->load->model('nodes_model');
-        $this->load->model('access_model');
-	if (!isset($this->data['user_priv'])) {
+	    if (!isset($this->data['user_priv'])) {
             $this->data['user_priv']['user_id']=-1;
             $this->data['user_priv']['schedule_id']=null;
             $this->data['user_priv']['membership_type_id']=null;
+        }
+        if (!isset($this->data['new_unlock'])) {
+            $this->data['new_unlock']['name']="";
+            $this->data['new_unlock']['schedule_id']=null;
+            $this->data['new_unlock']['enabled']=1;
         }
         $this->data['node'] = $this->nodes_model->get_node($node_id);
         $this->data['users'] = $this->access_model->get_users();
         $this->data['schedules'] = $this->access_model->get_schedules();
         $this->data['membership_types'] = $this->access_model->get_membership_types();
         $this->data['user_privileges'] = $this->access_model->get_user_privileges($node_id);
+        $this->data['unlock_schedules'] = $this->access_model->get_unlock_schedules($node_id);
         $this->data['logs'] = $this->nodes_model->get_node_logs($node_id,$limit,$page*$limit);
 
         $this->data['message'] = $this->session->flashdata('message');
@@ -201,6 +223,31 @@ class Node extends CI_Controller {
         $this->load->model('nodes_model');
         // Disable Node
         $nodeHostName = $this->nodes_model->disable($node_id);
+        
+        // Lets see where we came from
+        $from = $this->session->userdata('called_from');
+        if (isset($from) && $from != '') {
+            redirect($from);
+        } else {
+            redirect('node');
+        }
+    }
+    
+    function unlock($unlock_id,$enableordisable)
+    {
+        // Check user has privileges to manage nodes, else display a message to notify the user they do not have valid privileges.
+        if (! $this->flexi_auth->is_privileged('Manage Nodes'))
+        {
+            $this->session->set_flashdata('message', '<p class="error_msg">You do not have privileges to manage nodes.</p>');
+            redirect('node');
+        }
+        // Load node data
+        $this->load->model('access_model');
+        if ($enableordisable = "enable") {
+            $this->access_model->enableAutoUnlock($unlock_id);
+        } else {
+            $this->access_model->disableAutoUnlock($unlock_id);
+        }
         
         // Lets see where we came from
         $from = $this->session->userdata('called_from');

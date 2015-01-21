@@ -56,6 +56,14 @@ class Nodes_model extends CI_Model {
         return $data['hostname'];
     }
 
+    function update_node() {
+        $node = $this->input->post('node');
+        if ($node) {
+            $this->db->where('id',$node['id']);
+            $this->db->update('nodes',$node);
+        }
+    }
+
 	function update_cards() {
 		if ($is_enabled = $this->input->post('card_enabled')) {
 			$fail_count = 0;
