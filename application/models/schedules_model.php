@@ -45,10 +45,33 @@ class Schedules_model extends CI_Model {
 
     function update_schedule_times() {
         $schedule_time = $this->input->post('schedule_time');
-        if ($node) {
+        if ($schedule_time) {
             $this->db->where('id',$schedule_time['id']);
             $this->db->update('schedule_times',$schedule_time);
         }
+    }
+    
+    function add_schedule() {
+        / Validate data from form
+		$schedule = $this->input->post('schedule');
+	//************************ ADD CHECKING HERE ********************************************//
+		// Insert data into database
+		if ($this->db->insert("schedules",$schedule)) {
+			$this->data['message'] = "<p class='status_msg'>Schedule Added</p>";
+		} else {
+			$this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
+		}
+    }
+    
+    function delete_schedule() {
+        / Validate data from form
+		$schedule = $this->input->post('schedule');
+	//************************ ADD CHECKING HERE ********************************************//
+		// Delete data
+		$this->db->where('id',$schedule['id']);
+		$this->db->delete("schedules");
+		$this->db->where('schedule_id',$schedule['id']);
+		$this->db->delete("schedule_times");
     }
 
 	function add_schedule_times() {

@@ -49,6 +49,7 @@
 								<?php echo $row['name'];?>
 							</a></td>
 							<td>
+							    <?php echo form_hidden("schedule[id]",$row['id']);?>
 								<input type=submit name="delete_schedule" value="Delete" class="link_button large"/>
 							</td>
 							</tr>

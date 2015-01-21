@@ -87,6 +87,13 @@ class Schedule extends CI_Controller {
         // Mark that we're in the list for call functions
         $this->session->set_userdata('called_from', uri_string()); 
         
+        if ($this->input->post('add_schedule')) {
+    	    $this->schedules_model->add_schedule();
+    	}
+    	if ($this->input->post('delete_schedule')) {
+    	    $this->schedules_model->delete_schedule();
+    	}
+        
         if (!isset($this->data['schedule'])) {
             $this->data['schedule']['name']="";
         }
