@@ -155,36 +155,13 @@
 					</fieldset>
 					<fieldset>
 					    <legend>Node Access</legend>
-					    <legend>Add User Privileges</legend>
-					    
-			            <?php echo form_open(current_url());?>
+					    <legend>User Privileges</legend>
 					    <table>
 					        <thead>
 					            <th>User</th>
 					            <th>Schedule</th>
 					            <th>Membership Type</th>
-					        </thead>
-					        <tbody>
-					            <tr>
-							    <?php echo form_hidden("user_priv[node_id]",$node['id']);?>
-					            <td><?php echo form_dropdown("user_priv[user_id]",$users,$user_priv['user_id']);?></td>
-					            <td><?php echo form_dropdown("user_priv[schedule_id]",$schedules,$user_priv['schedule_id']);?></td>
-					            <td><?php echo form_dropdown("user_priv[membership_type_id]",$membership_types,$user_priv['membership_type_id']);?></td>
-					            </tr>
-					        </tbody>
-					        <tfoot>
-					            <td><input type=submit name="add_user_privilege" value="Add Privileges" class="link_button large"></td>
-					            <td colspan="2"></td>
-					        </tfoot>
-					    </table>
-				        <?php echo form_close();?>
-					    <legend>Current User Privileges</legend>
-					    <table>
-					        <thead>
-					            <th>User</th>
-					            <th>Schedule</th>
-					            <th>Membership Type</th>
-					            <th>Delete</th>
+					            <th>Commands</th>
 					        </thead>
 					        <tbody>
 					            <?php foreach($user_privileges as $user_privilege) : ?>
@@ -198,11 +175,21 @@
 					            </tr>
 				                <?php echo form_close();?>
 					            <?php endforeach;?>
+					            <?php echo form_open(current_url());?>
+					            <tr>
+							    <?php echo form_hidden("user_priv[node_id]",$node['id']);?>
+					            <td><?php echo form_dropdown("user_priv[user_id]",$users,$user_priv['user_id']);?></td>
+					            <td><?php echo form_dropdown("user_priv[schedule_id]",$schedules,$user_priv['schedule_id']);?></td>
+					            <td><?php echo form_dropdown("user_priv[membership_type_id]",$membership_types,$user_priv['membership_type_id']);?></td>
+					            <td><input type=submit name="add_user_privilege" value="Add Privileges" class="link_button large"></td>
+					            </tr>
+				                <?php echo form_close();?>
 					        </tbody>
 					        <tfoot>
 					            <td colspan="4"></td>
 					        </tfoot>
 					    </table>
+					    
 					</fieldset>
 					
 					<fieldset>
