@@ -73,20 +73,20 @@
 						    <?php echo form_open(current_url());?>
 						    <tr>
 						        <td>
-						            <?php echo form_hidden("schedule_time[schedule_id]",$schedule['id']);?>
-							        <?php echo form_dropdown("schedule_time[day_of_week]",$days_of_week,$schedule_time['day_of_week']);?>
+						            <?php echo form_hidden("new_schedule_time[schedule_id]",$schedule['id']);?>
+							        <?php echo form_dropdown("new_schedule_time[day_of_week]",$days_of_week,$new_schedule_time['day_of_week']);?>
     							</td>
     							<td>
-    								<input type=text name="schedule_time[start_date]" value="<?php echo $schedule_time['start_date'];?>" />
+    								<input type=text name="new_schedule_time[start_date]" value="<?php echo $new_schedule_time['start_date'];?>" />
     							</td>
     							<td>
-    								<input type=text name="schedule_time[end_date]" value="<?php echo $schedule_time['end_date'];?>" />
+    								<input type=text name="new_schedule_time[end_date]" value="<?php echo $new_schedule_time['end_date'];?>" />
     							</td>
     							<td>
-    								<input type=text name="schedule_time[start_time]" value="<?php echo $schedule_time['start_time'];?>" />
+    								<input type=text name="new_schedule_time[start_time]" value="<?php echo $new_schedule_time['start_time'];?>" />
     							</td>
     							<td>
-    								<input type=text name="schedule_time[end_time]" value="<?php echo $schedule_time['end_time'];?>" />
+    								<input type=text name="new_schedule_time[end_time]" value="<?php echo $new_schedule_time['end_time'];?>" />
     							</td>
     							<td>
     							    <input type=submit name="add_schedule_times" value="Add" class="link_button large">

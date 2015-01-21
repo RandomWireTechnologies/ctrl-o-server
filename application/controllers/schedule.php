@@ -120,6 +120,14 @@ class Schedule extends CI_Controller {
     	if ($this->input->post('delete_schedule_times')) {
     	    $this->schedules_model->delete_schedule_times();
     	}
+    	
+    	if (!isset($this->data['new_schedule_time'])) {
+    	    $this->data['new_schedule_time']['day_of_week'] = 'null';
+    	    $this->data['new_schedule_time']['start_date'] = '';
+    	    $this->data['new_schedule_time']['end_date'] = '';
+    	    $this->data['new_schedule_time']['start_time'] = '';
+    	    $this->data['new_schedule_time']['end_time'] = '';
+    	}
 	
         // Mark our location for call functions
         $this->session->set_userdata('called_from', uri_string()); 

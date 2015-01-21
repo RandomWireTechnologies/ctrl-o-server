@@ -33,7 +33,7 @@ class Schedules_model extends CI_Model {
 		// Select schedule data to be displayed.
 		$this->db->where("id",$schedule_id);
 		$query = $this->db->get("schedules");
-		return $query->result_array();
+		return $query->row_array();
 	}
 	
 	function get_schedule_times($schedule_id) {
