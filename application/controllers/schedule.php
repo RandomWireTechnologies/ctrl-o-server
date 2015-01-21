@@ -86,6 +86,11 @@ class Schedule extends CI_Controller {
         }
         // Mark that we're in the list for call functions
         $this->session->set_userdata('called_from', uri_string()); 
+        
+        if (!isset($this->data['schedule'])) {
+            $this->data['schedule']['name']="";
+        }
+        
         // Load node list data
         $this->load->model('schedules_model');
         $this->data['schedules'] = $this->schedules_model->get_schedules();
