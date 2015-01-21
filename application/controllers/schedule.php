@@ -86,6 +86,8 @@ class Schedule extends CI_Controller {
         }
         // Mark that we're in the list for call functions
         $this->session->set_userdata('called_from', uri_string()); 
+        // Load node list data
+        $this->load->model('schedules_model');
         
         if ($this->input->post('add_schedule')) {
     	    $this->schedules_model->add_schedule();
@@ -98,8 +100,6 @@ class Schedule extends CI_Controller {
             $this->data['schedule']['name']="";
         }
         
-        // Load node list data
-        $this->load->model('schedules_model');
         $this->data['schedules'] = $this->schedules_model->get_schedules();
         $this->data['message'] = $this->session->flashdata('message');
         $this->load->view('schedules_view', $this->data);
