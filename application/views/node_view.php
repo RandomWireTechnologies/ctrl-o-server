@@ -97,7 +97,7 @@
 					    <table>
 					        <thead>
 					            <th>Name</th>
-					            <th>Schedule</th>
+					            <th><a href="<?php echo $base_url;?>schedule">Schedule</a></th>
 					            <th>Enabled</th>
 					            <th>Add/Delete</th>
 					        </thead>
@@ -163,7 +163,7 @@
 					    <table>
 					        <thead>
 					            <th>User</th>
-					            <th>Schedule</th>
+					            <th><a href="<?php echo $base_url;?>schedule">Schedule</a></th>
 					            <th>Membership Type</th>
 					            <th>Commands</th>
 					        </thead>
