@@ -106,12 +106,12 @@
 					            <?php echo form_open(current_url());?>
 					            <tr>
 					                <input type=hidden name="unlock[id]" value="<?php echo $unlock_schedule['id'];?>"/>
-					                <td>
-					                    <?php if($unlock_schedule['schedule_id']) {?><a href="<?php echo $base_url."schedule/view/".$unlock_schedule['schedule_id'];?>"> <?php } ?>
-					                        <?php echo $unlock_schedule['name'];?>
-					                    <?php if($unlock_schedule['schedule_id']) {?></a><?php } ?>
-					                </td>
-    					            <td><?php echo $unlock_schedule['schedule'];?></td>
+					                <td><?php echo $unlock_schedule['name'];?></td>
+    					            <td>
+    					                <?php if($unlock_schedule['schedule_id']) {?><a href="<?php echo $base_url."schedule/view/".$unlock_schedule['schedule_id'];?>"> <?php } ?>
+    					                    <?php echo $unlock_schedule['schedule'];?>
+    					                <?php if($unlock_schedule['schedule_id']) {?></a><?php } ?>    
+    					            </td>
     					            <td>
     					                <?php $yesorno = ""; $enable ="";
     							        if($unlock_schedule['enabled']) {
