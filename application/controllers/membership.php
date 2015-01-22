@@ -54,15 +54,17 @@ class Membership extends CI_Controller {
         $user_id = $this->flexi_auth->get_user_id();
 
         $this->load->model('memberships_model');
+        
+        if ($this->input->post("activate")) {
+            $this->memberships_model->activate();
+        }
+        
         $this->data['current_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Current');
         $this->data['new_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Unused');
         $this->data['used_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Expired');
         $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
         $this->data['user_id'] = $user_id;
         //$this->data['membership_types'] = $this->memberships_model->get_membership_types();
-        if ($this->input->post("activate")) {
-            $this->memberships_model->activate();
-        }
 
         // Set any returned status/error messages.
         $this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
