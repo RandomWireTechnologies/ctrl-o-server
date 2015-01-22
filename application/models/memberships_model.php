@@ -130,7 +130,7 @@ class Memberships_model extends CI_Model {
 	    $activates = array_keys($data);
 	    $id = $activates[0];
 	    // Check to make sure rights to activate
-	    if ($this->flexi_auth->is_privileged('Manage Memberships') || is_membership_owner($id)) {
+	    if ($this->flexi_auth->is_privileged('Manage Memberships') || $this->is_membership_owner($id)) {
 	        // Get membership length
 	        $this->db->select("membership_types.length as length");
 	        $this->db->from("memberships");
