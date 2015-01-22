@@ -36,6 +36,10 @@
                                 <a href="<?php echo $base_url;?>node">Manage Nodes</a>
                             </li>
                             <li>
+                                <a href="<?php echo $base_url;?>schedule">Manage Schedules</a>
+                            </li>
+                            
+                            <li>
                                 <a href="<?php echo $base_url;?>auth_admin/manage_user_accounts">Manage User Accounts</a>			
                             </li>
                             <li>

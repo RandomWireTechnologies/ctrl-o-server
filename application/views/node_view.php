@@ -106,7 +106,11 @@
 					            <?php echo form_open(current_url());?>
 					            <tr>
 					                <input type=hidden name="unlock[id]" value="<?php echo $unlock_schedule['id'];?>"/>
-					                <td><?php echo $unlock_schedule['name'];?></td>
+					                <td>
+					                    <?php if($unlock_schedule['schedule_id']) {?><a href="<?php echo $base_url."schedule/view/".$unlock_schedule['schedule_id'];?>"> <?php } ?>
+					                        <?php echo $unlock_schedule['name'];?>
+					                    <?php if($unlock_schedule['schedule_id']) {?></a><?php } ?>
+					                </td>
     					            <td><?php echo $unlock_schedule['schedule'];?></td>
     					            <td>
     					                <?php $yesorno = ""; $enable ="";
@@ -169,7 +173,11 @@
 							    <?php echo form_hidden("user_priv[id]",$user_privilege['id']);?>
 					            <tr>
     					            <td><?php echo $user_privilege['user'];?></td>
-    					            <td><?php echo $user_privilege['schedule'];?></td>
+    					            <td>
+    					                <?php if($user_privilege['schedule_id']) {?><a href="<?php echo $base_url."schedule/view/".$user_privilege['schedule_id'];?>"><?php } ?>
+    					                <?php echo $user_privilege['schedule'];?>
+    					                <?php if($user_privilege['schedule_id']) {?></a><?php } ?>
+    					            </td>
     					            <td><?php echo $user_privilege['membership_type'];?></td>
     					            <td><input type=submit name="delete_user_privilege" value="Remove" class="link_button large"></td>
 					            </tr>

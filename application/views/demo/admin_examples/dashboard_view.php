@@ -50,6 +50,9 @@
 							<a href="<?php echo $base_url;?>node">Manage Nodes</a>			
 						</li>	
 						<li>
+							<a href="<?php echo $base_url;?>schedule">Manage Schedules</a>			
+						</li>	
+						<li>
 							<a href="<?php echo $base_url;?>card/manage">Manage Cards</a>			
 						</li>	
 						<li>

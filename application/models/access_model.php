@@ -74,7 +74,7 @@ class Access_model extends CI_Model {
 	 * Gets a list of user privileges set for a perticular node.
 	 */
 	function get_user_privileges($node_id) {
-		$this->db->select("access_user_priveleges.id as id,ifnull(concat(user_profiles.first_name,' ',user_profiles.last_name),'Any') as user,ifnull(schedules.name,'Any') as schedule,if(access_user_priveleges.membership_type_id=-1,'Any',ifnull(membership_types.name,'None')) as membership_type", FALSE);
+		$this->db->select("access_user_priveleges.id as id,ifnull(concat(user_profiles.first_name,' ',user_profiles.last_name),'Any') as user,access_user_priveleges.user_id as user_id,ifnull(schedules.name,'Any') as schedule,access_user_priveleges.schedule_id,if(access_user_priveleges.membership_type_id=-1,'Any',ifnull(membership_types.name,'None')) as membership_type", FALSE);
 		$this->db->from("access_user_priveleges");
 		$this->db->join("user_profiles","user_profiles.user_id = access_user_priveleges.user_id",'left');
 		$this->db->join("schedules","schedules.id = access_user_priveleges.schedule_id",'left');
@@ -87,7 +87,7 @@ class Access_model extends CI_Model {
 	}
 	
 	function get_unlock_schedules($node_id) {
-	    $this->db->select("access_manual_unlock.id as id, access_manual_unlock.name as name, schedules.name as schedule, access_manual_unlock.enabled as enabled");
+	    $this->db->select("access_manual_unlock.id as id, access_manual_unlock.name as name, schedules.name as schedule, access_manual_unlock.schedule_id as schedule_id, access_manual_unlock.enabled as enabled");
 	    $this->db->from("access_manual_unlock");
 	    $this->db->join("schedules","schedules.id = access_manual_unlock.schedule_id",'left');
 	    $this->db->where("access_manual_unlock.node_id",$node_id);
