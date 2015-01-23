@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Schedules_model extends CI_Model {
-	
+    
     // The following method prevents an error occurring when $this->data is modified.
     // Error Message: 'Indirect modification of overloaded property Demo_cart_admin_model::$data has no effect'.
     public function &__get($key)
@@ -10,9 +10,9 @@ class Schedules_model extends CI_Model {
         return $CI->$key;
     }
     
-    ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	
+    ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###    
     // Schedules
-    ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	
+    ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###    
     
     /**
      * get_schedules
@@ -47,10 +47,10 @@ class Schedules_model extends CI_Model {
         $schedule_time = $this->input->post('schedule_time');
 
         if ($schedule_time['day_of_week'] == "") {$schedule_time['day_of_week'] = null;}
-	if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
-	if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
-	if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
-	if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
+        if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
+        if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
+        if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
+        if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
 
         if ($schedule_time) {
             $this->db->where('id',$schedule_time['id']);
@@ -65,9 +65,9 @@ class Schedules_model extends CI_Model {
         // Insert data into database
         if ($this->db->insert("schedules",$schedule)) {
             $this->data['message'] = "<p class='status_msg'>Schedule Added</p>";
-    	} else {
+        } else {
             $this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
-    	}
+        }
     }
     
     function delete_schedule() {
@@ -86,10 +86,10 @@ class Schedules_model extends CI_Model {
         $schedule_time = $this->input->post('new_schedule_time');
         //************************ ADD CHECKING HERE ********************************************//
         if ($schedule_time['day_of_week'] == "") {$schedule_time['day_of_week'] = null;}
-	if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
-	if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
-	if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
-	if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
+        if ($schedule_time['start_date'] == "") {$schedule_time['start_date'] = null;}
+        if ($schedule_time['end_date'] == "") {$schedule_time['end_date'] = null;}
+        if ($schedule_time['start_time'] == "") {$schedule_time['start_time'] = null;}
+        if ($schedule_time['end_time'] == "") {$schedule_time['end_time'] = null;}
 
         // Insert data into database
         if ($this->db->insert("schedule_times",$schedule_time)) {
