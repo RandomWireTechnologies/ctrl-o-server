@@ -148,6 +148,7 @@ class Access_model extends CI_Model {
         }
     }
     
+    function update_user_privilege()
     {
         // Validate data from form
         $privilege = $this->input->post('user_priv');
