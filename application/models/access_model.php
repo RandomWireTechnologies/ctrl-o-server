@@ -43,7 +43,7 @@ class Access_model extends CI_Model {
         $data = $query->result_array();
         $result = array();
         if ($add_none) {
-            $result['null'] = "None";
+            $result[''] = "None";
         }
         foreach ($data as $item) {
             $result[$item['id']] = $item['name'];
@@ -61,7 +61,7 @@ class Access_model extends CI_Model {
         $query = $this->db->get("membership_types");
         $data = $query->result_array();
         $result = array();
-        $result['null'] = "None";
+        $result[''] = "None";
         $result['-1'] = "Any";
         foreach ($data as $item) {
             $result[$item['id']] = $item['name'];
