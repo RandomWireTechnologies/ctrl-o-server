@@ -35,7 +35,7 @@
 				</div>
 				<?php echo form_open(current_url());	?>  	
 					<fieldset>
-						<legend>Memberships</legend>
+						<legend>Memberships (<?php echo $membership_count['active']."/",$membership_count['max']."/".$membership_count['total']?>)</legend>
 						<table>
                             <thead>
                                 <tr>

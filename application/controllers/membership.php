@@ -139,6 +139,7 @@ class Membership extends CI_Controller {
 		//$this->data['user_cards'] = $this->cards_model->get_all_user_cards();
 		///$this->data['money_cards'] = $this->cards_model->get_all_money_cards();
 		//$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
+		$this->data['membership_count'] = $this->memberships_model->get_membership_counts();
 		$this->data['all_memberships'] = $this->memberships_model->get_all_memberships();
 		$this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
 
