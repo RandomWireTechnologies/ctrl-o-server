@@ -77,7 +77,7 @@ class Memberships_model extends CI_Model {
     }
     
     function get_membership_counts() {
-        $query = $this->db->select("count(distinct c.id) as active,count(distinct m.user_id) as max,count(distinct p.user_id) as total from current_memberships as c, memberships as m, user_profiles as p", FALSE)->get();
+        $query = $this->db->select("count(distinct c.user_id) as active,count(distinct m.user_id) as max,count(distinct p.user_id) as total from current_memberships as c, memberships as m, user_profiles as p", FALSE)->get();
         return $query->row_array();        
     }
 
