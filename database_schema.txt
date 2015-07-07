@@ -69,15 +69,27 @@
 * log    
  * A list of node action log items (item_id/amount is future for logging vending machine transactions)
  * id, node_id, card_id, user_id, time, type, item_id, amount, result
+
+* memberships         
+ * A list of memberships and their owners, start and end date (NULL if membership is not activated)
+ * id, owner_id, type_id, name, created_at
+
+* membership_credits
+ * A table to maintain credits for memberships
+ * id, membership_id, owner_id, type_id, price_paid, auto_activate, start, end, purchased, notes
+ 
+* membership_users
+ * A table to link users to memberships
+ * id, membership_id, user_id
  
 * membership_types
  * A list of membership types, including price and length in days
- * id, name, length, number, price, auto_renew
+ * id, name, length, price, subscription, num_users
  
-* memberships         
- * A list of memberships and their owners, start and end date (NULL if membership is not activated)
- * id, user_id, type_id, start, end, purchased, price, notes
- 
+* membership_log
+ * A log of actions taken with memberships
+ * id, membership_id, user_id, action, for_user_id, result
+
 * nodes
  * A list of nodes/doors 
  * id, name, type, hostname, ip, mac, login_key, enabled
