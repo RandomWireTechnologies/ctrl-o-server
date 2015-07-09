@@ -88,7 +88,7 @@
  
 * membership_types
  * A list of membership types, including price and length in days
- * id, name, length, price, subscription, num_users
+ * id, name, length, num_users, price, subscription
  
 * membership_log
  * A log of actions taken with memberships
