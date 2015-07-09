@@ -64,12 +64,13 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
                 $end = $credit->end;
                 $price = $credit->price;
                 $purchased = $credit->purchased;
-                $notes = $credit->notes;
+                $notes = $db->escape_string($credit->notes);
                 // Add credit
                 $db->query("insert into membership_credits values ('', '$membership_id', '$user_id', '$type_id', '$price', 0, '$start', '$end', '$purchased', '$notes')");
             }
         }
     
     } // end users while
+    echo "\n"; // Make clean exit
 }
 ?>
