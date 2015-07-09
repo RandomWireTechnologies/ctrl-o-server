@@ -36,8 +36,9 @@ class Memberships_model extends CI_Model {
 			$this->db->where('start', NULL, FALSE);
 			$query = $this->db->get("membership_names");
 		} else {
-		    $this->db->select("*,membership_types.name as type,membership_names.id as membership_id,membership_credits.price_paid as price");
+		    $this->db->select("membership_names.*,concat(user_profiles.first_name,' ',user_profiles.last_name) as owner_name, membership_types.name as membership_type,membership_credits.end as expires");
 		    $this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
+			$this->db->join("user_profiles","user_profiles.user_id = membership_names.owner_id","left");
 			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
 			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
 			$this->db->where('membership_users.user_id', $user_id);
