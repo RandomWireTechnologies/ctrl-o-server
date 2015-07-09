@@ -54,14 +54,15 @@ class Membership extends CI_Controller {
         $user_id = $this->flexi_auth->get_user_id();
 
         $this->load->model('memberships_model');
-        
+        $this->load->model('cards_model');
         if ($this->input->post("activate")) {
             $this->memberships_model->activate();
         }
-        
+
         $this->data['current_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Current');
-        $this->data['new_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Unused');
-        $this->data['used_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Expired');
+        $this->data['memberships'] = $this->memberships_model->get_user_memberships($user_id,'All');
+	$this->data['users'] = $this->cards_model->get_username_list();
+	$this->data['types'] = $this->memberships_model->membership_type_list();
         $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
         $this->data['user_id'] = $user_id;
         //$this->data['membership_types'] = $this->memberships_model->get_membership_types();

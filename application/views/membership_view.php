@@ -31,41 +31,50 @@
 				
                 <?php echo form_open(current_url());	?>  	
                     <fieldset>
-						<legend>Membership</legend>
-						<ul>
-						<li class="info_req">
-    						<label for="user">User:</label>
-    						<?php echo form_dropdown("membership[user_id]",$users,$membership['user_id']);?>
-						</li>
-						<li class="info_req">
-							<label for="type">Membership Type:</label>
-							<?php echo form_dropdown("membership[type_id]",$membership_types,$membership['type_id']); ?>
-						</li>
-						<li class="info_req">
-							<label for="date">Purchase Date:</label>
-							<input type="text" id="purchase_date" name="membership[purchased]" value="<?php echo $membership['purchased'];?>" />
-						</li>
-						<li>
-							<label for="date">Start Date:</label>
-							<input type="text" id="start_date" name="membership[start]" value="<?php echo $membership['start'];?>" />
-						</li>
-						<li>
-							<label for="date">End Date:</label>
-							<input type="text" id="end_date" name="membership[end]" value="<?php echo $membership['end'];?>" />
-						</li>
-						<li class="info_req">
-							<label for="price">Price:</label>
-							<input type="text" id="price" name="membership[price]" value="<?php echo $membership['price'];?>" />
-						</li>
-						<li>
-							<label for="notes">Notes:</label>
-							<input type="text" id="notes" name="membership[notes]" value="<?php echo $membership['notes'];?>" />
-						</li>
-						<li>
-							<input type=submit name="update_membership" value="Update Membership" class="link_button large">
-						</li>
-						</ul>
-					</fieldset>        
+			<legend>Membership</legend>
+			<h3><?php echo $membership['name']." - ".$membership['type'];?></h3>
+			<input name="new_name" value="<?php echo $membership['name']?>"><input type=submit name=action value="Update Name" class="link_button"><br>
+			<b>Membership Owner: <?php echo $membership['owner_name'];?></b>
+			<hr>
+                        <b>Credits</b>
+                        <table>
+                        <thead>
+                                <tr>
+                                        <th>Purchase Date/Time</th>
+                                        <th>Price Paid</th>
+                                        <th>Start Date/Time</th>
+                                        <th>End Date/Time</th>
+                                        <th>Auto-Activate</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($membership['credits'] as $credit) : ?>
+                                <tr>
+                                <td><?php echo $credit['purchased'];?></td>
+                                <td>$<?php echo $credit['price_paid'];?></td>
+                                <td><?php echo $credit['start'];?></td>
+                                <td><?php echo $credit['end'];?></td>
+                                <td><?php echo $credit['auto_activate']?></td>
+                                </tr>
+                        <?php endforeach;?>
+                        </tbody>
+                        <tfoot>
+                                <tr>
+                                <td colspan=5><b>Add new credits to this membership<b> <input type="submit" name="buy" value="Paypal Buy Button" class = "link_button"></td>
+                                </tr>
+                        </tfoot>
+                        </table>
+                        <b>Users: <?php echo $membership['user_count']." of ".$membership['max_users'];?></b>
+                        <ul>
+                        <?php foreach($membership['users'] as $user) : ?>
+                                <li><?php echo $user['name'];?> - <a href="<?php echo $base_url."membership/remove_user/".$user['id'];?>">Delete</a></li>
+                        <?php endforeach;?>
+                        </ul>
+                        <?php if($membership['user_count']<$membership['max_users']):?>
+                                Add new person to this membership: <?php echo form_dropdown("new_membership_user[".$membership['id']."]",$users,"");?> <input type=submit name="add_user" val$
+                        <?php endif;?>
+
+		    </fieldset>        
                 <?php echo form_close();?>
             </div>
         </div>
