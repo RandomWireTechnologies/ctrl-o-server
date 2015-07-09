@@ -20,26 +20,30 @@ class Memberships_model extends CI_Model {
 	 */
 	function get_user_memberships($user_id, $type='All') {
 		if ($type == 'All') {
-			$query = $this->db->get_where("memberships",array('user_id' => $user_id));
+			$query = $this->db->get_where("membership_names",array('owner_id' => $user_id));
 		} else if ($type == 'Expired') {
 		    $this->db->select("*,membership_types.name as type,memberships.id as membership_id,memberships.price as price");
 		    $this->db->join("membership_types","membership_types.id = memberships.type_id","left");
 			$this->db->where('user_id', $user_id);
 			$this->db->where('end <', 'NOW()', FALSE);
-			$query = $this->db->get("memberships");
+			$query = $this->db->get("membership_names");
 		} else if ($type == 'Unused') {
-		    $this->db->select("*,membership_types.name as type,memberships.id as membership_id,memberships.price as price");
-		    $this->db->join("membership_types","membership_types.id = memberships.type_id","left");
-			$this->db->where('user_id', $user_id);
+		    $this->db->select("*,membership_types.name as type,membership_names.id as membership_id,membership_credits.price_paid as price");
+		    $this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
+			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
+			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
+			$this->db->where('membership_users.user_id', $user_id);
 			$this->db->where('start', NULL, FALSE);
-			$query = $this->db->get("memberships");
+			$query = $this->db->get("membership_names");
 		} else {
-		    $this->db->select("*,membership_types.name as type,memberships.id as membership_id,memberships.price as price");
-		    $this->db->join("membership_types","membership_types.id = memberships.type_id","left");
-			$this->db->where('user_id', $user_id);
-			$this->db->where('start is not null');
-			$this->db->where('end >', 'NOW()', FALSE);
-			$query = $this->db->get("memberships");
+		    $this->db->select("*,membership_types.name as type,membership_names.id as membership_id,membership_credits.price_paid as price");
+		    $this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
+			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
+			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
+			$this->db->where('membership_users.user_id', $user_id);
+			$this->db->where('membership_credits.start <','NOW()', FALSE);
+			$this->db->where('membership_credits.end >', 'NOW()', FALSE);
+			$query = $this->db->get("membership_names");
 		}
 		return $query->result_array();
 	}
