@@ -15,26 +15,41 @@ $db_debug = $db['default']['db_debug'];
 $cache_on = $db['default']['cache_on'];
 $cachedir = $db['default']['cachedir'];
 $char_set = $db['default']['char_set'];
+$username = "root";
+$password = "ctrl-o-master";
 
-$db = mysqli_connect($host, $username, $password, $database, $port);
+echo "Attempting to connect to $host:$port - $database as $username\n";
+$db = new mysqli($host, $username, $password, $database, $port);
 
+if ($db->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
 
 // Check to see if new membership tables exist
 if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
-    $db->query("create table membership_names (id int not null primary key auto_increment, owner_id int not null, type_id int not null, name varchar(64), created_at timestamp)");
-    $db->query("drop table membership_credits if exists");
-    $db->query("create table membership_credits (id int not null primary key auto_increment, membership_id int, owner_id int not null, type_id int not null, price_paid decimal(10,2) not null default '0.0', auto_activate tinyint, start timestamp, end timestamp, purchased timestamp not null, notes text)");
-    $db->query("drop table membership_users if exists");
-    $db->query("create table membership_users (id int not null primary key auto_increment, membership_id int not null, user_id int not null)");
-    $db->query("drop table membership_log if exists");
-    $db->query("create table membership_log (id int not null primary key auto_increment, membership_id int not null, user_id int not null, action varchar(64) not null, for_user_id int, result varchar(64))");
+    echo "Didn't find membership_names table, doing upgrade...\n";
+    $result = $db->query("create table membership_names (id int not null primary key auto_increment, owner_id int not null, type_id int not null, name varchar(64), created_at timestamp)");
+    if ($result == FALSE) {echo "Failed to create table membership_names: ".$db->error."\n"; return;}
+    $result = $db->query("drop table membership_credits if exists");
+    if ($result == FALSE) {echo "Failed to drop table membership credits: ".$db->error."\n";}
+    $result = $db->query("create table membership_credits (id int not null primary key auto_increment, membership_id int, owner_id int not null, type_id int not null, price_paid decimal(10,2) not null default '0.0', auto_activate tinyint, start timestamp, end timestamp, purchased timestamp not null, notes text)");
+    if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
+    $result = $db->query("drop table membership_users if exists");
+    if ($result == FALSE) {echo "Failed to drop table membership_users: ".$db->error."\n";}
+    $result = $db->query("create table membership_users (id int not null primary key auto_increment, membership_id int not null, user_id int not null)");
+    if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
+    $result = $db->query("drop table membership_log if exists");
+    $result = $db->query("create table membership_log (id int not null primary key auto_increment, membership_id int not null, user_id int not null, action varchar(64) not null, for_user_id int, result varchar(64))");
+    if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
     // Get list of users with memberships
     $users = $db->query("select distinct user_id from memberships");
     while($user = $users->fetch_object()) {
+        echo "@";
         $user_id = $user->user_id;
         // for each user get a list of membership types owned
         $types = $db->query("select distinct type_id from memberships where user_id=$user_id");
         while ($type = $types->fetch_object()) {
+            echo "!";
             $type_id = $type->type_id;
             // for each membership type create a new membership
             $db->query("insert into membership_names values ('', $user_id, $type_id, 'Unnamed Membership', NOW())");
@@ -42,6 +57,7 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
             // get a list of old memberships of that type and create membership credits for them
             $credits = $db->query("select * from memberships where user_id='$user_id' and type_id='$type_id'");
             while ($credit = $credits->fetch_object()) {
+                echo ".";
                 $start = $credit->start;
                 $end = $credit->end;
                 $price = $credit->price;
