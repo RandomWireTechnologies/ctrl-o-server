@@ -55,7 +55,7 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
             $db->query("insert into membership_names values ('', $user_id, $type_id, 'Unnamed Membership', NOW())");
             $membership_id = $db->insert_id;
             // Add each user to their own memberships (assumption but a fairly safe one for now)
-            $db->query("insert into membership_users values ('', $membership_id, $user_id);
+            $db->query("insert into membership_users values ('', $membership_id, $user_id)");
             // get a list of old memberships of that type and create membership credits for them
             $credits = $db->query("select * from memberships where user_id='$user_id' and type_id='$type_id'");
             while ($credit = $credits->fetch_object()) {
