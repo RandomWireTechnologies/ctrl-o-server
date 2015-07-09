@@ -71,6 +71,10 @@
  * id, node_id, card_id, user_id, time, type, item_id, amount, result
 
 * memberships         
+ * A depricated list of memberships and their owners, start and end date (NULL if membership is not activated)
+ * id, user_id, type_id, start, end, purchased, price, notes
+
+* membership_names        
  * A list of memberships and their owners, start and end date (NULL if membership is not activated)
  * id, owner_id, type_id, name, created_at
 
