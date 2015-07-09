@@ -30,15 +30,15 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
     echo "Didn't find membership_names table, doing upgrade...\n";
     $result = $db->query("create table membership_names (id int not null primary key auto_increment, owner_id int not null, type_id int not null, name varchar(64), created_at timestamp)");
     if ($result == FALSE) {echo "Failed to create table membership_names: ".$db->error."\n"; return;}
-    $result = $db->query("drop table membership_credits if exists");
+    $result = $db->query("drop table if exists membership_credits");
     if ($result == FALSE) {echo "Failed to drop table membership credits: ".$db->error."\n";}
     $result = $db->query("create table membership_credits (id int not null primary key auto_increment, membership_id int, owner_id int not null, type_id int not null, price_paid decimal(10,2) not null default '0.0', auto_activate tinyint, start timestamp, end timestamp, purchased timestamp not null, notes text)");
     if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
-    $result = $db->query("drop table membership_users if exists");
+    $result = $db->query("drop table if exists membership_users");
     if ($result == FALSE) {echo "Failed to drop table membership_users: ".$db->error."\n";}
     $result = $db->query("create table membership_users (id int not null primary key auto_increment, membership_id int not null, user_id int not null)");
     if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
-    $result = $db->query("drop table membership_log if exists");
+    $result = $db->query("drop table if exists membership_log");
     $result = $db->query("create table membership_log (id int not null primary key auto_increment, membership_id int not null, user_id int not null, action varchar(64) not null, for_user_id int, result varchar(64))");
     if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
     // Get list of users with memberships
