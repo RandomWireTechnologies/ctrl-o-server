@@ -66,46 +66,30 @@
 						<?php if (count($memberships) == 0) :?>
 							<h3>None</h3>
 						<?php else : ?>
-							<?php foreach($memberships as $membership) : ?>
-							<h3><?php echo $membership['name']." - ".$membership['type'];?></h3>
-							<b>Credits</b>
 							<table>
 	                                                <thead>
 	                                                        <tr>
-                	                                                <th>Purchase Date/Time</th>
-                        	                                        <th>Price Paid</th>
-                        	                                        <th>Start Date/Time</th>
-                        	                                        <th>End Date/Time</th>
-                                	                                <th>Auto-Activate</th>
+                	                                                <th>Name</th>
+                        	                                        <th>Type</th>
+                        	                                        <th>Users</th>
+                        	                                        <th>Credit Expires</th>
+                                	                                <th>Add More Credit</th>
                                 	                        </tr>
                                                 	</thead>
                                                 	<tbody>
-                                                	<?php foreach($membership['credits'] as $credit) : ?>
+                                                	<?php foreach($memberships as $membership) : ?>
                                                 	        <tr>
-                                                	        <td><?php echo $credit['purchased'];?></td>
-                                                	        <td>$<?php echo $credit['price_paid'];?></td>
-                                                	        <td><?php echo $credit['start'];?></td>
-                                                	        <td><?php echo $credit['end'];?></td>
-								<td><?php echo $credit['auto_activate']?></td>
+                                                	        <td><a href="<?php echo $base_url."membership/view/".$membership['id'];?>"><?php echo $membership['name'];?></a></td>
+                                                	        <td><?php echo $membership['type'];?></td>
+                                                	        <td><?php echo $membership['user_count']."/".$membership['max_users'];?></td>
+                                                	        <td><?php echo $membership['expires'];?></td>
+								<td><input type="submit" name="buy" value="Paypal Buy Button" class = "link_button"></td>
                                                 	        </tr>
                                                 	<?php endforeach;?>
                                                 	</tbody>
                                                 	<tfoot>
-								<tr>
-								<td colspan=5><b>Add new credits to this membership<b> <input type="submit" name="buy" value="Paypal Buy Button" class = "link_button"></td>
-								</tr>
                                                 	</tfoot>
                                                 	</table>
-							<b>Users: <?php echo $membership['user_count']." of ".$membership['max_users'];?></b>
-							<ul>
-							<?php foreach($membership['users'] as $user) : ?>
-								<li><?php echo $user['name'];?> - <a href="<?php echo $base_url."membership/remove_user/".$user['id'];?>">Delete</a></li>
-							<?php endforeach;?>
-							</ul>
-							<?php if($membership['user_count']<$membership['max_users']):?>
-								Add new person to this membership: <?php echo form_dropdown("new_membership_user[".$membership['id']."]",$users,"");?> <input type=submit name="add_user" value="Add User" class="link_button large">
-							<?php endif;?>
-							<?php endforeach;?>
 						<?php endif;?>
 
 					</fieldset>

@@ -20,9 +20,10 @@ class Memberships_model extends CI_Model {
 	 */
 	function get_user_memberships($user_id, $type='All') {
 		if ($type == 'All') {
-			$this->db->select("membership_names.*,membership_types.name as type, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count");
+			$this->db->select("membership_names.*,membership_types.name as type, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, max(membership_credits.end) as expires");
 			$this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
 			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
+			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
 			$this->db->group_by("membership_names.id");
 			$this->db->where('membership_names.owner_id', $user_id);
 			$query = $this->db->get("membership_names");
