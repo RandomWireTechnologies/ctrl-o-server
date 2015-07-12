@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Membership extends CI_Controller {
  
@@ -81,9 +81,17 @@ class Membership extends CI_Controller {
         $this->load->model('cards_model');
         if ($this->memberships_model->is_membership_owner($membership_id) || $this->flexi_auth->is_privileged('Manage Memberships')) {
             // Set any returned status/error messages.
-            if($this->input->post("update_membership") && $this->flexi_auth->is_privileged('Manage Memberships')) {
-                $this->memberships_model->update_membership($membership_id);
+            if($this->input->post("action") && ($this->flexi_auth->is_privileged('Manage Memberships') || $this->memberships_model->is_membership_owner($membership_id))) {
+                $this->memberships_model->membership_action($membership_id);
             }
+            $this->config->load('paypal_ipn');
+            if ($this->config->item('paypal_ipn_use_live_settings')) {
+		$this->data['paypal_id'] = $this->config->item('paypal_ipn_live_settings')['id'];
+		$this->data['paypal_url'] = $this->config->item('paypal_ipn_live_settings')['url'];
+	    } else {
+		$this->data['paypal_id'] = $this->config->item('paypal_ipn_sandbox_settings')['id'];
+		$this->data['paypal_url'] = $this->config->item('paypal_ipn_sandbox_settings')['url'];
+	    }
             $this->data['users'] = $this->cards_model->get_username_list();
             $this->data['membership_types'] = $this->memberships_model->membership_type_list();
             $this->data['membership'] = $this->memberships_model->get_membership($membership_id);
@@ -96,6 +104,17 @@ class Membership extends CI_Controller {
         }
     }
 
+    function remove_user($membership_id,$userlink_id) {
+	$this->load->model('memberships_model');
+	if ($this->memberships_model->is_membership_owner($membership_id) || $this->flexi_auth->is_privileged('Manage Memberships')) {
+	    $this->memberships_model->membership_remove_user($membership_id,$userlink_id);
+	} else {
+	    $this->flexi_auth->set_error_message("You don't have permission to view that membership!", TRUE);
+            $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
+	}
+	redirect("membership/view/$membership_id");
+    }
+
     function user($user_id)
 	{
         // Ensure user has rights
@@ -106,12 +125,15 @@ class Membership extends CI_Controller {
             redirect('membership');
 		}
 		$this->load->model('memberships_model');
+		$this->load->model('cards_model');
 		if ($this->input->post("activate")) {
 			$this->memberships_model->activate();
 		}
-		$this->data['current_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Current');
-		$this->data['new_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Unused');
-		$this->data['used_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Expired');
+
+        	$this->data['current_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Current');
+        	$this->data['memberships'] = $this->memberships_model->get_user_memberships($user_id,'All');
+		$this->data['users'] = $this->cards_model->get_username_list();
+		$this->data['types'] = $this->memberships_model->membership_type_list();
 		$this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
                 $this->data['user_id'] = $user_id;
 		// Set any returned status/error messages.
@@ -154,27 +176,30 @@ class Membership extends CI_Controller {
     {
         $user_id = $this->flexi_auth->get_user_id();
 
-		$this->load->model('memberships_model');
-		$this->load->model('cards_model');
+	$this->load->model('memberships_model');
+	$this->load->model('cards_model');
         // Ensure user has rights
-		if (! $this->flexi_auth->is_privileged('Manage Memberships')) {
-			// You don't have privledges, bounce to your card page
+	if (! $this->flexi_auth->is_privileged('Manage Memberships')) {
+	    // You don't have privledges, bounce to your card page
             $this->flexi_auth->set_error_message("You don't have permission to manage memberships!", TRUE);
             $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
             redirect('membership');
-		}
-		
-		if ($this->input->post('add_membership')) {
-			// Handle updates
-			$this->memberships_model->add_new_membership();
+	}
+
+	if ($action = $this->input->post('action')) {
+	    // Handle updates
+	    $membership_id = $this->memberships_model->add_new_membership();
+            if($action == "Add Membership With Credit") {
+                 $this->memberships_model->add_membership_credit($membership_id);
+            }
             $this->data['membership'] = $this->input->post('membership');
-		}
+	}
 
         $this->data['users'] = $this->cards_model->get_username_list();
         $this->data['membership_types'] = $this->memberships_model->membership_type_list();
         //$this->data['current_user'] = $this->flexi_auth->get_user_id();
 
-		$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
+	$this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
         $this->load->view('membership_add_view', $this->data);
     }
 

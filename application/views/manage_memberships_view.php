@@ -41,31 +41,25 @@
                                 <tr>
                                     <th>Person</th>
                                     <th>Membership Type</th>
-                                    <th>Start Date/Time</th>
-                                    <th>End Date/Time</th>
-                                    <th>Purchase Date/Time</th>
-                                    <th>Price Paid</th>
-                                    <th>Notes</th>
+				    <th>Name</th>
+                                    <th>Credit Expires</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php foreach($all_memberships as $row) : ?>
                                     <tr>
                                     <td>
-                                        <a href="/membership/user/<?php echo $row['user_id']?>">
+                                        <a href="/membership/user/<?php echo $row['owner_id']?>">
+                                        <?php echo $row['owner'];?>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $row['type'];?></td>
+                                    <td>
+                                        <a href="/membership/view/<?php echo $row['membership_id']?>">
                                         <?php echo $row['name'];?>
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="/membership/view/<?php echo $row['membership_id']?>">
-                                        <?php echo $row['type'];?>
-                                        </a>
-                                    </td>
-                                    <td><?php echo $row['start'];?></td>
-                                    <td><?php echo $row['end'];?></td>
-                                    <td><?php echo $row['purchased'];?></td>
-                                    <td>$<?php echo $row['price'];?></td>
-                                    <td><?php echo $row['notes'];?></td>
+                                    <td><?php echo $row['expires'];?></td>
                                     </tr>
                             <?php endforeach;?>
                             </tbody>

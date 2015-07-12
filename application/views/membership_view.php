@@ -29,13 +29,15 @@
 				</div>
 	    		<?php } ?>
 				
-                <?php echo form_open(current_url());	?>  	
                     <fieldset>
+			<?php echo form_open(current_url());	?>  	
+
 			<legend>Membership</legend>
 			<h3><?php echo $membership['name']." - ".$membership['type'];?></h3>
 			<input name="new_name" value="<?php echo $membership['name']?>"><input type=submit name=action value="Update Name" class="link_button"><br>
 			<b>Membership Owner: <?php echo $membership['owner_name'];?></b>
 			<hr>
+                	<?php echo form_close();?>
                         <b>Credits</b>
                         <table>
                         <thead>
@@ -58,24 +60,39 @@
                                 </tr>
                         <?php endforeach;?>
                         </tbody>
+
                         <tfoot>
+				<form name="_xclick" action="<?php echo $paypal_url;?>">
+				<input type="hidden" name="cmd" value="_xclick">
+				<input type="hidden" name="business" value="<?php echo $paypal_id;?>">
+				<input type="hidden" name="currency_code" value="USD">
+				<input type="hidden" name="item_name" value="<?php echo $membership['type'];?>">
+				<input type="hidden" name="item_number" value="<?php echo $membership['type_id'];?>">
+				<input type="hidden" name="amount" value="<?php echo $membership['type_price'];?>">
+				<input type="hidden" name="custom" value="<?php echo $membership['id'];?>">
+				<input type="hidden" name="notify_url" value="https://lm.randomwire.biz/paypal/ipn">
+				<input type="hidden" name="return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
+				<input type="hidden" name="cancel_return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
                                 <tr>
-                                <td colspan=5><b>Add new credits to this membership<b> <input type="submit" name="buy" value="Paypal Buy Button" class = "link_button"></td>
+                                <td colspan=5><b>Add new credits to this membership<b> <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_86x21.png" border="0" name="submit" alt="Paypal Buy Button"></td>
                                 </tr>
+				</form>
                         </tfoot>
                         </table>
+			<?php echo form_open(current_url());	?>
+
                         <b>Users: <?php echo $membership['user_count']." of ".$membership['max_users'];?></b>
                         <ul>
                         <?php foreach($membership['users'] as $user) : ?>
-                                <li><?php echo $user['name'];?> - <a href="<?php echo $base_url."membership/remove_user/".$user['id'];?>">Delete</a></li>
+                                <li><?php echo $user['name'];?> - <a href="<?php echo $base_url."membership/remove_user/".$membership['id']."/".$user['id'];?>">Delete</a></li>
                         <?php endforeach;?>
                         </ul>
                         <?php if($membership['user_count']<$membership['max_users']):?>
-                                Add new person to this membership: <?php echo form_dropdown("new_membership_user[".$membership['id']."]",$users,"");?> <input type=submit name="add_user" val$
+                                Add new person to this membership: <?php echo form_dropdown("new_membership_user",$users,"");?> <input type=submit name="action" value="Add User" class="link_button">
                         <?php endif;?>
+                	<?php echo form_close();?>
 
 		    </fieldset>        
-                <?php echo form_close();?>
             </div>
         </div>
     </div>	
