@@ -72,5 +72,7 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
     
     } // end users while
     echo "\n"; // Make clean exit
+    // Update current_memberships view
+    $db->query("alter sql security invoker view current_memberships as select c.membership_id as id,u.user_id,c.type_id,c.start,c.end,c.purchased,c.price_paid,c.notes from membership_credits as c,membership_users as u where c.membership_id=u.membership_id and c.membership_id is not null and c.start<=NOW() and c.end>=now();");
 }
 ?>
