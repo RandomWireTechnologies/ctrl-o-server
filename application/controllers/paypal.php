@@ -24,103 +24,111 @@
 class Paypal extends CI_Controller {
 
 // To handle the IPN post made by PayPal (uses the Paypal_Lib library).
-    function ipn()
-    {
-        $log_file = 'paypal.log';
-$this->load->library('PayPal_IPN'); // Load the library
-$this->auth = new stdClass; // Stupid requirement before loading flexi_auth
-$this->load->library('flexi_auth');
-
-// Try to get the IPN data.
-if ($this->paypal_ipn->validateIPN())
+function ipn()
 {
-// Succeeded, now let's extract the order
-    $this->paypal_ipn->extractOrder();
+    $log_file = 'paypal.log';
+    $this->load->library('PayPal_IPN'); // Load the library
+    $this->auth = new stdClass; // Stupid requirement before loading flexi_auth
+    $this->load->library('flexi_auth');
 
-// And we save the order now (persist and extract are separate because you might only want to persist the order in certain circumstances).
-    $this->paypal_ipn->saveOrder();
-
-// Now let's check what the payment status is and act accordingly
-    if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID)
+    // Try to get the IPN data.
+    if ($this->paypal_ipn->validateIPN())
     {
-        $user_id = $this->paypal_ipn->order['custom'];
-        if (is_null($user_id)) {
-            $user_data = $this->flexi_auth->get_user_by_identity_query($this->paypal_ipn->order['payer_email']);
-            if (!is_null($user_data)) {
-                $count = $user_data->num_rows();
-                if ($count > 0) {
-                    $user = $user_data->result_array();
-                    $user_id = $user[0]['user_id'];
-                    if ( !function_exists('file_put_contents') && !defined('FILE_APPEND') ) {
-                        file_put_contents($log_file, 'test\n', FILE_APPEND);
+        // Succeeded, now let's extract the order
+        $this->paypal_ipn->extractOrder();
+
+        // And we save the order now (persist and extract are separate because you might only want to persist the order in certain circumstances).
+        $this->paypal_ipn->saveOrder();
+
+        // Now let's check what the payment status is and act accordingly
+        if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID)
+        {
+            $user_id = null;
+            $membership_id = $this->paypal_ipn->order['custom'];
+            if (is_null($membership_id)) {
+                $user_data = $this->flexi_auth->get_user_by_identity_query($this->paypal_ipn->order['payer_email']);
+                if (!is_null($user_data)) {
+                    $count = $user_data->num_rows();
+                    if ($count > 0) {
+                        $user = $user_data->result_array();
+                        $user_id = $user[0]['user_id'];
+                        if ( !function_exists('file_put_contents') && !defined('FILE_APPEND') ) {
+                            file_put_contents($log_file, 'test\n', FILE_APPEND);
+                        }
+                    }
+                    //$user_id = $user_data[0]['id'];
+                }
+            }
+
+            if(isset($membership_credit)) {
+                unset($membership_credit);
+            }
+
+            $payment_date = date( 'Y-m-d H:i:s', strtotime( $this->paypal_ipn->order['payment_date']));
+            // Get Items
+            foreach ($this->paypal_ipn->orderItems as $item) {
+                // Get the item name and user id (item id)
+                if(is_int($item['item_number'])) {
+                    $membership_credit['type_id'] = $item['item_number'];
+                } else {
+                    if ($item['item_number'] == "sub-Maker") {
+                        $membership_credit['type_id'] = 6;
+                        $start_date = $payment_date;
+                        $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
+                        $membership_credit['start'] = $start_date;
+                        $membership_credit['end'] = $end_date;
+                    } elseif ($item['item_number'] == "sub-Pro") {
+                        $membership_credit['type_id'] = 7;
+                        $start_date = $payment_date;
+                        $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
+                        $membership_credit['start'] = $start_date;
+                        $membership_credit['end'] = $end_date;
+                    } elseif ($item['item_number'] == "sub-EntSmBiz") {
+                        $membership_credit['type_id'] = 8;
+                        $start_date = $payment_date;
+                        $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
+                        $membership_credit['start'] = $start_date;
+                        $membership_credit['end'] = $end_date;
+                    } elseif ($item['item_number'] == "1mo-Maker") {
+                        $membership_credit['type_id'] = 3;
+                    } elseif ($item['item_number'] == "1mo-Pro") {
+                        $membership_credit['type_id'] = 4;
+                    } elseif ($item['item_number'] == "1mo-EntSmBiz") {
+                        $membership_credit['type_id'] = 5;
                     }
                 }
-//$user_id = $user_data[0]['id'];
-            }
-        }
-
-        $payment_date = date( 'Y-m-d H:i:s', strtotime( $this->paypal_ipn->order['payment_date']));
-// Get Items
-        foreach ($this->paypal_ipn->orderItems as $item) {
-// Get the item name and user id (item id)
-            $membership_type = $item['item_number'];
-            $this->load->model('memberships_model');
-            if(isset($membership)) {
-                unset($membership);
-            }
-            $membership['user_id'] = $user_id;
-            if(is_int($item['item_number'])) {
-                $membership['type_id'] = $item['item_number'];
-            } else {
-                if ($item['item_number'] == "sub-Maker") {
-                    $membership['type_id'] = 6;
-                    $start_date = $payment_date;
-                    $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                    $membership['start'] = $start_date;
-                    $membership['end'] = $end_date;
-                } elseif ($item['item_number'] == "sub-Pro") {
-                    $membership['type_id'] = 7;
-                    $start_date = $payment_date;
-                    $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                    $membership['start'] = $start_date;
-                    $membership['end'] = $end_date;
-                } elseif ($item['item_number'] == "sub-EntSmBiz") {
-                    $membership['type_id'] = 8;
-                    $start_date = $payment_date;
-                    $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                    $membership['start'] = $start_date;
-                    $membership['end'] = $end_date;
-                } elseif ($item['item_number'] == "1mo-Maker") {
-                    $membership['type_id'] = 3;
-                } elseif ($item['item_number'] == "1mo-Pro") {
-                    $membership['type_id'] = 4;
-                } elseif ($item['item_number'] == "1mo-EntSmBiz") {
-                    $membership['type_id'] = 5;
+ 
+                $this->load->model('memberships_model');
+                if(is_null($membership_id) && is_int($membership['type_id']) && is_int($user_id)) {
+                    $membership_id = $this->memberships_model->get_users_membership_id($user_id,$membership_type);
+                }
+                if (!is_null($membership_id)) {
+                    $membership_credit['owner_id'] = $user_id;
+                    $membership_credit['membership_id'] = $membership_id;
+                    $membership_credit['purchased'] = $payment_date;
+                    $membership_credit['price_paid'] = $item['mc_gross'];
+                    $membership_credit['notes'] = "Purchased from PayPal";
+    
+                    if (!is_null($user_id) && !is_null($membership['type_id'])) {
+                        $this->memberships_model->purchased($membership_credit);
+                    }
                 }
             }
-            $membership['purchased'] = $payment_date;
-            $membership['price'] = $item['mc_gross'];
-            $membership['notes'] = "Purchased from PayPal";
-
-            if (!is_null($user_id) && !is_null($membership['type_id'])) {
-                $this->memberships_model->purchased($membership);
-            }
+            /* HEALTH WARNING:
+            *
+            * Please note that this PAID block does nothing. In other words, this controller will not respond to a successful order
+            * with any notification such as email or similar. You will have to identify paid orders by checking your database.
+            *
+            * If you want to send email notifications on successful receipt of an order, please see the alternative, Smarty template-
+            * based example controller: example-smarty-email-notification.php
+            */
         }
-/* HEALTH WARNING:
-*
-* Please note that this PAID block does nothing. In other words, this controller will not respond to a successful order
-* with any notification such as email or similar. You will have to identify paid orders by checking your database.
-*
-* If you want to send email notifications on successful receipt of an order, please see the alternative, Smarty template-
-* based example controller: example-smarty-email-notification.php
-*/
-}
-}
-else // Just redirect to the root URL
-{
-    $this->load->helper('url');
-    redirect('/', 'refresh');
-}
+    }
+    else // Just redirect to the root URL
+    {
+        $this->load->helper('url');
+        redirect('/', 'refresh');
+    }
 }
 
 function test($user_id = FALSE) {

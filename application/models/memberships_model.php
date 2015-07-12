@@ -104,17 +104,17 @@ class Memberships_model extends CI_Model {
     }
 
     function membership_action($membership_id) {
-	$action = $this->input->post("action");
-	if ($action == "Update Name") {
-	   $membership = array("name"=>$this->input->post("new_name"));
-	   $this->db->where("id",$membership_id);
-	   $this->db->update("membership_names",$membership);
-	} else if ($action == "Add User") {
-	   $users = array("user_id"=>$this->input->post("new_membership_user"),"membership_id"=>$membership_id);
-	   $this->db->insert("membership_users",$users);
-	} else if ($action == "Paypal Buy Button") {
-
-	}
+        $action = $this->input->post("action");
+        if ($action == "Update Name") {
+            $membership = array("name"=>$this->input->post("new_name"));
+            $this->db->where("id",$membership_id);
+            $this->db->update("membership_names",$membership);
+        } else if ($action == "Add User") {
+            $users = array("user_id"=>$this->input->post("new_membership_user"),"membership_id"=>$membership_id);
+            $this->db->insert("membership_users",$users);
+        } else if ($action == "Paypal Buy Button") {
+        
+        }
     }
 
     function membership_remove_user($membership_id,$userlink_id) {
@@ -148,7 +148,7 @@ class Memberships_model extends CI_Model {
 	}
 
     function purchased($membership) {
-        $this->db->insert("memberships",$membership);
+        $this->db->insert("membership_credits",$membership);
     }
 
     function add_new_membership() {
