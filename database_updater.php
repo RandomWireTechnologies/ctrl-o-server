@@ -32,7 +32,7 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
     if ($result == FALSE) {echo "Failed to create table membership_names: ".$db->error."\n"; return;}
     $result = $db->query("drop table if exists membership_credits");
     if ($result == FALSE) {echo "Failed to drop table membership credits: ".$db->error."\n";}
-    $result = $db->query("create table membership_credits (id int not null primary key auto_increment, membership_id int, owner_id int not null, type_id int not null, price_paid decimal(10,2) not null default '0.0', auto_activate tinyint, start timestamp, end timestamp, purchased timestamp not null, notes text)");
+    $result = $db->query("create table membership_credits (id int not null primary key auto_increment, membership_id int, owner_id int not null, type_id int not null, price_paid decimal(10,2) not null default '0.0', auto_activate tinyint, start timestamp null, end timestamp null, purchased timestamp not null default NOW(), notes text)");
     if ($result == FALSE) {echo "Failed to create table membership_credits: ".$db->error."\n"; return;}
     $result = $db->query("drop table if exists membership_users");
     if ($result == FALSE) {echo "Failed to drop table membership_users: ".$db->error."\n";}
