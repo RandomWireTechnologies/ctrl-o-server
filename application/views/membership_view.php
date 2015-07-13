@@ -69,7 +69,9 @@
 				<input type="hidden" name="item_name" value="<?php echo $membership['type'];?>">
 				<input type="hidden" name="item_number" value="<?php echo $membership['type_id'];?>">
 				<input type="hidden" name="amount" value="<?php echo $membership['type_price'];?>">
-				<input type="hidden" name="custom" value="<?php echo $membership['id'];?>">
+				<input type="hidden" name="on0" value="membership_id">
+				<input type="hidden" name="os0" value="<?php echo $membership['id'];?>">
+				<input type="hidden" name="custom" value="<?php echo $user_id;?>">
 				<input type="hidden" name="notify_url" value="https://lm.randomwire.biz/paypal/ipn">
 				<input type="hidden" name="return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
 				<input type="hidden" name="cancel_return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">

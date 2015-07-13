@@ -95,6 +95,7 @@ class Membership extends CI_Controller {
             $this->data['users'] = $this->cards_model->get_username_list();
             $this->data['membership_types'] = $this->memberships_model->membership_type_list();
             $this->data['membership'] = $this->memberships_model->get_membership($membership_id);
+            $this->data['user_id'] = $user_id;
             $this->load->view('membership_view', $this->data);
         } else {
             // You don't have privledges, bounce to your membership page
