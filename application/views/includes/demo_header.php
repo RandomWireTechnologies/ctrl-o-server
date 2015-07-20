@@ -33,6 +33,9 @@
                                 <a href="<?php echo $base_url;?>membership/manage">Manage Memberships</a>
                             </li>
                             <li>
+                                <a href="<?php echo $base_url;?>membership/types">Manage Membership Types</a>
+                            </li>
+                            <li>
                                 <a href="<?php echo $base_url;?>node">Manage Nodes</a>
                             </li>
                             <li>

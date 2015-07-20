@@ -84,6 +84,7 @@ class Memberships_model extends CI_Model {
     }
 
     function get_membership_types() {
+	$this->db->where("disabled",0);
         $query = $this->db->get("membership_types");
         return $query->result_array();
     }
@@ -99,8 +100,11 @@ class Memberships_model extends CI_Model {
     }
     
     function get_membership_counts() {
-        $query = $this->db->select("count(distinct c.user_id) as active,count(distinct m.user_id) as max,count(distinct p.user_id) as total from current_memberships as c, memberships as m, user_profiles as p", FALSE)->get();
-        return $query->row_array();        
+	$active = $this->db->select("count(distinct user_id) as active from current_memberships",FALSE)->get()->row_array()['active'];
+	$max = $this->db->select("count(distinct owner_id) as max from membership_names",FALSE)->get()->row_array()['max'];
+	$total = $this->db->select("count(distinct user_id) as total from user_profiles",FALSE)->get()->row_array()['total'];
+        //$query = $this->db->select("count(distinct c.user_id) as active,count(distinct m.owner_id) as max,count(distinct p.user_id) as total from current_memberships as c, membership_names as m, user_profiles as p", FALSE)->get();
+        return array("active"=>$active,"max"=>$max,"total"=>$total);
     }
 
     function get_membership_owner($membership_id) {
@@ -154,6 +158,51 @@ class Memberships_model extends CI_Model {
 
     function purchased($membership) {
         $this->db->insert("membership_credits",$membership);
+    }
+
+    function delete_type() {
+	$id = $this->input->post('id');
+	$this->db->where("id", $id);
+	if ($this->db->update("membership_types",array("disabled"=>"1"))) {
+	    $this->data['message'] = "<p class='status_msg'>Membership Type Deleted</p>";
+	} else {
+	    $this->data['message'] = "<p class='error_msg'>Membership type couldn't be deleted</p>";
+	}
+    }
+
+    function add_type() {
+	// Validate data from form
+	$action = $this->input->post('action');
+        $type = $this->input->post('new_type');
+	    //************************ ADD CHECKING HERE ********************************************//
+	    // Convert blanks to nulls
+	    if ($type['name']=="") {
+	        $this->data['message'] = "<p class='error_msg'>You must set a name!</p>";
+		return;
+	    }
+	    if (!is_numeric($type['length'])) {
+	        $this->data['message'] = "<p class='error_msg'>Length must be a valid number</p>";
+		return;
+	    }
+	    if (!is_numeric($type['number'])) {
+	        $this->data['message'] = "<p class='error_msg'>You must set a valid number of users</p>";
+		return;
+	    }
+	    if (!is_numeric($type['price'])) {
+	        $this->data['message'] = "<p class='error_msg'>You must set a price!</p>";
+		return;
+	    }
+	    if (!is_numeric($type['subscription'])) {
+	        $this->data['message'] = "<p class='error_msg'>You must select if it's a subscription</p>";
+		return;
+	    }
+	    // Insert data into database
+	    if ($this->db->insert("membership_types",$type)) {
+		$this->data['message'] = "<p class='status_msg'>Membership Type Added</p>";
+                return $this->db->insert_id;
+	    } else {
+		$this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
+	    }
     }
 
     function add_new_membership() {

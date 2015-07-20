@@ -56,22 +56,18 @@
                                 <td>$<?php echo $credit['price_paid'];?></td>
                                 <td><?php echo $credit['start'];?></td>
                                 <td><?php echo $credit['end'];?></td>
-                                <td><?php echo $credit['auto_activate']?></td>
+                                <td><?php if ($credit['auto_activate'] ==0) {echo "No";} else if ($credit['auto_activate'] ==1) {echo "Yes";} else if ($credit['auto_activate'] ==2) {echo "Subscription";}?></td>
                                 </tr>
                         <?php endforeach;?>
                         </tbody>
 
                         <tfoot>
 				<form name="_xclick" action="<?php echo $paypal_url;?>">
-				<input type="hidden" name="cmd" value="_xclick">
-				<input type="hidden" name="business" value="<?php echo $paypal_id;?>">
-				<input type="hidden" name="currency_code" value="USD">
-				<input type="hidden" name="item_name" value="<?php echo $membership['type'];?>">
-				<input type="hidden" name="item_number" value="<?php echo $membership['type_id'];?>">
-				<input type="hidden" name="amount" value="<?php echo $membership['type_price'];?>">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="5TDM8JVX6S8NY">
 				<input type="hidden" name="on0" value="membership_id">
 				<input type="hidden" name="os0" value="<?php echo $membership['id'];?>">
-				<input type="hidden" name="custom" value="<?php echo $user_id;?>">
+				<input type="hidden" name="custom" value="<?php echo $membership['id'];?>">
 				<input type="hidden" name="notify_url" value="https://lm.randomwire.biz/paypal/ipn">
 				<input type="hidden" name="return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
 				<input type="hidden" name="cancel_return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
