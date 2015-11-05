@@ -20,11 +20,12 @@ class Memberships_model extends CI_Model {
 	 */
 	function get_user_memberships($user_id, $type='All') {
 		if ($type == 'All') {
-			$this->db->select("membership_names.*,membership_types.name as type, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, max(membership_credits.end) as expires");
+			$this->db->select("membership_names.*,membership_types.name as type, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, max(membership_credits.end) as expires, membership_types.paypal_button, membership_types.paypal_subscription_button");
 			$this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
 			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
 			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
 			$this->db->group_by("membership_names.id");
+			$this->db->order_by("expires","desc");
 			$this->db->where('membership_names.owner_id', $user_id);
 			$this->db->where('membership_credits.end is not null');
 			$query = $this->db->get("membership_names");
@@ -44,6 +45,7 @@ class Memberships_model extends CI_Model {
 			$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
 			$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
 			$this->db->group_by("membership_names.id");
+			$this->db->order_by("expires","desc");
 			$this->db->where('membership_users.user_id', $user_id);
 			$this->db->where('membership_credits.start <','NOW()', FALSE);
 			$this->db->where('membership_credits.end >', 'NOW()', FALSE);
@@ -68,7 +70,7 @@ class Memberships_model extends CI_Model {
 
     function get_membership($membership_id)
     {
-	$this->db->select("membership_names.*,membership_types.name as type,membership_types.price as type_price, CONCAT_WS(' ',user_profiles.first_name,user_profiles.last_name ) as owner_name, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count");
+	$this->db->select("membership_names.*,membership_types.name as type,membership_types.price as type_price, CONCAT_WS(' ',user_profiles.first_name,user_profiles.last_name ) as owner_name, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, membership_types.paypal_button, membership_types.paypal_subscription_button");
 	$this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
 	$this->db->join("user_profiles","user_profiles.user_id = membership_names.owner_id","left");
 	$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");

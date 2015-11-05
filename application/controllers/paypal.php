@@ -46,7 +46,11 @@ function ipn()
             $user_id = null;
             $membership_id = null;
             //$membership_id = $this->paypal_ipn->order['custom'];
-            $user_id = $this->paypal_ipn->order['custom'];
+            $custom = $this->paypal_ipn->order['custom'];
+	    $custom_data = unserialize($custom);
+	    $membership_id = $custom_data['membership_id'];
+	    $user_id = $custom_data['user_id'];
+	    //$auto_activate = $custom_data['auto_activate'];
 	    file_put_contents($log_file, "User Id=$user_id\n", FILE_APPEND);
             if (is_null($membership_id)) {
                 $user_data = $this->flexi_auth->get_user_by_identity_query($this->paypal_ipn->order['payer_email']);
