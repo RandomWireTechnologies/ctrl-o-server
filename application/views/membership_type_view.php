@@ -42,7 +42,7 @@
                         <li><strong>Number of Users:</strong><?php echo $type['number'];?></li>
                         <li><strong>Subscription Allowed:</strong><?php echo $type['subscription'];?></li>
                         <li><strong>Paypal Button ID:</strong><input name="type[paypal_button]" value="<?php echo $type['paypal_button'];?>"></li>
-                        <li><strong>Subscription Paypal Button ID:</strong><input name="type[paypal_button]" value="<?php echo $type['paypal_subscription_button'];?>"></li>
+                        <li><strong>Subscription Paypal Button ID:</strong><input name="type[paypal_subscription_button]" value="<?php echo $type['paypal_subscription_button'];?>"></li>
                     </ul>
                     <input type=submit name=action value="Update" class="link_button">
                     
