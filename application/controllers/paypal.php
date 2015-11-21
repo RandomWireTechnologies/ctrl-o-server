@@ -26,7 +26,7 @@ class Paypal extends CI_Controller {
 // To handle the IPN post made by PayPal (uses the Paypal_Lib library).
 function ipn()
 {
-    $log_file = 'paypal.log';
+    $log_file = '/p/web/lm.randomwire.biz/paypal.log';
     $this->load->library('PayPal_IPN'); // Load the library
     $this->auth = new stdClass; // Stupid requirement before loading flexi_auth
     $this->load->library('flexi_auth');
@@ -44,7 +44,14 @@ function ipn()
         if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID)
         {
             $user_id = null;
-            $membership_id = $this->paypal_ipn->order['custom'];
+            $membership_id = null;
+            //$membership_id = $this->paypal_ipn->order['custom'];
+            $custom = $this->paypal_ipn->order['custom'];
+	    $custom_data = unserialize($custom);
+	    $membership_id = $custom_data['membership_id'];
+	    $user_id = $custom_data['user_id'];
+	    //$auto_activate = $custom_data['auto_activate'];
+	    file_put_contents($log_file, "User Id=$user_id\n", FILE_APPEND);
             if (is_null($membership_id)) {
                 $user_data = $this->flexi_auth->get_user_by_identity_query($this->paypal_ipn->order['payer_email']);
                 if (!is_null($user_data)) {
@@ -68,8 +75,9 @@ function ipn()
             // Get Items
             foreach ($this->paypal_ipn->orderItems as $item) {
                 // Get the item name and user id (item id)
-                if(is_int($item['item_number'])) {
+                if(is_numeric($item['item_number'])) {
                     $membership_credit['type_id'] = $item['item_number'];
+	 	    file_put_contents($log_file, "Membership Type Id=".$membership_credit['type_id']."\n", FILE_APPEND);
                 } else {
                     if ($item['item_number'] == "sub-Maker") {
                         $membership_credit['type_id'] = 6;
@@ -97,19 +105,38 @@ function ipn()
                         $membership_credit['type_id'] = 5;
                     }
                 }
+
+		file_put_contents($log_file, "Options Passed: N=".$item['option_name_1']." V=".$item['option_selection_1']."\n", FILE_APPEND);
+		if($item['option_name_1'] == "membership_id") {
+		    $membership_id = $item['option_selection_1'];
+		    file_put_contents($log_file, "Membership ID Passed as ID=$membership_id\n", FILE_APPEND);
+		}
  
                 $this->load->model('memberships_model');
-                if(is_null($membership_id) && is_int($membership['type_id']) && is_int($user_id)) {
+                if(is_null($membership_id) && is_numeric($membership['type_id']) && is_numeric($user_id)) {
                     $membership_id = $this->memberships_model->get_users_membership_id($user_id,$membership_type);
+		    file_put_contents($log_file, "Getting Membership Id... ID=$membership_id\n", FILE_APPEND);
                 }
+		if(is_null($user_id) && is_numeric($membership_id)) {
+		    $user_id = $this->memberships_model->get_membership_owner($membership_id);
+		    file_put_contents($log_file, "Getting User Id from database, memid=$membership_id, owner_Id=$user_id\n", FILE_APPEND);
+		}
                 if (!is_null($membership_id)) {
                     $membership_credit['owner_id'] = $user_id;
                     $membership_credit['membership_id'] = $membership_id;
                     $membership_credit['purchased'] = $payment_date;
                     $membership_credit['price_paid'] = $item['mc_gross'];
                     $membership_credit['notes'] = "Purchased from PayPal";
-    
-                    if (!is_null($user_id) && !is_null($membership['type_id'])) {
+
+		    file_put_contents($log_file, "Membership Credit: Owner=$user_id, Type=".$membership_credit['type_id']."\n", FILE_APPEND);
+
+                    if (!is_null($user_id) && !is_null($membership_credit['type_id'])) {
+		        file_put_contents($log_file, "Storing Values...\n", FILE_APPEND);
+		        file_put_contents($log_file, " Owner=".$membership_credit['owner_id']."\n", FILE_APPEND);
+		        file_put_contents($log_file, " MID=".$membership_credit['membership_id']."\n", FILE_APPEND);
+		        file_put_contents($log_file, " Purchased=".$membership_credit['purchased']."\n", FILE_APPEND);
+		        file_put_contents($log_file, " PricePaid=".$membership_credit['price_paid']."\n", FILE_APPEND);
+		        file_put_contents($log_file, " Notes=".$membership_credit['notes']."\n", FILE_APPEND);
                         $this->memberships_model->purchased($membership_credit);
                     }
                 }

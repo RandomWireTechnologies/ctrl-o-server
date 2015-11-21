@@ -56,27 +56,37 @@
                                 <td>$<?php echo $credit['price_paid'];?></td>
                                 <td><?php echo $credit['start'];?></td>
                                 <td><?php echo $credit['end'];?></td>
-                                <td><?php echo $credit['auto_activate']?></td>
+                                <td><?php if ($credit['auto_activate'] ==0) {echo "No";} else if ($credit['auto_activate'] ==1) {echo "Yes";} else if ($credit['auto_activate'] ==2) {echo "Subscription";}?></td>
                                 </tr>
                         <?php endforeach;?>
                         </tbody>
 
                         <tfoot>
-				<form name="_xclick" action="<?php echo $paypal_url;?>">
-				<input type="hidden" name="cmd" value="_xclick">
-				<input type="hidden" name="business" value="<?php echo $paypal_id;?>">
-				<input type="hidden" name="currency_code" value="USD">
-				<input type="hidden" name="item_name" value="<?php echo $membership['type'];?>">
-				<input type="hidden" name="item_number" value="<?php echo $membership['type_id'];?>">
-				<input type="hidden" name="amount" value="<?php echo $membership['type_price'];?>">
-				<input type="hidden" name="custom" value="<?php echo $membership['id'];?>">
-				<input type="hidden" name="notify_url" value="https://lm.randomwire.biz/paypal/ipn">
-				<input type="hidden" name="return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
-				<input type="hidden" name="cancel_return" value="https://lm.randomwire.biz/membership/view/<?php echo $membership['id'];?>">
                                 <tr>
-                                <td colspan=5><b>Add new credits to this membership<b> <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_86x21.png" border="0" name="submit" alt="Paypal Buy Button"></td>
+                                <td colspan=5>
+					<b>Add new credits to this membership:<b>
+					<?php if ($membership['paypal_button'] != "") :?>
+					<form name="_xclick" action="<?php echo $paypal_url;?>">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_button']; ?>">
+					<input type="hidden" name="custom" value="<?php echo htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id)));?>">
+					<input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+					<input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+					<input type="image" src="<?php $base_url;?>/includes/images/paypal_buy_small.png" border="0" name="submit" alt="Paypal Buy Button">
+					</form>
+					<?php endif;?>
+					<?php if ($membership['paypal_subscription_button'] != "") :?>
+					<form name="_xclick" action="<?php echo $paypal_url;?>">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_subscription_button']; ?>">
+					<input type="hidden" name="custom" value="<?php echo htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id)));?>">
+					<input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+					<input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+					<input type="image" src="<?php $base_url;?>/includes/images/paypal_subscribe_small.png" border="0" name="submit" alt="Paypal Subscribe Button">
+					</form>
+					<?php endif;?>
+				</td>
                                 </tr>
-				</form>
                         </tfoot>
                         </table>
 			<?php echo form_open(current_url());	?>

@@ -58,6 +58,9 @@
 						<li>
 							<a href="<?php echo $base_url;?>membership/manage">Manage Memberships</a>			
 						</li>	
+						<li>
+							<a href="<?php echo $base_url;?>membership/types">Manage Membership Types</a>			
+						</li>	
 					</ul>	
 					<h3>User Accounts</h3>
 					<p>Manage the account details of all site users.</p>

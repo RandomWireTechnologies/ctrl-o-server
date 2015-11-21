@@ -329,8 +329,8 @@ class PayPal_IPN
             // Reference: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables
             for ($ii = 1, $count = 7; $ii < $count; $ii++)
             {
-                $this->orderItems[$i]['option_name_'.$ii] = isset($this->ipnData['option_name'.$ii.'_'.$suffix]) ? $this->ipnData['option_name'.$ii.'_'.$suffix] : null;
-                $this->orderItems[$i]['option_selection_'.$ii] = isset($this->ipnData['option_selection'.$ii.'_'.$suffix]) ? $this->ipnData['option_selection'.$ii.'_'.$suffix] : null;
+                $this->orderItems[$i]['option_name_'.$ii] = isset($this->ipnData['option_name'.$ii.$suffixUnderscore]) ? $this->ipnData['option_name'.$ii.$suffixUnderscore] : null;
+                $this->orderItems[$i]['option_selection_'.$ii] = isset($this->ipnData['option_selection'.$ii.$suffixUnderscore]) ? $this->ipnData['option_selection'.$ii.$suffixUnderscore] : null;
             }
         }
 
