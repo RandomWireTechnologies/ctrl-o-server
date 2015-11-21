@@ -84,32 +84,56 @@ class Membership extends CI_Controller {
 
     function types() {
         $user_id = $this->flexi_auth->get_user_id();
-
-	if ($this->flexi_auth->is_privileged('Manage Memberships')) {
+    
+        if ($this->flexi_auth->is_privileged('Manage Memberships')) {
             $this->load->model('memberships_model');
-	    $action = $this->input->post("action");
+            $action = $this->input->post("action");
             if ($action == "Add") {
-		$this->data['new_type'] = $this->input->post("new_type");
+                $this->data['new_type'] = $this->input->post("new_type");
                 $this->memberships_model->add_type();
             } else if ($action == "Delete") {
                 $this->memberships_model->delete_type();
             }
-	    if (!isset($this->data['new_type'])) {
-		$this->data['new_type'] = array("name"=>"","length"=>"","price"=>"","number"=>"");
-	    }
+            if (!isset($this->data['new_type'])) {
+                $this->data['new_type'] = array("name"=>"","length"=>"","price"=>"","number"=>"");
+            }
             $this->data['membership_types'] = $this->memberships_model->get_membership_types();
             $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
             $this->data['user_id'] = $user_id;
-
+    
             // Set any returned status/error messages.
             $this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
-
+    
             $this->load->view('membership_type_list_view', $this->data);
-	} else {
+        } else {
             $this->flexi_auth->set_error_message("You don't have permission to view this page!", TRUE);
             $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
             redirect('membership');
-	}
+        }
+    }
+    
+    function type_view($type_id) {
+        $user_id = $this->flexi_auth->get_user_id();
+    
+        if ($this->flexi_auth->is_privileged('Manage Memberships')) {
+            $this->load->model('memberships_model');
+            $action = $this->input->post("action");
+            if ($action == "Update") {
+                $this->memberships_model->update_type($type_id,$this->input->post("type"));
+            }
+            $this->data['type'] = $this->memberships_model->get_membership_type($type_id);
+            $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
+            $this->data['user_id'] = $user_id;
+    
+            // Set any returned status/error messages.
+            $this->data['message'] = (! isset($this->data['message'])) ? $this->session->flashdata('message') : $this->data['message'];
+    
+            $this->load->view('membership_type_view', $this->data);
+        } else {
+            $this->flexi_auth->set_error_message("You don't have permission to view this page!", TRUE);
+            $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
+            redirect('membership');
+        }
     }
 
     function view($membership_id)

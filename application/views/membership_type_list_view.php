@@ -89,10 +89,10 @@
 						</thead>
                                                 <tbody>
 							<tr>
-								<td><input name="new_type[name]" value="<?echo $new_type['name'];?>" size=20></td>
-								<td><input name="new_type[length]" value="<?echo $new_type['length'];?>" size=4> Days</td>
-								<td>$<input name="new_type[price]" value="<?echo $new_type['price'];?>" size=8></td>
-								<td><input name="new_type[number]" value="<?echo $new_type['number'];?>" size=2></td>
+								<td><input name="new_type[name]" value="<?php echo $new_type['name'];?>" size=20></td>
+								<td><input name="new_type[length]" value="<?php echo $new_type['length'];?>" size=4> Days</td>
+								<td>$<input name="new_type[price]" value="<?php echo $new_type['price'];?>" size=8></td>
+								<td><input name="new_type[number]" value="<?php echo $new_type['number'];?>" size=2></td>
 								<td><select name="new_type[subscription]"><option value="0">No</option><option value="1">Yes</option></select></td>
 								<td><input type=submit name="action" value="Add" class="link_button"></td>
 							</tr>

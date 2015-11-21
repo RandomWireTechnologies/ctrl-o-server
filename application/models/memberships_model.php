@@ -70,18 +70,18 @@ class Memberships_model extends CI_Model {
 
     function get_membership($membership_id)
     {
-	$this->db->select("membership_names.*,membership_types.name as type,membership_types.price as type_price, CONCAT_WS(' ',user_profiles.first_name,user_profiles.last_name ) as owner_name, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, membership_types.paypal_button, membership_types.paypal_subscription_button");
-	$this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
-	$this->db->join("user_profiles","user_profiles.user_id = membership_names.owner_id","left");
-	$this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
+        $this->db->select("membership_names.*,membership_types.name as type,membership_types.price as type_price, CONCAT_WS(' ',user_profiles.first_name,user_profiles.last_name ) as owner_name, membership_types.number as max_users, count(distinct membership_users.user_id) as user_count, membership_types.paypal_button, membership_types.paypal_subscription_button");
+        $this->db->join("membership_types","membership_types.id = membership_names.type_id","left");
+        $this->db->join("user_profiles","user_profiles.user_id = membership_names.owner_id","left");
+        $this->db->join("membership_users","membership_users.membership_id = membership_names.id","left");
         $this->db->where('membership_names.id',$membership_id);
         $membership = $this->db->get("membership_names")->row_array();
-	$membership['credits'] = $this->db->get_where("membership_credits",array('membership_id' => $membership['id']))->result_array();
-	$this->db->select("membership_users.id,membership_users.user_id,concat(user_profiles.first_name,' ',user_profiles.last_name) as name",FALSE);
-	$this->db->join("user_profiles","user_profiles.user_id = membership_users.user_id","left");
-	$this->db->where("membership_users.membership_id", $membership['id']);
-	$membership['users'] = $this->db->get("membership_users")->result_array();
-	
+        $membership['credits'] = $this->db->get_where("membership_credits",array('membership_id' => $membership['id']))->result_array();
+        $this->db->select("membership_users.id,membership_users.user_id,concat(user_profiles.first_name,' ',user_profiles.last_name) as name",FALSE);
+        $this->db->join("user_profiles","user_profiles.user_id = membership_users.user_id","left");
+        $this->db->where("membership_users.membership_id", $membership['id']);
+        $membership['users'] = $this->db->get("membership_users")->result_array();
+        
         return $membership;
     }
 
@@ -89,6 +89,13 @@ class Memberships_model extends CI_Model {
 	$this->db->where("disabled",0);
         $query = $this->db->get("membership_types");
         return $query->result_array();
+    }
+    
+    function get_membership_type($type_id) {
+	$this->db->where("disabled",0);
+	    $this->db->where("id", $type_id);
+        $query = $this->db->get("membership_types");
+        return $query->row_array();
     }
     
     function membership_type_list() {

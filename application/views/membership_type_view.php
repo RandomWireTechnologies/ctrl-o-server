@@ -23,29 +23,32 @@
         <div class="content clearfix">
             <div class="col100">
 
-    			<?php if (! empty($message)) { ?>
-				<div id="message">
-					<?php echo $message; ?>
-				</div>
-	    		<?php } ?>
+    		    <?php if (! empty($message)) { ?>
+                <div id="message">
+                    <?php echo $message; ?>
+                </div>
+                <?php } ?>
 				
-                    <fieldset>
-			<?php echo form_open(current_url());	?>  	
+                <fieldset>
+                    <?php echo form_open(current_url());	?>  	
 
-			<legend>Membership Type</legend>
-			<h3><?php echo $type['name'];?></h3>
-			<input name="new_name" value="<?php echo $type['name']?>"><input type=submit name=action value="Update Name" class="link_button"><br>
-			<hr>
-			<ul>
-				<li><strong>Duration:</strong><?php echo $type['length'];?></li>
-				<li><strong>Price:</strong><?php echo $type['length'];?></li>
-				<li><strong>Number of Users:</strong><?php echo $type['number'];?></li>
-				<li><strong>Subscription Allowed:</strong><?php echo $type['subscription'];?></li>
-			</ul>
-
-                	<?php echo form_close();?>
-
-		    </fieldset>        
+                    <legend>Membership Type</legend>
+                    <h3><?php echo $type['name'];?></h3>
+                    <input name="type[name]" value="<?php echo $type['name']?>"><br>
+                    <hr>
+                    <ul>
+                        <li><strong>Duration:</strong><?php echo $type['length'];?></li>
+                        <li><strong>Price:</strong><?php echo $type['length'];?></li>
+                        <li><strong>Number of Users:</strong><?php echo $type['number'];?></li>
+                        <li><strong>Subscription Allowed:</strong><?php echo $type['subscription'];?></li>
+                        <li><strong>Paypal Button ID:</strong><input name="type[paypal_button]" value="<?php echo $type['paypal_button'];?>"></li>
+                        <li><strong>Subscription Paypal Button ID:</strong><input name="type[paypal_button]" value="<?php echo $type['paypal_subscription_button'];?>"></li>
+                    </ul>
+                    <input type=submit name=action value="Update" class="link_button">
+                    
+                    <?php echo form_close();?>
+                    
+                </fieldset>        
             </div>
         </div>
     </div>	
