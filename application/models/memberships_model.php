@@ -108,6 +108,11 @@ class Memberships_model extends CI_Model {
 		return $result;
     }
     
+    function update_type($type_id,$type_data) {
+        $this->db->where("id",$type_id);
+        $this->db->update("membership_types",$type_data);
+    }
+    
     function get_membership_counts() {
 	$active = $this->db->select("count(distinct user_id) as active from current_memberships",FALSE)->get()->row_array()['active'];
 	$max = $this->db->select("count(distinct owner_id) as max from membership_names",FALSE)->get()->row_array()['max'];
