@@ -58,22 +58,22 @@ class Membership extends CI_Controller {
         if ($this->input->post("activate")) {
             $this->memberships_model->activate();
         }
-
+        
         $this->data['current_memberships'] = $this->memberships_model->get_user_memberships($user_id,'Current');
         $this->data['memberships'] = $this->memberships_model->get_user_memberships($user_id,'All');
-	$this->data['users'] = $this->cards_model->get_username_list();
-	$this->data['types'] = $this->memberships_model->membership_type_list();
+        $this->data['users'] = $this->cards_model->get_username_list();
+        $this->data['types'] = $this->memberships_model->membership_type_list();
         $this->data['user'] = $this->flexi_auth->get_user_by_identity_row_array();
         $this->data['user_id'] = $user_id;
         //$this->data['membership_types'] = $this->memberships_model->get_membership_types();
-            $this->config->load('paypal_ipn');
-            if ($this->config->item('paypal_ipn_use_live_settings')) {
-		//$this->data['paypal_id'] = $this->config->item('paypal_ipn_live_settings')['id'];
-		$this->data['paypal_url'] = $this->config->item('paypal_ipn_live_settings')['url'];
-	    } else {
-		//$this->data['paypal_id'] = $this->config->item('paypal_ipn_sandbox_settings')['id'];
-		$this->data['paypal_url'] = $this->config->item('paypal_ipn_sandbox_settings')['url'];
-	    }
+        $this->config->load('paypal_ipn');
+        if ($this->config->item('paypal_ipn_use_live_settings')) {
+            //$this->data['paypal_id'] = $this->config->item('paypal_ipn_live_settings')['id'];
+            $this->data['paypal_url'] = $this->config->item('paypal_ipn_live_settings')['url'];
+        } else {
+            //$this->data['paypal_id'] = $this->config->item('paypal_ipn_sandbox_settings')['id'];
+            $this->data['paypal_url'] = $this->config->item('paypal_ipn_sandbox_settings')['url'];
+        }
 
 
         // Set any returned status/error messages.

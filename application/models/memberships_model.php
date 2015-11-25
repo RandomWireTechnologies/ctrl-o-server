@@ -36,6 +36,8 @@ class Memberships_model extends CI_Model {
 				$this->db->join("user_profiles","user_profiles.user_id = membership_users.user_id","left");
 				$this->db->where("membership_users.membership_id", $membership['id']);
 				$memberships[$key]['users'] = $this->db->get("membership_users")->result_array();
+				$memberships[$key]['paypal_button_custom'] = htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id, "auto_activate"=>1)));
+				$memberships[$key]['paypal_subscription_button_custom'] = htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id, "auto_activate"=>1)));
 			}
 			return $memberships;
 		} else {
@@ -83,6 +85,27 @@ class Memberships_model extends CI_Model {
         $membership['users'] = $this->db->get("membership_users")->result_array();
         
         return $membership;
+    }
+    
+    function get_users_membership_id($user_id,$membership_type_id) {
+        $this->db->where("owner_id",$user_id);
+        $this->db->where("type_id",$membership_type_id);
+        $membership = $this->db->get("membership_names")->row_array();
+        if (!is_null($membership)) {
+            return $membership['id'];
+        } else {
+            return null;
+        }
+    }
+    
+    function get_membership_owner($membership_id) {
+        $this->db->where("id",$membership_id);
+        $membership = $this->db->get("membership_names")->row_array();
+        if (!is_null($membership)) {
+            return $membership['owner_id'];
+        } else {
+            return null;
+        }
     }
 
     function get_membership_types() {
@@ -172,6 +195,7 @@ class Memberships_model extends CI_Model {
 
     function purchased($membership) {
         $this->db->insert("membership_credits",$membership);
+        return $this->db->insert_id();
     }
 
     function delete_type() {
@@ -226,7 +250,7 @@ class Memberships_model extends CI_Model {
 	    //************************ ADD CHECKING HERE ********************************************//
 	    // Convert blanks to nulls
 	    if ($membership['notes']=="") {unset($membership['notes']);}
-	    if ($membership['onwer_id']=="") {
+	    if ($membership['owner_id']=="") {
 	        $this->data['message'] = "<p class='error_msg'>You must select a user!</p>";
 		return;
 	    }
@@ -245,6 +269,33 @@ class Memberships_model extends CI_Model {
 	    } else {
 		$this->data['message'] = "<p class='error_msg'>Failed to add...</p>";
 	    }
+	}
+	
+	function activate_credit($credit_id) {
+	    $this->db->select("membership_credits.membership_id as membership_id, membership_types.length as length");
+	    $this->db->from("membership_credits");
+	    $this->db->join("membership_types","membership_types.id = membership_credits.type_id", "left");
+	    $this->db->where("membership_credits.id",$credit_id);
+	    $data = $this->db->get()->row_array();
+	    $length = $data['length'];
+	    $membership_id = $data['membership_id'];
+	    // Use membership id to find last credit end time
+	    $this->db->select("max(end) as end");
+	    $this->db->from("membership_credits");
+	    $this->db->where("membership_id", $membership_id);
+	    $this->db->where("end > NOW()");
+	    $last_end = $this->db->get()->row_array()['end'];
+	    if (!is_null($last_end)) {
+	        $start = $last_end;
+	    } else {
+	        $start = date('Y-m-d H:i:s');
+        }
+        $end = date('Y-m-d H:i:s', strtotime("$start +$length days"));
+        $membership_credit['start'] = $start;
+        $membership_credit['end'] = $end;
+        
+        $this->db->where("id", $credit_id);
+        $this->db->update("membership_credits", $membership_credit);
 	}
 	
 	function activate() {
