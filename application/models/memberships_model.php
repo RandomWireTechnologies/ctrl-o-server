@@ -97,16 +97,16 @@ class Memberships_model extends CI_Model {
             return null;
         }
     }
-    
-    function get_membership_owner($membership_id) {
-        $this->db->where("id",$membership_id);
-        $membership = $this->db->get("membership_names")->row_array();
-        if (!is_null($membership)) {
-            return $membership['owner_id'];
-        } else {
-            return null;
-        }
-    }
+//    
+//    function get_membership_owner($membership_id) {
+//        $this->db->where("id",$membership_id);
+//        $membership = $this->db->get("membership_names")->row_array();
+//        if (!is_null($membership)) {
+//            return $membership['owner_id'];
+//        } else {
+//            return null;
+//        }
+//    }
 
     function get_membership_types() {
 	$this->db->where("disabled",0);
@@ -188,11 +188,10 @@ class Memberships_model extends CI_Model {
 	    $this->db->update("memberships",$membership);
     }
 
-    // Commenting because apparently this is implemented above
-//	function is_membership_owner($membership_id) {
-//		$query = $this->db->get_where("memberships",array("user_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
-//		return ($query->num_rows() === 1);
-//	}
+	function is_membership_owner($membership_id) {
+		$query = $this->db->get_where("memberships",array("user_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
+		return ($query->num_rows() === 1);
+	}
 
     function purchased($membership) {
         $this->db->insert("membership_credits",$membership);
