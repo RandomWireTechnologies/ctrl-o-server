@@ -188,10 +188,11 @@ class Memberships_model extends CI_Model {
 	    $this->db->update("memberships",$membership);
     }
 
-	function is_membership_owner($membership_id) {
-		$query = $this->db->get_where("memberships",array("user_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
-		return ($query->num_rows() === 1);
-	}
+    // Commenting because apparently this is implemented above
+//	function is_membership_owner($membership_id) {
+//		$query = $this->db->get_where("memberships",array("user_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
+//		return ($query->num_rows() === 1);
+//	}
 
     function purchased($membership) {
         $this->db->insert("membership_credits",$membership);
