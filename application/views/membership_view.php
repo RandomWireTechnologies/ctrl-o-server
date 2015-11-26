@@ -55,7 +55,7 @@
                                     <td><?php echo $credit['purchased'];?></td>
                                     <td>$<?php echo $credit['price_paid'];?></td>
                                     <td>
-                                        <?php if is_null($credit['start']):?>
+                                        <?php if (is_null($credit['start'])):?>
                                             <?php form_open(current_url()); ?>
                                                 <input type="hidden" name="credit_id" value="<?php echo $credit['id'];?>">
                                                 <input type="submit" name="action" value="Activate" class="link_button">
