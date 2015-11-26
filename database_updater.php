@@ -45,46 +45,52 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
     $table = $db->query("select a.id as from_id,b.id as to_id from membership_types as a left join membership_types as b on a.length = b.length AND a.number=b.number and a.price=b.price where a.auto_renew=1 and b.auto_renew=0");
     $type_lookup=array();
     while($obj = $table->fetch_object()) {
-	$type_lookup[$obj->from_id] = $obj->to_id;
+        $type_lookup[$obj->from_id] = $obj->to_id;
     }
     // Get list of users with memberships
     $users = $db->query("select distinct user_id from memberships");
     while($user = $users->fetch_object()) {
         echo "@";
         $user_id = $user->user_id;
-	$memberships_added = array();
+        $memberships_added = array();
         // for each user get a list of membership types owned
         $types = $db->query("select distinct type_id from memberships where user_id=$user_id");
         while ($type = $types->fetch_object()) {
             echo "!";
             $old_type_id = $type->type_id;
-	    $type_id = $old_type_id;
-	    // Check to see if type is a duplicated type, if so remap it
-	    if (array_key_exists($old_type_id,$type_lookup)) {
-		$type_id = $type_lookup[$old_type_id];
-		echo "*$old_type_id->$type_id*";
-	    }
-	    $membership_id = NULL;
-	    if (!array_key_exists($type_id,$memberships_added)) {
+            $type_id = $old_type_id;
+            // Check to see if type is a duplicated type, if so remap it
+            if (array_key_exists($old_type_id,$type_lookup)) {
+                $type_id = $type_lookup[$old_type_id];
+                echo "*$old_type_id->$type_id*";
+            }
+            $membership_id = NULL;
+            if (!array_key_exists($type_id,$memberships_added)) {
                 // for each membership type create a new membership
                 $db->query("insert into membership_names values ('', $user_id, $type_id, 'Unnamed Membership', NOW())");
                 $membership_id = $db->insert_id;
                 // Add each user to their own memberships (assumption but a fairly safe one for now)
                 $db->query("insert into membership_users values ('', $membership_id, $user_id)");
                 $memberships_added[$type_id] = $membership_id;
-	    }
-	    $membership_id = $memberships_added[$type_id];
+            }
+            $membership_id = $memberships_added[$type_id];
             // get a list of old memberships of that type and create membership credits for them
             $credits = $db->query("select m.*,t.auto_renew from memberships as m,membership_types as t where m.user_id='$user_id' and m.type_id='$old_type_id' and m.type_id=t.id");
             while ($credit = $credits->fetch_object()) {
                 echo ".";
-		if ($credit->auto_renew) {
-		    $subscription = 2;
-		} else {
-		    $subscription = 0;
-		}
+                if ($credit->auto_renew) {
+                    $subscription = 2;
+                } else {
+                    $subscription = 0;
+                }
                 $start = $credit->start;
                 $end = $credit->end;
+                if ($start == "") {
+                    $start = null;
+                }
+                if ($end == "") {
+                    $end = null;
+                }
                 $price = $credit->price;
                 $purchased = $credit->purchased;
                 $notes = $db->escape_string($credit->notes);
@@ -102,8 +108,8 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
     $db->query("alter table membership_types add column paypal_subscription_button varchar(16) after paypal_button;");
     $db->query("alter table membership_types add column disabled TINYINT NOT NULL DEFAULT 0 after paypal_subscription_button;");
     foreach ($type_lookup as $key=>$value) {
-	$db->query("delete from membership_types where id=$key");
-	$db->query("update membership_types set subscription=1 where id=$value");
+        $db->query("delete from membership_types where id=$key");
+        $db->query("update membership_types set subscription=1 where id=$value");
     }
 }
 ?>
