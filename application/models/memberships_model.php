@@ -151,17 +151,21 @@ class Memberships_model extends CI_Model {
     }
 
     function membership_action($membership_id) {
-	$action = $this->input->post("action");
-	if ($action == "Update Name") {
-	   $membership = array("name"=>$this->input->post("new_name"));
-	   $this->db->where("id",$membership_id);
-	   $this->db->update("membership_names",$membership);
-	} else if ($action == "Add User") {
-	   $users = array("user_id"=>$this->input->post("new_membership_user"),"membership_id"=>$membership_id);
-	   $this->db->insert("membership_users",$users);
-	} else if ($action == "Paypal Buy Button") {
-
-	}
+        $action = $this->input->post("action");
+        if ($action == "Update Name") {
+            $membership = array("name"=>$this->input->post("new_name"));
+            $this->db->where("id",$membership_id);
+            $this->db->update("membership_names",$membership);
+        } else if ($action == "Add User") {
+            $users = array("user_id"=>$this->input->post("new_membership_user"),"membership_id"=>$membership_id);
+            $this->db->insert("membership_users",$users);
+        } else if ($action == "Paypal Buy Button") {
+            
+        } else if ($action == "Activate") {
+            $credit_id = $this->input->post("credit_id");
+            // Just call local member function to activate the credit
+            activate_credit($credit_id);
+        }
     }
 
     function membership_remove_user($membership_id,$userlink_id) {

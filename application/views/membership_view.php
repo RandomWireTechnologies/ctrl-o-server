@@ -54,7 +54,16 @@
                                 <tr>
                                     <td><?php echo $credit['purchased'];?></td>
                                     <td>$<?php echo $credit['price_paid'];?></td>
-                                    <td><?php echo $credit['start'];?></td>
+                                    <td>
+                                        <?php if is_null($credit['start']):?>
+                                            <?php form_open(current_url()); ?>
+                                                <input type="hidden" name="credit_id" value="<?php echo $credit['id'];?>">
+                                                <input type="submit" name="action" value="Activate" class="link_button">
+                                            <?php echo form_close();?>
+                                        <?php else: ?>
+                                            <?php echo $credit['start'];?>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?php echo $credit['end'];?></td>
                                     <td><?php if ($credit['auto_activate'] ==0) {echo "No";} else if ($credit['auto_activate'] ==1) {echo "Yes";} else if ($credit['auto_activate'] ==2) {echo "Subscription";}?></td>
                                 </tr>
