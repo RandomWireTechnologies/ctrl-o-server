@@ -164,7 +164,7 @@ class Memberships_model extends CI_Model {
         } else if ($action == "Activate") {
             $credit_id = $this->input->post("credit_id");
             // Just call local member function to activate the credit
-            activate_credit($credit_id);
+            $this->activate_credit($credit_id);
         }
     }
 
