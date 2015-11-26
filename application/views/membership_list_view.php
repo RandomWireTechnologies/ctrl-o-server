@@ -85,22 +85,26 @@
                                             <td><?php echo $membership['user_count']."/".$membership['max_users'];?></td>
                                             <td><?php echo $membership['expires'];?></td>
                                             <td>
-                                                <?php echo form_open($paypal_url); ?>
-                                                <input type="hidden" name="cmd" value="_s-xclick">
-                                                <input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_button']; ?>">
-                                                <input type="hidden" name="custom" value="<?php echo $membership['paypal_button_custom'];?>">
-                                                <input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
-                                                <input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
-                                                <input type="image" src="<?php $base_url;?>/includes/images/paypal_buy_small.png" border="0" name="submit" alt="Paypal Buy Button">
-                                                <?php echo form_close();?>
-                                                <?php echo form_open($paypal_url); ?>
-                                                <input type="hidden" name="cmd" value="_s-xclick">
-                                                <input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_subscription_button']; ?>">
-                                                <input type="hidden" name="custom" value="<?php echo $membership['paypal_subscription_button_custom'];?>">
-                                                <input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
-                                                <input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
-                                                <input type="image" src="<?php $base_url;?>/includes/images/paypal_subscribe_small.png" border="0" name="submit" alt="Paypal Subscribe Button">
-                                                <?php echo form_close();?>
+                                                <?php if ($membership['paypal_button'] != "") :?>
+                                                    <?php echo form_open($paypal_url); ?>
+                                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                                    <input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_button']; ?>">
+                                                    <input type="hidden" name="custom" value="<?php echo $membership['paypal_button_custom'];?>">
+                                                    <input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+                                                    <input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+                                                    <input type="image" src="<?php $base_url;?>/includes/images/paypal_buy_small.png" border="0" name="submit" alt="Paypal Buy Button">
+                                                    <?php echo form_close();?>
+                                                <?php endif;?>
+                                                <?php if ($membership['paypal_subscription_button'] != "") :?>
+                                                    <?php echo form_open($paypal_url); ?>
+                                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                                    <input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_subscription_button']; ?>">
+                                                    <input type="hidden" name="custom" value="<?php echo $membership['paypal_subscription_button_custom'];?>">
+                                                    <input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+                                                    <input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
+                                                    <input type="image" src="<?php $base_url;?>/includes/images/paypal_subscribe_small.png" border="0" name="submit" alt="Paypal Subscribe Button">
+                                                    <?php echo form_close();?>
+                                                <?php endif;?>
                                             </td>
                                         </tr>
                                         <?php endforeach;?>

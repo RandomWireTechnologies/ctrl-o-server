@@ -83,7 +83,8 @@ class Memberships_model extends CI_Model {
         $this->db->join("user_profiles","user_profiles.user_id = membership_users.user_id","left");
         $this->db->where("membership_users.membership_id", $membership['id']);
         $membership['users'] = $this->db->get("membership_users")->result_array();
-        
+        $membership['paypal_button_custom'] = htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id, "auto_activate"=>1)));
+        $membership['paypal_subscription_button_custom'] = htmlspecialchars(serialize(array("membership_id"=>$membership['id'],"user_id"=>$user_id, "auto_activate"=>2)));
         return $membership;
     }
     
