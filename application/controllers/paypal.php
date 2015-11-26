@@ -124,6 +124,7 @@ class Paypal extends CI_Controller {
                         $membership_credit['owner_id'] = $user_id;
                         $membership_credit['membership_id'] = $membership_id;
                         $membership_credit['purchased'] = $payment_date;
+                        $membership_credit['auto_activate'] = $auto_activate;
                         $membership_credit['price_paid'] = $item['mc_gross'];
                         $membership_credit['notes'] = "Purchased from PayPal";
 
