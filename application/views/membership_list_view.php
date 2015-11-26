@@ -88,7 +88,7 @@
                                                 <?php echo form_open($paypal_url); ?>
                                                 <input type="hidden" name="cmd" value="_s-xclick">
                                                 <input type="hidden" name="hosted_button_id" value="<?php echo $membership['paypal_button']; ?>">
-                                                <input type="hidden" name="custom" value="<?php echo $membership['paypal_button_cusom'];?>">
+                                                <input type="hidden" name="custom" value="<?php echo $membership['paypal_button_custom'];?>">
                                                 <input type="hidden" name="return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
                                                 <input type="hidden" name="cancel_return" value="https://<?php echo $_SERVER['SERVER_NAME'];?>/membership/view/<?php echo $membership['id'];?>">
                                                 <input type="image" src="<?php $base_url;?>/includes/images/paypal_buy_small.png" border="0" name="submit" alt="Paypal Buy Button">
