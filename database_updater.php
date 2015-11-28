@@ -66,8 +66,10 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
             }
             $membership_id = NULL;
             if (!array_key_exists($type_id,$memberships_added)) {
+                // Lookup the name of type 
+                $type_name = $db->query("select name from membership_types where id=$type_id")->fetch_field();
                 // for each membership type create a new membership
-                $db->query("insert into membership_names values ('', $user_id, $type_id, 'Unnamed Membership', NOW())");
+                $db->query("insert into membership_names values ('', $user_id, $type_id, '$type_name Membership', NOW())");
                 $membership_id = $db->insert_id;
                 // Add each user to their own memberships (assumption but a fairly safe one for now)
                 $db->query("insert into membership_users values ('', $membership_id, $user_id)");
@@ -85,12 +87,6 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
                 }
                 $start = $credit->start;
                 $end = $credit->end;
-                if ($start == "") {
-                    $start = null;
-                }
-                if ($end == "") {
-                    $end = null;
-                }
                 $price = $credit->price;
                 $purchased = $credit->purchased;
                 $notes = $db->escape_string($credit->notes);
@@ -100,6 +96,9 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
         }
     } // end users while
     echo "\n"; // Make clean exit
+    // Fix all the credits '0000-00-00 00:00:00' to NULL
+    $db->query("update membership_credits set start=null where start='0000-00-00 00:00:00'");
+    $db->query("update membership_credits set end=null where end='0000-00-00 00:00:00'");
     // Update current_memberships view
     $db->query("alter sql security invoker view current_memberships as select c.membership_id as id,u.user_id,c.type_id,c.start,c.end,c.purchased,c.price_paid,c.notes from membership_credits as c,membership_users as u where c.membership_id=u.membership_id and c.membership_id is not null and c.start<=NOW() and c.end>=now();");
     // Update membership_type
