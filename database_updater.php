@@ -59,6 +59,9 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
             echo "!";
             $old_type_id = $type->type_id;
             $type_id = $old_type_id;
+            if ($type_id == 0) {
+                continue;
+            }
             // Check to see if type is a duplicated type, if so remap it
             if (array_key_exists($old_type_id,$type_lookup)) {
                 $type_id = $type_lookup[$old_type_id];
@@ -67,7 +70,8 @@ if ($db->query("show tables like 'membership_names'")->num_rows == 0) {
             $membership_id = NULL;
             if (!array_key_exists($type_id,$memberships_added)) {
                 // Lookup the name of type 
-                $type_name = $db->query("select name from membership_types where id=$type_id")->fetch_field();
+                $type_name_lookup = $db->query("select name from membership_types where id=$type_id")->fetch_object();
+                $type_name = $type_name_lookup->name;
                 // for each membership type create a new membership
                 $db->query("insert into membership_names values ('', $user_id, $type_id, '$type_name Membership', NOW())");
                 $membership_id = $db->insert_id;
