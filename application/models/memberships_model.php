@@ -164,7 +164,7 @@ class Memberships_model extends CI_Model {
         } else if ($action == "Activate") {
             $credit_id = $this->input->post("credit_id");
             // Just call local member function to activate the credit
-            $this->activate_credit($credit_id);
+            $this->activate_credit($credit_id,1);
         }
     }
 
@@ -276,7 +276,7 @@ class Memberships_model extends CI_Model {
 	    }
 	}
 	
-	function activate_credit($credit_id) {
+	function activate_credit($credit_id, $activate_type) {
 	    $this->db->select("membership_credits.membership_id as membership_id, membership_types.length as length");
 	    $this->db->from("membership_credits");
 	    $this->db->join("membership_types","membership_types.id = membership_credits.type_id", "left");
@@ -284,16 +284,20 @@ class Memberships_model extends CI_Model {
 	    $data = $this->db->get()->row_array();
 	    $length = $data['length'];
 	    $membership_id = $data['membership_id'];
-	    // Use membership id to find last credit end time
-	    $this->db->select("max(end) as end");
-	    $this->db->from("membership_credits");
-	    $this->db->where("membership_id", $membership_id);
-	    $this->db->where("end > NOW()");
-	    $last_end = $this->db->get()->row_array()['end'];
-	    if (!is_null($last_end)) {
-	        $start = $last_end;
-	    } else {
+	    if ($activate_type == 2) {
 	        $start = date('Y-m-d H:i:s');
+	    } else {
+    	    // Use membership id to find last credit end time
+    	    $this->db->select("max(end) as end");
+    	    $this->db->from("membership_credits");
+    	    $this->db->where("membership_id", $membership_id);
+    	    $this->db->where("end > NOW()");
+    	    $last_end = $this->db->get()->row_array()['end'];
+    	    if (!is_null($last_end)) {
+    	        $start = $last_end;
+    	    } else {
+    	        $start = date('Y-m-d H:i:s');
+            }
         }
         $end = date('Y-m-d H:i:s', strtotime("$start +$length days"));
         $membership_credit['start'] = $start;

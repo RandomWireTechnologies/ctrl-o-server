@@ -139,7 +139,7 @@ class Paypal extends CI_Controller {
                             file_put_contents($log_file, " Notes=".$membership_credit['notes']."\n", FILE_APPEND);
                             $credit_id = $this->memberships_model->purchased($membership_credit);
                             if ($auto_activate) {
-                                $this->memberships_model->activate_credit($credit_id);
+                                $this->memberships_model->activate_credit($credit_id, $auto_activate);
                             }
                         }
                     }
