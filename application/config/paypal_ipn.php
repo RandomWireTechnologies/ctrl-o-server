@@ -28,7 +28,7 @@ $config['paypal_ipn_use_live_settings'] = TRUE;
 
 // Constants for the live environment
 $config['paypal_ipn_live_settings'] = array(
-    'email' => 'paypal@address.com', // Your merchant email address
+    'email' => 'info@lowellmakes.com', // Your merchant email address
     'url' => 'https://www.paypal.com/cgi-bin/webscr', // PayPal's IPN handler for validating the data
     'debug' => FALSE // Whether we want debugging enabled (see below for explanation...)
 );
@@ -38,7 +38,7 @@ $config['paypal_ipn_live_settings'] = array(
 
 // Constants for the sandbox environment
 $config['paypal_ipn_sandbox_settings'] = array(
-    'email' => 'test@fake.com',
+    'email' => 'info@lowellmakes.com',
     'url' => 'https://www.sandbox.paypal.com/cgi-bin/webscr',
     'debug' => TRUE
 );

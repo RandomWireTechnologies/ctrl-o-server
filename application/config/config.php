@@ -16,14 +16,15 @@
 */
 //$config['base_url']	= 'http://localhost/';
 $config['base_url']	= '';
-$config['title'] = "Ctrl-O Panel";
-$config['logo_alt'] = "Ctrl-O"; // This is the alt text for the logo
+$config['title'] = "Lowell Makes Members";
+$config['logo_alt'] = "Lowell Makes"; // This is the alt text for the logo
 // HEAD Content - This can be used to add analytics tracking and other global code.
 $config['global_head_content'] = ""; // Add any extra html here to be inserted in all pages head
 
-$config['header_link_array'] = array();
+//$config['header_link_array'] = array();
+$config['header_link_array'] = ["Home"=>"http://www.lowellmakes.com/","Forum"=>"https://forums.lowellmakes.com","Wiki"=>"https://wiki.lowellmakes.com/","Members"=>"https://members.lowellmakes.com/"];
 //$config['header_link_array'] = ["Random Wire Technologies"=>"https://randomwire.biz/", "Blog"=>"https://blog.randomwire.biz"];
-$config['new_member_notify_email'] = "";
+$config['new_member_notify_email'] = "it@lowellmakes.com";
 
 /*
 |--------------------------------------------------------------------------
@@ -233,7 +234,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'changeMeToSomethingNewAndRandom';
+$config['encryption_key'] = 'LJo34tlijD8fk3HI&Y#Q%oiuy38r7yKHY#IHCE';
 
 /*
 |--------------------------------------------------------------------------
