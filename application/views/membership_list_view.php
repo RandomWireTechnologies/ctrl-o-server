@@ -5,8 +5,8 @@
 <!--[if IE 9 ]><html lang="en" class="no-js ie9"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="no-js"><!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <?php $this->load->view('includes/head'); ?>
+    	<meta charset="utf-8">
+    	<?php $this->load->view('includes/head'); ?> 
     </head>
 
     <body id="update_account">
@@ -35,7 +35,6 @@
                             <?php if (count($current_memberships) == 0) :?>
                                 <h3>No active memberships!</h3>
                             <?php else : ?>
-
                                 <table>
                                     <thead>
                                         <tr>
@@ -119,10 +118,9 @@
 
                         <fieldset>
                             <legend>Create New Membership</legend>
-                            Type: <?php echo form_dropdown("new_membership_type",$types,"");?>
-                            Name: <input name="new_name">
-                            <input type=submit class="link_button name="buy" value="Paypal Buy Button">
-                            <input type=submit class="link_button name="subscribe" value="Paypal Subscribe Button">
+                            Type: <?php echo form_dropdown("new_membership_type_id",$types,"");?>
+                            <input type=hidden name="new_membership_owner_id" value="<?php echo $user_id;?>">
+                            <input type=submit class="link_button" name="action" value="Create Membership">
                         </fieldset>
 
                         <?php echo form_close();?>

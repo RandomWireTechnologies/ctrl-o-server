@@ -27,7 +27,7 @@ class Memberships_model extends CI_Model {
 			$this->db->group_by("membership_names.id");
 			$this->db->order_by("expires","desc");
 			$this->db->where('membership_names.owner_id', $user_id);
-			$this->db->where('membership_credits.end is not null');
+			//$this->db->where('membership_credits.end is not null');
 			$query = $this->db->get("membership_names");
 			$memberships = $query->result_array();
 			foreach ($memberships as $key => $membership) {
@@ -64,8 +64,8 @@ class Memberships_model extends CI_Model {
 		$this->db->join("user_profiles","user_profiles.user_id = membership_names.owner_id");
 		$this->db->join("membership_credits","membership_credits.membership_id = membership_names.id","left");
 		$this->db->group_by("membership_names.id");
-		$this->db->where("membership_credits.end is not null");
-		$this->db->order_by("owner","ASC");
+		//$this->db->where("membership_credits.end is not null");
+		$this->db->order_by("membership_names.created_at","DESC");
 		$query = $this->db->get();
 		return $query->result_array();
 	}
@@ -116,13 +116,15 @@ class Memberships_model extends CI_Model {
     }
     
     function get_membership_type($type_id) {
-	$this->db->where("disabled",0);
+	    $this->db->where("disabled",0);
 	    $this->db->where("id", $type_id);
         $query = $this->db->get("membership_types");
         return $query->row_array();
     }
     
     function membership_type_list() {
+        $this->db->where("disabled",0);
+        $this->db->order_by("name");
         $query = $this->db->get("membership_types");
 		$data = $query->result_array();
 		$result = array();
@@ -194,7 +196,7 @@ class Memberships_model extends CI_Model {
     }
 
 	function is_membership_owner($membership_id) {
-		$query = $this->db->get_where("memberships",array("user_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
+		$query = $this->db->get_where("membership_names",array("owner_id"=>$this->flexi_auth->get_user_id(),"id"=>$membership_id));
 		return ($query->num_rows() === 1);
 	}
 
@@ -249,19 +251,28 @@ class Memberships_model extends CI_Model {
     }
 
     function add_new_membership() {
-	// Validate data from form
-	$action = $this->input->post('action');
+    	// Validate data from form
+    	$action = $this->input->post('action');
         $membership = $this->input->post('membership');
-	    //************************ ADD CHECKING HERE ********************************************//
-	    // Convert blanks to nulls
-	    if ($membership['notes']=="") {unset($membership['notes']);}
-	    if ($membership['owner_id']=="") {
-	        $this->data['message'] = "<p class='error_msg'>You must select a user!</p>";
-		return;
+        if ($action == "Create Membership") {
+            unset($membership);
+            $membership['name']="Unnamed Membership";
+            $membership['owner_id']=$this->input->post('new_membership_owner_id');
+            $membership['type_id']=$this->input->post('new_membership_type_id');
+            $this->db->insert("membership_names",$membership);
+            $this->data['message'] = "<p class='status_msg'>Membership Added</p>";
+            return;
+        }
+        //************************ ADD CHECKING HERE ********************************************//
+        // Convert blanks to nulls
+        if ($membership['notes']=="") {unset($membership['notes']);}
+        if ($membership['owner_id']=="") {
+            $this->data['message'] = "<p class='error_msg'>You must select a user!</p>";
+            return;
 	    }
 	    if ($membership['purchased']=="") {
 	        $this->data['message'] = "<p class='error_msg'>You must set a purchase date!</p>";
-		return;
+            return;
 	    }
 	    if ($membership['price_paid']=="") {
 	        $this->data['message'] = "<p class='error_msg'>You must set a price paid!</p>";
