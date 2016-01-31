@@ -48,11 +48,12 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '127.0.0.1';
-$db['default']['port'] = 6779;
-$db['default']['username'] = 'ctrl-o';
-$db['default']['password'] = 'ctrl-o-db-password';
-$db['default']['database'] = 'ctrl-o';
+//$db['default']['hostname'] = '127.0.0.1';
+//$db['default']['port'] = 6779;
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'member_web';
+$db['default']['password'] = '34srEApRBjUmsSFY';
+$db['default']['database'] = 'member_web';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -44,7 +44,7 @@
 						<ul>
 						<li>
 							<label for="date">Purchase Date:</label>
-							<input type="text" id="purchased" name="membership[purchased]" value="<?php echo set_value('membership[purchased]',$now);?>" />
+							<input type="text" id="purchased" name="membership_credit[purchased]" value="<?php echo set_value('membership_credit[purchased]',$now);?>" />
 						</li>
 						<li>
 							<label for="activate">Activate:</label>
@@ -52,11 +52,11 @@
 						</li>
 						<li class="info_req">
 							<label for="price">Price Paid:</label>
-							<input type="text" id="price" name="membership[price_paid]" value="<?php echo set_value('price_paid');?>" />
+							<input type="text" id="price" name="membership_credit[price_paid]" value="<?php echo set_value('price_paid');?>" />
 						</li>
 						<li>
 							<label for="notes">Notes:</label>
-							<input type="text" id="notes" name="membership[notes]" value="<?php echo set_value('notes');?>" />
+							<input type="text" id="notes" name="membership_credit[notes]" value="<?php echo set_value('notes');?>" />
 						</li>
 						<li>
 							<input type=submit name="action" value="Add Membership With Credit" class="link_button large">

@@ -33,8 +33,8 @@
                         <?php echo form_open(current_url());	?>
 
                         <legend>Membership</legend>
-                        <h3><?php echo $membership['name']." - ".$membership['type'];?></h3>
-                        <input name="new_name" value="<?php echo $membership['name']?>"><input type=submit name=action value="Update Name" class="link_button"><br>
+                        <h3><?php echo $membership['type'];?></h3>
+                        <!-- <input name="new_name" value="<?php echo $membership['name']?>"><input type=submit name=action value="Update Name" class="link_button"><br> -->
                         <b>Membership Owner: <?php echo $membership['owner_name'];?></b>
                         <hr>
                         <?php echo form_close();?>

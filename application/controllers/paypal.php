@@ -26,7 +26,7 @@ class Paypal extends CI_Controller {
     // To handle the IPN post made by PayPal (uses the Paypal_Lib library).
     function ipn()
     {
-        $log_file = '/p/web/lm.randomwire.biz/paypal.log';
+        //$log_file = '/p/web/lm.randomwire.biz/paypal.log';
         $this->load->library('PayPal_IPN'); // Load the library
         $this->auth = new stdClass; // Stupid requirement before loading flexi_auth
         $this->load->library('flexi_auth');
@@ -51,15 +51,15 @@ class Paypal extends CI_Controller {
                 $membership_id = $custom_data['membership_id'];
                 $user_id = $custom_data['user_id'];
                 $auto_activate = $custom_data['auto_activate'];
-                file_put_contents($log_file, "User Id=$user_id\n", FILE_APPEND);
+                //file_put_contents($log_file, "User Id=$user_id\n", FILE_APPEND);
                 if (is_null($membership_id)) {
                     $user_data = $this->flexi_auth->get_user_by_identity_query($this->paypal_ipn->order['payer_email']);
                     if (!is_null($user_data) && ($user_data->num_rows() > 0)) {
                         $user = $user_data->row_array();
                         $user_id = $user['user_id'];
-                        if ( !function_exists('file_put_contents') && !defined('FILE_APPEND') ) {
-                            file_put_contents($log_file, 'test\n', FILE_APPEND);
-                        }
+                        //if ( !function_exists('file_put_contents') && !defined('FILE_APPEND') ) {
+                            //file_put_contents($log_file, 'test\n', FILE_APPEND);
+                        //}
                     } else {
                         // We should at least email or something when a payment comes in that doesn't match here
                     }
@@ -68,57 +68,76 @@ class Paypal extends CI_Controller {
                 if(isset($membership_credit)) {
                     unset($membership_credit);
                 }
-
                 $payment_date = date( 'Y-m-d H:i:s', strtotime( $this->paypal_ipn->order['payment_date']));
                 // Get Items
                 foreach ($this->paypal_ipn->orderItems as $item) {
                     // Get the item name and user id (item id)
-                    if(is_numeric($item['item_number'])) {
-                        $membership_credit['type_id'] = $item['item_number'];
-                        file_put_contents($log_file, "Membership Type Id=".$membership_credit['type_id']."\n", FILE_APPEND);
+                    $membership_type = $item['item_number'];
+                    $this->load->model('memberships_model');
+                    if(isset($membership)) {
+                        unset($membership);
+                    }
+                    $membership['user_id'] = $user_id;
+                    if(is_int($item['item_number'])) {
+                        $membership['type_id'] = $item['item_number'];
                     } else {
                         if ($item['item_number'] == "sub-Maker") {
-                            $membership_credit['type_id'] = 6;
+                            $membership['type_id'] = 6;
                             $start_date = $payment_date;
                             $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                            $membership_credit['start'] = $start_date;
-                            $membership_credit['end'] = $end_date;
-                        } elseif ($item['item_number'] == "sub-Pro") {
-                            $membership_credit['type_id'] = 7;
+                            $membership['start'] = $start_date;
+                            $membership['end'] = $end_date;
+                        } elseif ($item['item_number'] == "sub-MakerYearly") {
+                            $membership['type_id'] = 9;
+                            $start_date = $payment_date;
+                            $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +365 days"));
+                            $membership['start'] = $start_date;
+                            $membership['end'] = $end_date;
+                        } elseif ($item['item_number'] == "sub-Professional") {
+                            $membership['type_id'] = 7;
                             $start_date = $payment_date;
                             $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                            $membership_credit['start'] = $start_date;
-                            $membership_credit['end'] = $end_date;
+                            $membership['start'] = $start_date;
+                            $membership['end'] = $end_date;
                         } elseif ($item['item_number'] == "sub-EntSmBiz") {
-                            $membership_credit['type_id'] = 8;
+                            $membership['type_id'] = 8;
                             $start_date = $payment_date;
                             $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
-                            $membership_credit['start'] = $start_date;
-                            $membership_credit['end'] = $end_date;
+                            $membership['start'] = $start_date;
+                            $membership['end'] = $end_date;
+                        } elseif ($item['item_number'] == "sub-Student") {
+                            $membership['type_id'] = 13;
+                            $start_date = $payment_date;
+                            $end_date = date( 'Y-m-d H:i:s', strtotime("$start_date +31 days"));
+                            $membership['start'] = $start_date;
+                            $membership['end'] = $end_date;
                         } elseif ($item['item_number'] == "1mo-Maker") {
-                            $membership_credit['type_id'] = 3;
+                            $membership['type_id'] = 3;
+                        } elseif ($item['item_number'] == "1yr-maker") {
+                            $membership['type_id'] = 9;
                         } elseif ($item['item_number'] == "1mo-Pro") {
-                            $membership_credit['type_id'] = 4;
+                            $membership['type_id'] = 4;
                         } elseif ($item['item_number'] == "1mo-EntSmBiz") {
-                            $membership_credit['type_id'] = 5;
+                            $membership['type_id'] = 5;
+                        } elseif ($item['item_number'] == "1mo-Student") {
+                            $membership['type_id'] = 12;
                         }
                     }
-                    
                     // First membership_id passing design.. Commenting out b/c focusing on stuffing it all in custom for now.
-//                    file_put_contents($log_file, "Options Passed: N=".$item['option_name_1']." V=".$item['option_selection_1']."\n", FILE_APPEND);
-//                    if($item['option_name_1'] == "membership_id") {
-//                        $membership_id = $item['option_selection_1'];
-//                        file_put_contents($log_file, "Membership ID Passed as ID=$membership_id\n", FILE_APPEND);
-//                    }
-
+        //                    file_put_contents($log_file, "Options Passed: N=".$item['option_name_1']." V=".$item['option_selection_1']."\n", FILE_APPEND);
+        //                    if($item['option_name_1'] == "membership_id") {
+        //                        $membership_id = $item['option_selection_1'];
+        //                        file_put_contents($log_file, "Membership ID Passed as ID=$membership_id\n", FILE_APPEND);
+        //                    }
+        
                     $this->load->model('memberships_model');
                     if(is_null($membership_id) && is_numeric($membership_credit['type_id']) && is_numeric($user_id)) {
                         $membership_id = $this->memberships_model->get_users_membership_id($user_id,$membership_credit['type_id']);
-                        file_put_contents($log_file, "Getting Membership Id... ID=$membership_id\n", FILE_APPEND);
+                        //file_put_contents($log_file, "Getting Membership Id... ID=$membership_id\n", FILE_APPEND);
                     }
                     if(is_null($user_id) && is_numeric($membership_id)) {
                         $user_id = $this->memberships_model->get_membership_owner($membership_id);
-                        file_put_contents($log_file, "Getting User Id from database, memid=$membership_id, owner_Id=$user_id\n", FILE_APPEND);
+                        //file_put_contents($log_file, "Getting User Id from database, memid=$membership_id, owner_Id=$user_id\n", FILE_APPEND);
                     }
                     if (!is_null($membership_id)) {
                         $membership_credit['owner_id'] = $user_id;
@@ -127,9 +146,9 @@ class Paypal extends CI_Controller {
                         $membership_credit['auto_activate'] = $auto_activate;
                         $membership_credit['price_paid'] = $item['mc_gross'];
                         $membership_credit['notes'] = "Purchased from PayPal";
-
+        
                         file_put_contents($log_file, "Membership Credit: Owner=$user_id, Type=".$membership_credit['type_id']."\n", FILE_APPEND);
-
+        
                         if (!is_null($user_id) && !is_null($membership_credit['type_id'])) {
                             file_put_contents($log_file, "Storing Values...\n", FILE_APPEND);
                             file_put_contents($log_file, " Owner=".$membership_credit['owner_id']."\n", FILE_APPEND);

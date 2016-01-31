@@ -458,7 +458,7 @@
 	 *	Do NOT change this salt once users have started registering accounts as their passwords will not work without the original salt.
 	 *	CHANGE THE DEFAULT STATIC SALT SET BELOW TO YOUR OWN RANDOM SET OF CHARACTERS.
 	*/
-        $config['security']['static_salt'] = 'setThisToYourOwnLongRandomStringForMoreSecurity';
+        $config['security']['static_salt'] = '18f098c5969fa7df50e543d075e1afec5671b1a634183e80f40a998a81f4a59e6fde83b825760c6cb2d568ecd99146121148cd064eba5c0da155ba7efe7c665e';
 	
 	/**
 	 * Set whether a salt is stored in the database and then used for password and hash token generation.
@@ -532,8 +532,8 @@
 	 * Set your unique reCAPTCHA api keys.
 	 * !IMPORTANT: Obtain YOUR OWN reCAPTCHA keys from http://www.google.com/recaptcha.
 	*/
-	$config['security']['recaptcha_public_key']	= '';
-	$config['security']['recaptcha_private_key'] = ''; 
+	$config['security']['recaptcha_public_key']	= '6Ldv7PISAAAAAEKSbafvIoJBaFERYQL12uakA925';
+	$config['security']['recaptcha_private_key'] = '6Ldv7PISAAAAAIbUimrNB6YMAeJh4y_JFagKFP5h'; 
 
 	/**
 	 * Set the theme of the reCAPTCHA. For custom theming, see https://developers.google.com/recaptcha/docs/customization
