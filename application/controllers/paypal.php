@@ -69,7 +69,7 @@ class Paypal extends CI_Controller {
                     unset($membership_credit);
                 }
 
-                $payment_date = date( 'Y-m-d H:i:s', strtotime( $this->paypal_ipn->order['payment_date']));
+                $payment_date = date('Y-m-d H:i:s', strtotime( $this->paypal_ipn->order['payment_date']));
                 // Get Items
                 foreach ($this->paypal_ipn->orderItems as $item) {
                     // Get the item name and user id (item id)
