@@ -23,7 +23,7 @@
 
 class Paypal extends CI_Controller {
 
-    // To handle the IPN post made by PayPal (uses the Paypal_Lib library)
+    // To handle the IPN post made by PayPal (uses the Paypal_Lib library).
     function ipn()
     {
         $log_file = '/p/web/lm.randomwire.biz/paypal.log';
