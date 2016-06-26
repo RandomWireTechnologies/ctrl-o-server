@@ -4,10 +4,30 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "riccamastellone/paypal-ipn-laravel",
+                "version": "3.0.4",
+                "source": {
+                    "url": "https://github.com/ryantology/paypal-ipn-laravel.git",
+                    "type": "git",
+                    "reference": "tags/3.0.4"
+                },
+                "autoload": {
+                    "psr-0" : {
+                        "Digitag\\PayPalIpnLaravel" : "src"
+                    }
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "paypal/rest-api-sdk-php": "^1.7"
+        "paypal/rest-api-sdk-php": "^1.7",
+        "riccamastellone/paypal-ipn-laravel": "3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

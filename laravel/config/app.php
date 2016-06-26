@@ -156,6 +156,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Digitag\PayPalIpnLaravel\PayPalIpnServiceProvider::class,
+
     ],
 
     /*
@@ -201,6 +203,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'IPN' => Digitag\PayPalIpnLaravel\Facades\IPN::class
 
     ],
 
