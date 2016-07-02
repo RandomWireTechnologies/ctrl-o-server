@@ -14,6 +14,11 @@ class PaypalController extends Controller
     {
         $order = IPN::getOrder();
     }
+
+    public function listSubscriptions()
+    {
+        return view('paypal/listSubscriptions');
+    }
 }
 
 ?>

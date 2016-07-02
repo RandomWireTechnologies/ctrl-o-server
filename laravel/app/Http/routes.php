@@ -15,13 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('cards','CardsController@index');
-
-Route::get('cards/{card}', 'CardsController@show');
-
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
-
 Route::post('ipn', 'PaypalController@ipn');
+
+
+Route::group(['middleware'=>'auth'], function () {
+	Route::get('/home', 'HomeController@index');
+
+	Route::get('cards','CardsController@index');
+
+	Route::get('cards/{card}', 'CardsController@show');
+
+	Route::get('/paypal/subscriptions', 'PaypalController@listSubscriptions');
+});
+
 // Route::post('ipn', array('uses' => 'IpnController@store', 'as' => 'ipn'));
