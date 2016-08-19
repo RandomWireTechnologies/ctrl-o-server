@@ -26,6 +26,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
+        "laravelcollective/html": "5.*",
         "paypal/rest-api-sdk-php": "^1.7",
         "riccamastellone/paypal-ipn-laravel": "3.*",
         "mike182uk/paypal-ipn-listener": "^6.0"

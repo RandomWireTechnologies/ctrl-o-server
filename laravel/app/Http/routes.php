@@ -27,7 +27,9 @@ Route::group(['middleware'=>'auth'], function () {
 
 	Route::get('cards/{card}', 'CardsController@show');
 
-	Route::get('/paypal/subscriptions', 'PaypalController@listSubscriptions');
+	Route::get('/paypal/subscriptions', ['as' => 'paypalSubscriptionList', 'uses' => 'PaypalController@listSubscriptions']);
+    Route::get('/paypal/subscription/{id}', ['as' => 'paypalSubscription', 'uses' => 'PaypalController@getSubscription']);
 });
 
 // Route::post('ipn', array('uses' => 'IpnController@store', 'as' => 'ipn'));
+

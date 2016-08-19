@@ -10,7 +10,9 @@
                 @foreach ($subscriptions as $subscription)
                     <div class="panel-body">
                     
-                        {{ $subscription->getName() }}
+                        Name: {{ Html::linkRoute('paypalSubscription',$subscription->getName(),$subscription->getId()) }} <br/>
+                        Description: {{ $subscription->getDescription() }} <br/>
+
 
                     </div>
 
