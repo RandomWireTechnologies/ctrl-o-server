@@ -56,10 +56,9 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@example.com',
-        'name' => 'Example',
+        'address' => env('APP_EMAIL_ADDRESS','ctrl-o@randomwire.biz'),
+        'name' => env('APP_EMAIL_NAME', 'Ctrl-O'),
     ],
-
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/profile', 'HomeController@profile');
+Route::post('/profile', 'HomeController@updateProfile');
+Route::post('/profile/password', 'HomeController@updatePassword');
+
 
 Route::get('/cards','CardsController@index');
 
