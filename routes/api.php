@@ -13,10 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
 
-Route::get('/cards','CardsController@apiList');
-Route::get('/cards/{card}', 'CardsController@apiRead');
+Route::group(['middleware' => ['auth:api']], function() {
 
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+});
+
+    Route::get('/cards','CardsController@apiList');
+    Route::get('/cards/{card}', 'CardsController@apiRead');
+
+    Route::get('/users', 'AdminController@apiUserList');
+
+    Route::get('/nodes', 'NodesController@apiList');
+
+    Route::get('/schedules', 'SchedulesController@apiList');

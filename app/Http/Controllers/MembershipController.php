@@ -5,20 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Card;
+use App\User;
+use Auth;
+use Validator;
 
-class CardsController extends Controller
+class MembershipController extends Controller
 {
     //
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         //$this->middleware('auth');
     }
 
-
-   	public function index()
+    public function index()
 	{
-		$cards = Card::all();
+		$memberships = Membership::all();
 		return view('cards.index', compact('cards'));
 	}
 
@@ -40,11 +46,12 @@ class CardsController extends Controller
 		if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
 		if (count($sort_data) > 1) {$dir = $sort_data[1];}
 		if (is_null($per_page)) {$per_page = 10;}
-		return Card::with('user')->orderBy($sort, $dir)->paginate($per_page);
+		return Card::orderBy($sort, $dir)->paginate($per_page);
 	}
 
 	public function apiRead(Card $card)
 	{
 		return $card;
 	}
+
 }

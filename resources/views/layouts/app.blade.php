@@ -65,6 +65,13 @@
                                         Profile
                                     </a>
                                 </li>
+                                @can('add-memberships')
+                                <li>
+                                    <a href="{{ url('/membership') }}">
+                                        Membership
+                                    </a>
+                                </li>
+                                @endcan
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();

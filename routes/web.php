@@ -17,12 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/profile', 'HomeController@profile');
-Route::post('/profile', 'HomeController@updateProfile');
-Route::post('/profile/password', 'HomeController@updatePassword');
+Route::group(['middleware' => ['auth']], function() {
+        
+    Route::get('/home', 'HomeController@index');
+    Route::get('/profile', 'HomeController@profile');
+    Route::post('/profile', 'HomeController@updateProfile');
+    Route::post('/profile/password', 'HomeController@updatePassword');
+
+    Route::get('/membership', 'MembershipController@index');
+    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/new', 'AdminController@new');
+    Route::get('/admin/register', 'AdminController@register');
+    Route::post('/admin/new', 'AdminController@new');
+    Route::post('/admin/register', 'AdminController@register');
 
 
-Route::get('/cards','CardsController@index');
+    Route::get('/cards','CardsController@index');
 
-Route::get('/cards/{card}', 'CardsController@show');
+    Route::get('/cards/{card}', 'CardsController@show');
+
+});
