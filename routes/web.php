@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
-        
+
     Route::get('/home', 'HomeController@index');
     Route::get('/profile', 'HomeController@profile');
     Route::post('/profile', 'HomeController@updateProfile');
@@ -26,9 +26,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/membership', 'MembershipController@index');
     Route::get('/admin', 'AdminController@index');
-    Route::get('/admin/new', 'AdminController@new');
+    Route::get('/admin/new', 'AdminController@newUser');
     Route::get('/admin/register', 'AdminController@register');
-    Route::post('/admin/new', 'AdminController@new');
+    Route::post('/admin/new', 'AdminController@newUser');
     Route::post('/admin/register', 'AdminController@register');
 
 

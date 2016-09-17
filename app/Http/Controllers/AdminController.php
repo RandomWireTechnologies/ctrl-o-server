@@ -29,7 +29,7 @@ class AdminController extends Controller
 		return view('admin.register');
 	}
 
-	public function new(Request $request)
+	public function newUser(Request $request)
 	{
 		// Handle new post call
 

@@ -72,6 +72,13 @@
                                     </a>
                                 </li>
                                 @endcan
+                                @can('admin-tools')
+                                <li>
+                                    <a href="{{ url('/admin') }}">
+                                        Admin
+                                    </a>
+                                </li>
+                                @endcan
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
