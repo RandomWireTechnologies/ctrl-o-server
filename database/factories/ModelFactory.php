@@ -31,7 +31,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Card::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->regexify('(Card|Fob) #\d\d'),
         'user_id' => factory(App\User::class)->create()->id,
         'serial' => substr($faker->sha1, 0, 7),
         'hash' => $faker->sha1,
@@ -41,14 +41,14 @@ $factory->define(App\Card::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Node::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'type' => $faker->name,
+        'name' => $faker->regexify('(Front |Back |Side |Bottom |Top )?(Main|Stair|Woodshop|Machineshop|Paintbooth|Secret) Door'),
+        'type' => $faker->regexify('(INTERIOR|EXTERIOR)_DOOR'),
         'enabled' => $faker->boolean,
     ];
 });
 
 $factory->define(App\Schedule::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->sentence(2),
     ];
 });

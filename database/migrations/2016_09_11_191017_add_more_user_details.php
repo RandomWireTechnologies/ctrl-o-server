@@ -16,7 +16,7 @@ class AddMoreUserDetails extends Migration
         Schema::table('users', function (Blueprint $table) {
             // 
             $table->string('company')->nullable()->after('password');
-            $table->string('phone',16)->after('company');
+            $table->string('phone',24)->after('company');
             $table->string('address_street')->after('phone');
             $table->string('address_unit',32)->nullable('')->after('address_street');
             $table->string('address_city',64)->after('address_unit');
