@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\Membership;
+use App\MembershipType;
+use App\MembershipCredit;
+use App\MembershipSubscription;
 use Auth;
 use Validator;
 
@@ -25,16 +29,16 @@ class MembershipController extends Controller
     public function index()
 	{
 		$memberships = Membership::all();
-		return view('cards.index', compact('cards'));
+		return view('membership.index', compact('memberships'));
 	}
 
-	public function show(Card $card)
+	public function show(Membership $membership)
 	{
 		// $card = Card::find($id);
 
 		// return view('cards.show', compact('card'));
 		// return $card;
-		return view('cards.show', compact('card'));
+		return view('membership.show', compact('membership'));
 	}
 
 	public function apiList(Request $request)
@@ -46,12 +50,12 @@ class MembershipController extends Controller
 		if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
 		if (count($sort_data) > 1) {$dir = $sort_data[1];}
 		if (is_null($per_page)) {$per_page = 10;}
-		return Card::orderBy($sort, $dir)->paginate($per_page);
+		return Membership::orderBy($sort, $dir)->paginate($per_page);
 	}
 
-	public function apiRead(Card $card)
+	public function apiRead(Membership $membership)
 	{
-		return $card;
+		return $membership;
 	}
 
 }
