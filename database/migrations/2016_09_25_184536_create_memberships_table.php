@@ -15,7 +15,7 @@ class CreateMembershipsTable extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->increments('id');
-            $tabld->integer('user_id'); 
+            $table->integer('user_id'); 
             $table->integer('membershiptype_id');
             $table->string('name');
             $table->timestamps();
