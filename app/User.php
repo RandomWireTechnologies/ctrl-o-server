@@ -31,4 +31,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Card::class);
     }
+
+    public function memberships_owned()
+    {
+        return $this->hasMany(Membership::class);
+    }
+
+    public function memberships()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
