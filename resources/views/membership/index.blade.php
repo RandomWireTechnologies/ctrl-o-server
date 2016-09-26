@@ -15,17 +15,19 @@
                             sortField:'name'
                         },
                         {
-                            name:'user_name',
-                            sortField:'user_name',
+                            name:'owner.name',
+                            sortField:'owner_id',
                             title:'Owner Name'
                         },
                         {
-                            name:'expires',
-                            sortField:'expires'
-                        }]" 
+                            name:'type.name',
+                            sortField:'membershiptype_id',
+                            title: 'Membership Type'
+                        },
+                        ]" 
                     data-path="data"
                     pagination-path=""
-                    per-page='10'
+                    per-page='40'
                     :sort-order="[{field:'name',direction:'asc'}]",
                     multiSort: true,
                     paginationComponent: 'vuetable-pagination',

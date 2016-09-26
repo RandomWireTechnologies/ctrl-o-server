@@ -41,7 +41,7 @@ class MembershipController extends Controller
 		return view('membership.show', compact('membership'));
 	}
 
-	public function apiList(Request $request)
+	public function apiMembershipList(Request $request)
 	{
 		$sort_data = explode("|",$request->sort);
 		$sort = 'name';
@@ -50,12 +50,45 @@ class MembershipController extends Controller
 		if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
 		if (count($sort_data) > 1) {$dir = $sort_data[1];}
 		if (is_null($per_page)) {$per_page = 10;}
-		return Membership::orderBy($sort, $dir)->paginate($per_page);
+		return Membership::with('owner')->with('type')->orderBy($sort, $dir)->paginate($per_page);
 	}
 
-	public function apiRead(Membership $membership)
+    
+    public function apiMembershipTypeList(Request $request)
+    {
+        $sort_data = explode("|",$request->sort);
+        $sort = 'name';
+        $dir = 'asc';
+        $per_page = $request->per_page;
+        if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
+        if (count($sort_data) > 1) {$dir = $sort_data[1];}
+        if (is_null($per_page)) {$per_page = 10;}
+        return MembershipType::orderBy($sort, $dir)->paginate($per_page);
+    }
+
+    
+    public function apiMembershipCreditList(Request $request)
+    {
+        $sort_data = explode("|",$request->sort);
+        $sort = 'ends_at';
+        $dir = 'desc';
+        $per_page = $request->per_page;
+        if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
+        if (count($sort_data) > 1) {$dir = $sort_data[1];}
+        if (is_null($per_page)) {$per_page = 10;}
+        return MembershipCredit::with('membership')->with('subscription')->orderBy($sort, $dir)->paginate($per_page);
+    }
+
+	public function apiMembershipSubscriptionList(Request $request)
 	{
-		return $membership;
+        $sort_data = explode("|",$request->sort);
+        $sort = 'name';
+        $dir = 'asc';
+        $per_page = $request->per_page;
+        if (!is_null($sort_data[0]) && $sort_data[0] != "") {$sort = $sort_data[0];}
+        if (count($sort_data) > 1) {$dir = $sort_data[1];}
+        if (is_null($per_page)) {$per_page = 10;}
+        return MembershipSubscription::with('membership')->orderBy($sort, $dir)->paginate($per_page);
 	}
 
 }

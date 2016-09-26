@@ -21,12 +21,15 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
 });
-
+Route::group(['middleware' => ['auth']], function() {
     Route::get('/cards','CardsController@apiList');
     Route::get('/cards/{card}', 'CardsController@apiRead');
-
     Route::get('/users', 'AdminController@apiUserList');
-
     Route::get('/nodes', 'NodesController@apiList');
-
     Route::get('/schedules', 'SchedulesController@apiList');
+    Route::get('/memberships', 'MembershipController@apiMembershipList');
+    Route::get('/membership_types', 'MembershipController@apiMembershipTypeList');
+    Route::get('/membership_credits', 'MembershipController@apiMembershipCreditList');
+    Route::get('/membership_subscriptions', 'MembershipController@apiMembershipSubscriptionList');
+});
+    

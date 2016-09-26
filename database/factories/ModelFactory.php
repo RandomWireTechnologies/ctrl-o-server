@@ -58,7 +58,7 @@ $factory->define(App\Membership::class, function (Faker\Generator $faker) {
     return [
         'owner_id' => factory(App\User::class)->create()->id,
         'membershiptype_id' => factory(App\MembershipType::class)->create()->id,
-        'name' => $faker->sentance(2),
+        'name' => $faker->sentence(2),
     ];
 });
 
@@ -68,16 +68,16 @@ $factory->define(App\MembershipCredit::class, function (Faker\Generator $faker) 
         'membership_subscription_id' => factory(App\MembershipSubscription::class)->create()->id,
         'price_paid' => $faker->randomFloat(2,0.0,1000.00),
         'payment_type' => $faker->randomElement(['cash','credit_card','paypal','paypal_subscription']),
-        'purchased_at' => Carbon::instance($faker->dateTime())->toDateTimeString(),
-        'begins_at' => Carbon::instance($faker->dateTime())->toDateTimeString(),
-        'ends_at' => Carbon::instance($faker->dateTime())->toDateTimeString()
+        'purchased_at' => $faker->dateTime()->format('Y-m-d H:i:s'),
+        'begins_at' => $faker->dateTime()->format('Y-m-d H:i:s'),
+        'ends_at' => $faker->dateTime()->format('Y-m-d H:i:s')
     ];
 });
 
-$factory->define(App\MembershipSubcription::class, function (Faker\Generator $faker) {
+$factory->define(App\MembershipSubscription::class, function (Faker\Generator $faker) {
     return [
         'membership_id' => factory(App\Membership::class)->create()->id,
-        'name' => $faker->sentance(2),
+        'name' => $faker->sentence(2),
         'paypal_subscription_id' => $faker->regexify('[A-Z0-9-]{12}'),
     ];
 });
@@ -85,7 +85,7 @@ $factory->define(App\MembershipSubcription::class, function (Faker\Generator $fa
 
 $factory->define(App\MembershipType::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->sentance(2),
+        'name' => $faker->sentence(2),
         'duration' => $faker->numberBetween(1,31),
         'duration_unit' => $faker->randomElement(['day','month','week','year']),
         'max_users' => $faker->numberBetween(1,10),

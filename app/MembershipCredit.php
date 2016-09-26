@@ -17,5 +17,4 @@ class MembershipCredit extends Model
         return $this->belongsTo(MembershipSubscription::class, 'membership_subscription_id');
     }
 
-    
 }
