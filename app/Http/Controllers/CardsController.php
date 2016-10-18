@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Card;
+use App\User;
 
 class CardsController extends Controller
 {
@@ -28,7 +29,9 @@ class CardsController extends Controller
 
 		// return view('cards.show', compact('card'));
 		// return $card;
-		return view('cards.show', compact('card'));
+		//$users = User::all(['id as value','name']);
+		$users = User::orderBy('name','asc')->get(['id as value','name']);
+		return view('cards.show', compact('card','users'));
 	}
 
 	public function apiList(Request $request)

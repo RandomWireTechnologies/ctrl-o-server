@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cards','CardsController@apiList');
     Route::get('/cards/{card}', 'CardsController@apiRead');
     Route::get('/users', 'AdminController@apiUserList');
+    Route::get('/users/names', 'AdminController@apiListAllUserByName');
     Route::get('/nodes', 'NodesController@apiList');
     Route::get('/schedules', 'SchedulesController@apiList');
     Route::get('/memberships', 'MembershipController@apiMembershipList');

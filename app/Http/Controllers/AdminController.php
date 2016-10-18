@@ -47,4 +47,15 @@ class AdminController extends Controller
 		if (is_null($per_page)) {$per_page = 10;}
 		return User::orderBy($sort, $dir)->paginate($per_page);
 	}
+
+	public function apiListAllUserByName(Request $request)
+	{
+		//return User::all();
+		if(!is_null($request->q)) {
+			$search = "%".$request->q."%";
+			return User::orderBy('name','asc')->where('name','like',$search)->get(['id as value','name']);
+		}
+		return User::orderBy('name','asc')->get(['id as value','name']);
+	}
+
 }
