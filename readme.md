@@ -1,4 +1,4 @@
-# Laravel PHP Framework
+# Ctrl-O Base on Laravel
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
@@ -10,9 +10,30 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
-## Official Documentation
+## Official Laravel Documentation
 
 Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+
+## Server Setup
+
+To get started, install: git, nginx, mysql, php7, composer and configure appropriately to create a site and database.
+PHP7 Modules needed:
+
+* mbstring
+* dom
+* mysql
+
+Install steps
+
+* Clone this repository
+* Point web server to public sub-directory
+* Add database/user to mysql
+* cd to directory
+* Copy .env.example to .env and change settings for database login
+* composer install (to get all the support files)
+* php artisan migrate
+* php artisan key:generate
+
 
 ## Contributing
 
