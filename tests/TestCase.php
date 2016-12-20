@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * tests/TestCase.php
+ *
+ * Basic test case to check for app existence.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**

@@ -1,0 +1,52 @@
+.ia-container { box-shadow: -6px 6px 5px rgba(0, 0, 0, 0.08); margin: 30px auto; overflow: hidden; width: 363px; }
+
+.ia-container figure {
+    position: absolute;
+    top: 0;
+    left: 18px; /* width of visible piece */
+    width: 335px;
+    box-shadow:0 0 0 2px rgba(195, 201, 207, 0.2);
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.ia-container > figure {
+    position: relative;
+    left: 0 !important;
+}
+.ia-container input {
+    position: absolute;
+    top: -30px;
+    left: -4px;
+    width: 50px; /* just cover visible part */
+    height: 180px;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    z-index: 100;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.ia-container input:checked{
+    width: 5px;
+    left: auto;
+    right: 0px;
+}
+.ia-container input:checked ~ figure {
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+    left: 330px;
+}
+.ia-container input:checked ~ figure input{
+    z-index: 1;
+}

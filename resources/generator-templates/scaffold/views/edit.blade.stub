@@ -1,0 +1,23 @@
+@extends('$MAIN_LAYOUT$')
+@section('title', '$MODEL_NAME_CAMEL$')
+
+@section('content')
+<!-- Start Contain Section -->
+<div class="main-content">
+	@include('partials.page-header')
+	<div class="page-content container-fluid">
+		@include('flash::message')
+
+		<div class="row">
+            <h1 class="pull-left">Edit $MODEL_NAME_CAMEL$</h1>
+        </div>
+
+        <div class="row">
+        	{!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$RESOURCE_URL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch', 'class' => 'form-horizontal']) !!}
+		        @include('$VIEW_FOLDER_NAME$.form')
+		    {!! Form::close() !!}
+        </div>
+	</div>
+</div>
+<!-- End Contain Section -->
+@endsection

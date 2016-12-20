@@ -1,15 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
-|
-*/
+/**
+ * bootstrap/app.php
+ *
+ * Application bootstrapper.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
 
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
+    CtrlServer\Base\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+    CtrlServer\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
+    CtrlServer\Exceptions\Handler::class
 );
 
 /*

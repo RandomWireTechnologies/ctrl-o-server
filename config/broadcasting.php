@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * config/broadcasting.php
+ *
+ * Config for broadcasting.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 return [
 
     /*
@@ -31,17 +42,17 @@ return [
     'connections' => [
 
         'pusher' => [
-            'driver' => 'pusher',
-            'key' => env('PUSHER_KEY'),
-            'secret' => env('PUSHER_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'driver'  => 'pusher',
+            'key'     => env('PUSHER_KEY'),
+            'secret'  => env('PUSHER_SECRET'),
+            'app_id'  => env('PUSHER_APP_ID'),
             'options' => [
                 //
             ],
         ],
 
         'redis' => [
-            'driver' => 'redis',
+            'driver'     => 'redis',
             'connection' => 'default',
         ],
 

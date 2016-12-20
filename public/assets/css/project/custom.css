@@ -1,0 +1,200 @@
+/**************Project************/
+.showcase {
+    display: block;
+    padding: 20px;
+    font-size: 1.1em;
+    font-weight: normal;
+
+}
+.post-media {
+    display: inline-block;
+    width: 100%;
+}
+.post-media img{
+    width: 100%;
+}
+.project-header a:hover{
+    color: rgb(255, 151, 29);
+}
+.post-media a {
+    position: relative;
+    display: block;
+}
+.post-media a::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.6);
+    transition: opacity 0.3s ease;
+}
+.post-media:hover a::before {
+    opacity: 1;
+}
+.post-media:hover a .icon {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+.post-media a .icon-i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 40px;
+    line-height: 48px;
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    transform: translate(-50%, 100%);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.post-media a .icon-trash
+{
+    position: absolute;
+    top: 26px;
+    right: 92px;
+
+    font-size: 15px;
+    line-height: 20px;
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease; 
+}
+.post-media a .icon-pencil
+{
+    position: absolute;
+    top: 26px;
+    right: 120px;
+
+    font-size: 15px;
+    line-height: 20px;
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease; 
+}
+.post-media .icon {
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 56px;
+    font-style: normal;
+}
+.post-media .icon::before {
+    display: inline-block;
+    position: relative;
+}
+.post-meta {
+    position: absolute;
+    top: 13px;
+    right: 28px;
+    z-index: 2;
+    text-align: center;
+    padding: 8px;
+    background: #36A9E1;
+}
+.post-meta-day {
+    display: block;
+    font-size: 25px;
+    line-height: 24px;
+    margin-bottom: 3px;
+}
+.post-meta-month {
+    display: block;
+    font-size: 14px;
+    line-height: inherit;
+    margin-bottom: -4px;
+    text-transform: uppercase;
+}
+.post-meta-time {
+    font-size: 15px;
+    line-height: inherit;
+}
+.cd-pagination .button1 a[data-icon]:before , .cd-pagination .button2 a[data-icon]:after{
+    font-family: 'ElegantIcons';
+    content: attr(data-icon);
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+.project-pagination .cd-pagination a:hover
+{
+    color: #757575 !important;
+}
+.btn-icon .icon {
+    margin: -1px 0 0;
+}
+.btn .icon {
+    vertical-align: middle;
+}
+.site-action {
+    position: fixed;
+    right: 32px;
+    bottom: 55px;
+    z-index: 1290;
+    -webkit-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    animation-duration: 3s;
+}
+
+.site-action
+.btn-icon .icon {
+    margin: -1px 0 0;
+}
+
+.site-action
+.btn .icon {
+    width: 1em;
+    margin: -1px 3px 0;
+    line-height: inherit;
+    text-align: center;
+}
+
+.project-main-panel
+{ 
+    padding-bottom:35px;
+
+}
+
+.project-box { 
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.18);
+    padding: 8px 8px 0px 8px;
+    margin-bottom: 30px;
+}
+.project-box img{
+    border-radius: 3px;
+}
+.post-meta
+{
+    border-radius: 3px;
+}
+.project-footer a{
+    color: #6e6e6e;
+    font-size: 16px;
+
+}
+.project-btn 
+{
+    text-align: right;
+}
+.project-btn .btn
+{
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+
+
+}
+.header-selectbox {
+    width: 160px;
+}

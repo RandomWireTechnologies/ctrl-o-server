@@ -1,0 +1,58 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    </head>
+    <body>
+        <div class="ajax-text-and-image lightbox-block">
+            <style scoped="">
+                .ajax-text-and-image {
+                    max-width: 800px;
+                    padding: 0;
+                    position: relative;
+                }
+
+                .ajax-col {
+                    float: left;
+                }
+
+                .ajax-col img {
+                    width: 100%;
+                    height: auto;
+                }
+                .ajax-padding{
+                    padding: 0px 20px 20px;
+                }
+
+
+                @media (max-width:991px) {
+                    .ajax-padding h3 {
+                        font-size: 30px;
+                    }
+                    .ajax-text-and-image {
+                        margin: 30px;
+                    }
+                }
+                @media (max-width:479px) {
+                    .ajax-padding h3 {
+                        font-size: 25px;
+                    }
+                    .ajax-text-and-image {
+                        margin: 15px;
+                    }
+                }
+            </style>
+            <div class="ajax-col">
+                <img class="img-responsive" src="../assets/images/lightbox/img_800x450.png" alt="image1">
+            </div>
+
+            <div class="ajax-col">
+                <div class="ajax-padding">
+                    <h3>Loaded via ajax</h3>
+                    <p>Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui.</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </body>
+</html>

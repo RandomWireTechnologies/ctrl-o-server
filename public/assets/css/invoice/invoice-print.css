@@ -1,0 +1,33 @@
+@media print {
+    body {
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+    .footable-sort-indicator{
+        display: none !important;
+    }
+    .panel-alt{
+        width: 33.3% !important;
+        float: left !important;
+    }
+    .page-total{
+        float: left !important;
+        width: 300px !important;
+    }
+    .col-lg-3 {
+        width: 50% !important;
+    }
+    .bill-box-invoice li {
+        list-style-type: none !important;
+    }
+    .bill-box-invoice {
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+    .panel {
+        border: none !important;
+    }
+}
+.waves-effect .waves-ripple {
+    display: none !important;
+}

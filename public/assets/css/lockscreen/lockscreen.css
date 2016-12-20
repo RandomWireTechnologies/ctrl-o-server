@@ -1,0 +1,289 @@
+/*----FORGOT-PAGE-1----*/
+
+.page-lockscreen 
+{ 
+    margin:0;
+    padding:0; 
+    height:100%;
+}
+
+p{
+    color:#fff;
+}
+.page-lockscreen-image:before 
+{ 
+    position:fixed;
+    top: 0; 
+    left: 0;
+    z-index: -1; 
+    width: 100%;
+    height: 100%;
+    content: ''; 
+    background-position:center top; 
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-image: url('../../images/lockscreen/img_1280x853.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+    opacity: 0.7;
+}
+
+
+.main-lockscreen
+{ 
+    display: table;
+    height: 100%; 
+    float: left;
+    padding: 60px;
+    background: rgba(0, 0, 0, 0.49);
+}
+
+.lock-user
+{
+    color: #fff;
+    font-weight: 500; 
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.content-lockscreen
+{
+    display: table-cell;
+    vertical-align: middle;
+
+
+}
+.content-lockscreen1
+
+{display: table-cell;
+ vertical-align: middle;
+ height: 100%;
+
+}
+
+.lockscreen-page
+{
+    padding: 60px 20px; 
+}
+
+.input-box { 
+    height:46px; 
+    border-radius:3px;
+    margin-bottom:25px;
+}
+
+.left-icon-lock {
+    padding:0px 16px; 
+    float:left; 
+    height:100%; 
+    line-height:44px;
+    border-radius:3px 0px 0px 3px;
+    color: #fff;
+    background-color: #006064;
+    border-color: #006064;
+}
+
+.textbox-lock {
+    float:left;
+    width:340px;
+}
+
+.textbox-lock input {
+    background:none; 
+    border:none;
+    padding:0px 10px; 
+    color:#424242; 
+    width:100%;
+    height:46px;
+    border: 1px solid #E4E1E1;
+}
+
+.form-control {
+    border-radius: 0px 3px 3px 0px !important;
+    background: #FFF !important;
+}
+
+.lockscreen-user-image
+{
+    text-align:center; 
+} 
+
+.lockscreen-user-image img 
+{ 
+    width: 80px;
+    border-radius: 4px; 
+}
+
+.lock-form
+{
+    margin-top:20px;
+}
+
+.lock-footer
+{
+    margin-top:10px;
+}
+
+.icon-lock
+{
+    margin-bottom:25px;
+    margin-top: 70px;
+}
+
+.lock-footer .icon-lock a {
+    margin: 0 10px;
+    color:#fff;
+    font-size: 15px;
+}
+
+.btn-lock 
+{
+    padding: 10px 0px;
+    margin-bottom:20px;
+    font-weight: bold;
+    width:100%;
+}
+
+.social-icon-lock{
+    margin-top: 0px;
+}
+
+.social-icon-lock li a span {
+    border-radius: 3px;
+    padding: 7px;
+    margin-right: 5px;
+    color: #fff;
+    border-color: white !important;
+}
+
+.social-icon-lock li a span:hover {
+    color: #0CACB3;
+    border-color: #0CACB3 !important;
+}
+
+/*second bg-image variation */
+.page-lockscreen-image1:before 
+{ 
+    position:fixed; top: 0; left: 0; z-index: -1; 
+    width: 100%; height: 100%; content: ''; 
+    background-position:center top; -webkit-background-size: cover;
+    background-size: cover;
+    background-image: url(../../images/forgot/img_5472x3648.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    opacity: 0.8;
+}
+.main-lockscreen1
+{ 
+    display:table; 
+    margin:0px auto; 
+    height:100%;
+}
+.icon-lock1
+{
+    margin-bottom:15px;
+}
+.lock-footer .icon-lock1 a {
+
+    color:#fff;
+    font-size: 15px;
+}
+.btn-lock1 {
+    padding: 10px 0px; 
+    font-weight: bold;
+    width: 100%;
+}
+.lockscreen-page1 { 
+    padding: 30px 30px;
+    background: rgba(0,0,0,0.25);
+}
+.lock-footer p
+{
+    margin:0px;
+    font-size: 14px;
+}
+.lock-form1 {
+    margin-top: 20px;
+}
+.lock-user1{
+    color: #fff;
+    font-size: 22px;
+    margin-top: 10px;
+}
+.lockscreen-page1 label {
+    float: left;
+}
+.lockscreen-page label{
+    float: left;
+}
+
+/*second bg-image variation */
+.page-lockscreen-image2:before 
+{ 
+    position:fixed; top: 0; left: 0; z-index: -1; 
+    width: 100%; height: 100%; content: ''; 
+    background-position:center top; -webkit-background-size: cover;
+    background-size: cover;
+    background-image: url('../../images/lockscreen/lock3.jpg'); 
+    background-repeat: no-repeat;
+    background-position: top center;
+    opacity: 0.7;
+}
+.main-lockscreen2 {
+    display: table;
+    height: 100%;
+    margin: 0px auto;
+    float: right;
+}
+
+.btn-lock, .btn-lock1{
+    border-radius: 4px;
+}
+
+.error {
+    color: #d74242;
+    padding-top: 3px;
+    margin-bottom: 0px;
+}
+
+
+
+
+
+/*Responsive Lock Screen Page */
+
+@media (max-width:767px)
+{
+    .lockscreen-page1 { 
+        margin: 30px 0px;
+    }
+    .main-lockscreen { 
+        padding:0px;
+        width: 100%;
+    }
+    .lockscreen-page {  
+        width: 427px;
+        margin: 0px auto;
+    }
+}
+
+@media (max-width:479px)
+{
+    .textbox-lock { 
+        width: 340px;
+    } 
+    .lockscreen-page1 {
+        padding: 30px 15px;
+        background: rgba(0,0,0,0.25); 
+    }
+    .lockscreen-page { 
+        width: 320px; 
+    }
+    .textbox-lock {
+        width: 233px;
+    }
+    .error {
+        font-size: 12px;
+    }
+    .input-box {margin-bottom: 15px;}
+}

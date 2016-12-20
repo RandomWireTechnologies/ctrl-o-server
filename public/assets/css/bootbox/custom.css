@@ -1,0 +1,86 @@
+/*********** Bootbox & Sweetalert **********/
+
+.sweet-well {
+    position: relative;
+    margin-bottom: 30px;
+    background-color: #eceff1;
+}
+.height-350{
+    height: 350px;
+}
+.height-300{
+    height: 300px;
+}
+.height-400{
+    height: 400px;
+}
+.sweet-well .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.sweetalert{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #b5b5b5;
+}
+
+.radio-primary input[type=radio]:checked+label::before {
+    border-color: #36A9E1;
+    background-color: #36A9E1;
+}
+.radio-primary input[type=radio]:checked+label::after {
+    border-color: #fff;
+}
+.radio-custom label::before {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: -20px;
+    content: "";
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    -webkit-transition: border .3s ease-in-out 0s,color .3s ease-in-out 0s;
+    -o-transition: border .3s ease-in-out 0s,color .3s ease-in-out 0s;
+    transition: border .3s ease-in-out 0s,color .3s ease-in-out 0s;
+}
+.radio-custom label::after {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: -20px;
+    content: " ";
+    background-color: transparent;
+    border: 2px solid #757575;
+    border-radius: 50%;
+    -webkit-transform: scale(0,0);
+    -ms-transform: scale(0,0);
+    -o-transform: scale(0,0);
+    transform: scale(0,0);
+    transition-transform: .1s cubic-bezier(.8,-.33,.2,1.33);
+}
+
+.radio-custom input[type=radio]:checked+label::after {
+    -webkit-transform: scale(1,1);
+    -ms-transform: scale(1,1);
+    -o-transform: scale(1,1);
+    transform: scale(1,1);
+}

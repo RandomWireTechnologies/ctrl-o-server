@@ -1,0 +1,135 @@
+@extends('$MAIN_LAYOUT$')
+@section('title', '$MODEL_NAME_PLURAL$')
+
+@section('content')
+<!-- Start Contain Section -->
+<div class="main-content">
+    @include('partials.page-header')
+    <div class="page-content container-fluid">
+        @include('flash::message')
+
+        <div class="row">
+            <h1 class="pull-left">$MODEL_NAME_PLURAL$</h1>
+            {!! link_to_route('$RESOURCE_URL$.create', 'Add New', [], ['class' => 'btn btn-primary pull-right', 'style' => 'margin-top: 25px']) !!}
+        </div>
+        
+        <div class="row">
+        @if($$MODEL_NAME_PLURAL_CAMEL$->isEmpty())
+            <div class="well text-center">No $MODEL_NAME_PLURAL$ found.</div>
+        @else
+            <table class="table">
+                <thead>
+                    $FIELD_HEADER$
+                    <th class="text-right">Action</th>
+                </thead>
+                <tbody>
+                    @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+                    <tr>
+                        $FIELD_BODY$
+                        <td>
+                            {!! Form::open([
+                                'route' => ['$RESOURCE_URL$.destroy', $$MODEL_NAME_CAMEL$->id],
+                                'method' => 'DELETE',
+                                'onSubmit' => "return confirm('Are you sure wants to delete this $MODEL_NAME$?')",
+                            ]) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger pull-right', 'style' => 'margin-left:10px']) !!}
+                            {!! Form::close() !!}
+                            {!! link_to_route('$RESOURCE_URL$.edit', 'Edit', [$$MODEL_NAME_CAMEL$->id], ['class' => 'btn btn-primary pull-right']) !!}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+        </div>
+        <div class="row pull-right">
+            $PAGINATE$
+        </div>
+    </div>
+</div>
+<!-- End Contain Section -->
+@endsection
+
+
+
+
+@extends('$MAIN_LAYOUT$')
+@section('title', '$MODEL_NAME_PLURAL$')
+
+@section('page-plugin-css')
+<link rel="stylesheet" href="{{ asset('assets/fonts/material-design/material-design.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jsgrid/jsgrid.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/pagination/style.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/css/toastr/toastr.min.css') }}" />
+@endsection
+
+@section('content')
+<!-- Start Contain Section -->
+<div class="main-content">
+    <div class="page-content container-fluid">
+        @include('flash::message')
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <!-- Basic JsGrid -->
+                    <header class="panel-heading">
+                        <h3 class="panel-title">$MODEL_NAME_PLURAL$</h3>
+                    </header>
+                    <div class="panel-body">
+                        <div id="browse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-scalled" id="form-modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog open-modal-center">
+            {!! Form::open([
+                'route' => '$RESOURCE_URL$.store', 
+                'id'    => 'add-form', 
+                'class' => 'modal-content form-horizontal',
+                'novalidate'
+            ]) !!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Add $MODEL_NAME_CAMEL$</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="row">
+                        @include('$VIEW_FOLDER_NAME$.form')
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {!! Form::button('Cancel', [
+                        'class'        => 'btn waves-effect waves-light',
+                        'data-dismiss' => 'modal'
+                    ]) !!}
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary waves-effect waves-light']) !!}
+                </div> 
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+<!-- End Contain Section -->
+@endsection
+
+@section('page-plugin-js')
+<script src="{{ asset('assets/js/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('assets/js/jsgrid/jsgrid.min.js') }}"></script>
+@endsection
+
+@section('page-js')
+<script src="{{ asset('assets/js/jsgrid/jsgrid.config.js') }}"></script>
+<script src="{{ asset('assets/js/validation/jquery.validate.min.js') }}"></script>
+@endsection
+
+
+
+
+
+
+

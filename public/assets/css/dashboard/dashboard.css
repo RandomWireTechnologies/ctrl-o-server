@@ -1,0 +1,637 @@
+/*---- index ----*/
+
+.dashboard .table{
+    margin-bottom: 0;
+}
+
+.rickshaw_legend{
+    position: inherit;
+    top: 53px;
+    right: 0px;
+    background: rgba(0,0,0,.8);
+    color: white;
+}
+.static-box .tasks-progress > ul > li {
+    width: 100% !important;
+}
+.product-main-div
+{
+    padding-bottom:26px !important;
+}
+.pro-main-title 
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(66, 66, 66);
+}
+.dashboard-profile-div p
+{
+    font-size: 16px;
+    color:#777;
+}
+
+.profile-dash-main
+{
+    padding: 0px 0px 30px 0px;
+}
+.dash-static-box.static-box {
+    padding: 13px 30px 0px 30px;
+}
+.message-hr
+{
+    background-color: #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    margin: 10px;
+} 
+.input-group .dash-form-group{
+    resize: none;
+}
+.timeline:not(.timeline-single) > li:first-child:not(.timeline-date) + .timeline-item {
+    margin-top: 30px  ;
+}
+.comment { 
+    padding: 0px 25px 0px;
+}
+
+.widgett-actions {
+    margin-top: 5px; 
+}
+.widgett-body-footer {
+    margin-top: 15px;
+}
+.static-box {
+    padding: 30px 30px;
+}
+
+.timeline > li { 
+    margin-bottom: 30px;
+}
+.client-main-div a{
+    padding: 10px 30px 0px 30px !important;
+}
+.echart-main-div
+{
+    padding: 0px 20px;
+}
+
+.heading-top-index
+{
+    background-color: #36a9e1;
+    padding: 12px 20px;
+    margin: 0px;
+    color: white;
+    font-size: 22px;
+}
+.heading-top-index-2
+{
+    background-color: #ffffff;
+    color: #505050;
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+    position: relative;
+
+}
+.heading-top-index-2 span{
+    font-weight: bold;
+}
+
+
+.heading-top-index-2 h3{
+    margin:0px;
+    font-size: 18px;
+
+}
+
+.wet-class strong{
+    /* color:#717171;*/
+}
+
+.dashboard-main .panel-heading1 {
+    padding: 10px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 25px 15px;
+}
+.widget-user-icon
+{
+    margin-bottom:30px
+}
+
+.weath-content-box
+{
+    margin-top:25px;
+}
+.weath-main-dash
+{
+    padding-bottom: 15px;
+}
+
+.heading-top-index p
+{
+
+    margin: 0px;
+}
+.dash-top-heading-hover { 
+    transition: all .2s ease-out;
+}
+
+.dash-top-heading-hover:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 5px rgba(0,0,0,.1);
+    transition: all .2s ease-out;
+}
+
+
+.dash-content-shadow {
+    transition: All 0.5s ease;
+    box-shadow: 0px 2px 0 #e5eaee;
+}
+
+.profile-dash-main .name-profile { 
+    font-size: 24px; 
+    line-height: 30px;
+}
+
+.total-sales-sec {
+    display: table;
+    float: left;
+    padding: 13px 45px;
+    width: 100%;
+    background-color:#fff;
+}
+
+.circle-chart {
+    float: left; 
+    position: relative;
+    margin-top:20px;
+}
+.cirlce-chart-detail {
+    left: 0;
+    margin-top: -30px;
+    position: absolute;
+    text-align: center;
+    top: 50%; 
+    width: 100%;
+}
+
+.cirlce-chart-detail > span {
+    color: #424242;
+    float: left;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-weight: 500;
+}
+
+.cirlce-chart-detail > h5 {
+    color: #424242;
+    float: left;
+    font-size: 18px;
+    margin: 1px 0 0;
+    text-align: center;
+    width: 100%;
+}
+.total-sales-info {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    text-align: center;
+
+}
+
+.target-title {
+    color: #424242;
+    float: left;
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 22px;
+
+}
+.total-sales-info > h3 {
+    color: #424242;
+    float: left;
+    font-size: 21px;
+    margin-bottom: 0;
+    margin-top: -3px;
+    padding-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+.total-sales-info-line{
+    border-bottom: 1px solid RGBA(173, 171, 171, 0.63);
+    clear: both;
+    width: 100px;
+    text-align: center;
+    margin: 0px auto;
+}
+.total-sales-info > ul {
+    float: left;
+    list-style: outside none none;
+    margin: 20px 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.total-sales-info > ul > li {
+    float: left;
+    width: 25%;
+}
+.total-sales-info > ul > li span{
+    font-size:18px;
+    color:#424242;
+}
+.total-sales-info > ul > li h5{
+    font-size: 15px;
+    color: rgb(66, 66, 66);
+    margin: 2px 0px;
+}
+
+.dash-gallary-widget .widget-advanced .widget-header {
+    position: relative;
+    padding: 15px 15px 50px;
+    height: 140px;
+    overflow: hidden;
+}
+.widget-content-light{
+    font-size: 22px;
+}
+.dash-gallary-widget .gallery-background-dark {
+    background-color: #394263;
+}
+
+.dash-gallary-widget .widget .widget-content-light {
+    color: #fff;
+}
+.dash-gallary-widget .widget-advanced .widget-main {
+    position: relative; 
+}
+.image-main-div img 
+{
+    margin-bottom: 20px;
+}
+.image-main-div img:hover
+{
+    opacity:0.6;
+}
+.image-main-div{
+    padding: 55px 30px 0px;
+}
+
+
+.dash-gallary-widget .widget-advanced .widget-image-container {
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    width: 74px;
+    height: 74px;
+    top: -36px;
+    left: 50%;
+    margin-left: -36px;
+    border-radius: 36px;
+    background-color: #fff;
+}
+
+.dash-gallary-widget .widget .widget-icon {
+    display: inline-block;
+    line-height: 64px;
+    text-align: center;
+    font-size: 28px;
+    color: #fff;
+    border-radius: 32px;
+}
+.dash-gallary-widget .widget .widget-icon, .widget .widget-image {
+    width: 64px;
+    height: 64px;
+}
+.dash-gallary-widget .gallery-background {
+    background-color: #1bbae1;
+}
+
+
+.dash-gallary-widget .gallery.gallery-widget > .row > div {
+    margin-bottom: 0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.dash-gallary-widget a.gallery-link {
+
+    cursor: zoom-in;
+}
+.dash-gallary-widget .gallery img  {
+    width: 100%;
+}
+.widgett-body { 
+    padding: 13px 0px;
+}
+
+.admin-profile-follow{
+    margin-top: 30px;
+}
+.admin-profile-follow ul{
+
+    padding-left: 0px;
+}
+
+.admin-profile-follow > ul > li {
+    display: inline-block;
+    float: none;
+    padding: 0 20px;
+}
+.admin-profile-follow > ul > li > i {
+
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    width: 42px;
+}
+.admin-profile-follow > ul > li > span {
+    color: #4d575d;
+    display: block;
+    font-family: Montserrat;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.day
+{
+    height: 120px;
+    border-left: 1px solid rgba(0,0,0,.05);
+}
+.back-img-user h3{
+    font-size: 20px;
+}
+.weather-font{
+    margin-bottom: 5px;
+    margin-left: 12px;
+    font-size: 30px;    
+}
+.weather-deg{
+    font-size: 13px;
+}
+.font-21{
+    font-size: 21px;
+}
+.left-client-content h4{
+    font-size: 16px;
+}
+.left-client-content p{
+    font-size: 13px;
+}
+
+
+/*---- dashboard_v1 chagnes_11-10-2016 ----*/
+.ia-container figure{
+    width: 100%;
+}
+
+.ia-container .dash-icon-head {
+    border-radius: 50%;
+    color: #fff;
+    float: left;
+    font-size: 85px;
+    height: auto;
+    line-height: normal;
+    margin-right: 0;
+    text-align: center;
+    top: -10px;
+    width: auto;
+    opacity: 0.7;
+    background: none !important;
+}
+.text-icon-dash {
+    background: #f9bc67 none repeat scroll 0 0;
+    border-top: 1px solid #edc68e;
+    bottom: 0;
+    color: #fff;
+    font-size: 14px;
+    left: 0;
+    padding: 7px 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+.card-box-dash{
+    min-height: 155px;
+}
+.huge {
+    color: #fff !important;
+    display: block;
+    font-size: 20px !important;
+    letter-spacing: 0;
+    margin: -5px 0 3px;
+    padding: 0;
+}
+.ia-container.greenBg .dash-icon-head{
+    top: -4px;
+    font-size: 70px;
+}
+.ia-container.blueBG .dash-icon-head{
+    top: -4px;
+    font-size: 70px;
+}
+.ia-container.redBG .dash-icon-head{
+    top: -4px;
+    font-size: 70px;
+}
+.blue{
+    background: none;
+}
+.ia-container {
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.1);
+}
+.card-box-dash .counter{
+    color: #FFF;
+    font-size: 30px;
+}
+.dashboard .message-box a:nth-child(2n+1) {
+    background: #f6f6f6 none repeat scroll 0 0;
+}
+.dashboard .product-main tbody tr:nth-child(2n+1) {
+    background: #f6f6f6 none repeat scroll 0 0;
+}
+.dashboard .product-main tbody tr:hover{
+    background: #eee;
+}
+.dashboard .product-main tbody tr td {
+    padding: 10px 10px 2px !important;
+}
+.dashboard .progress {
+    height: 14px;
+    margin-bottom: 11.5px;
+}
+.dashboard .our-target .heading-top-index-2{
+    background: #36a9e1;
+    border: none;
+}
+.dashboard .our-target .heading-top-index-2 h3,
+.dashboard .our-target .total-sales-info .target-title,
+.dashboard .our-target .total-sales-info h3,
+.dashboard .our-target .total-sales-info-line,
+.dashboard .our-target .total-sales-info ul li span,
+.dashboard .our-target .total-sales-info ul li h5,
+.dashboard .our-target .cirlce-chart-detail span,
+.dashboard .our-target .cirlce-chart-detail h5{
+    color: #FFF;
+}
+.dashboard .static-box{
+    box-shadow: 0 3px 8px -4px rgba(0, 0, 0, 0.15);
+}
+.dashboard .our-target .total-sales-sec{
+    background: #36a9e1;
+}
+.dashboard .client-main-div a{
+    padding: 7.7px 30px 0px 30px !important;
+}
+.card-box-dash.box-1-dash { background: #f0ad4e;}
+.card-box-dash.box-2-dash { background: #8bc34a;}
+.card-box-dash.box-2-dash .text-icon-dash { background: #9bd35a; border-top: 1px solid #abe36a;}
+.card-box-dash.box-3-dash { background: #9b59b6;}
+.card-box-dash.box-3-dash .text-icon-dash { background: #ab69c6; border-top: 1px solid #cb89e6;}
+.card-box-dash.box-4-dash { background: #FC4D4D;}
+.card-box-dash.box-4-dash .text-icon-dash { background: #ff6262; border-top: 1px solid #ff7d7d;}
+
+
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+.jvectormap-container circle:nth-child(4n+1){
+    animation: blink 1s step-start 0s infinite;
+    -webkit-animation: blink 1s step-start 0s infinite;
+}
+
+
+
+
+@keyframes blink2 {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink2 {
+    50% {
+        opacity: 0.0;
+    }
+}
+.jvectormap-container circle:nth-child(4n+2){
+    animation: blink2 1.5s step-start 0s infinite;
+    -webkit-animation: blink2 1.5s step-start 0s infinite;
+}
+
+
+@keyframes blink3 {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink3 {
+    50% {
+        opacity: 0.0;
+    }
+}
+.jvectormap-container circle:nth-child(4n+3){
+    animation: blink3 2s step-start 0s infinite;
+    -webkit-animation: blink3 2s step-start 0s infinite;
+}
+
+
+
+@keyframes blink4 {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink4 {
+    50% {
+        opacity: 0.0;
+    }
+}
+.jvectormap-container circle:nth-child(4n+4){
+    animation: blink4 2.5s step-start 0s infinite;
+    -webkit-animation: blink4 2.5s step-start 0s infinite;
+}
+
+
+
+@media ( min-width: 1200px ) and ( max-width: 1599px ) {
+    .main-content .wid-u-info{
+        clear: none;
+        float: right;
+        text-align: right;
+        padding: 13px 0 0;
+    }
+    .card-box-dash .counter{
+        font-size: 24px;
+    }
+    .main-content .dash-icon-head{
+        left: 0;
+    }
+    .main-content .huge{
+        font-size: 17px !important;
+    }
+}
+@media ( max-width: 1599px ) {
+    .page-content .ia-container figure {
+        width: 100%;
+    }
+    .main-content .first-icon-main{
+        width: 100%;
+    }
+}
+@media ( max-width: 1599px ) {
+    .dashboard .static-box { 
+        margin-bottom:0px !important;
+    }
+}
+@media ( max-width: 767px ) {
+    .dashboard .static-box { 
+        margin-bottom:0px !important;
+    }
+}
+@media (max-width: 479px) {
+    .font-21{
+        font-size: 18px;
+    }
+    .weather-deg {
+        font-size: 11px;
+    }
+    .weather-font {
+        font-size: 25px;
+    }
+    .dashboard .client-main-div a {
+        padding: 7.7px 30px 12px 12px !important;
+    }
+    
+    .ia-container .dash-icon-head{
+        font-size: 65px;
+    }
+    .huge{
+        font-size: 17px !important;
+    }
+    .card-box-dash .counter{
+        font-size: 20px;
+    }
+    .card-box-dash {
+        min-height: 135px;
+    }
+    .ia-container.greenBg .dash-icon-head,
+    .ia-container.blueBG .dash-icon-head,
+    .ia-container.redBG .dash-icon-head{
+        font-size: 55px;
+        top: 2px;
+    }
+    
+}

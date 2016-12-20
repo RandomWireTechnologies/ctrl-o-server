@@ -1,18 +1,19 @@
 <?php
 
+/**
+ * routes/api.php
+ *
+ * Here is where you can register API routes for your application. These
+ * routes are loaded by the RouteServiceProvider within a group which
+ * is assigned the "api" middleware group. Enjoy building your API!
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 
 Route::group(['middleware' => ['auth:api']], function() {
 
@@ -22,8 +23,12 @@ Route::group(['middleware' => ['auth:api']], function() {
 
 });
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/cards','CardsController@apiList');
-    Route::get('/cards/{card}', 'CardsController@apiRead');
+    
+    Route::get('/cards', [
+        'as'   => 'api.cards.list',
+        'uses' => 'CardController@list'
+    ]);
+    Route::get('/cards/{card}', 'CardController@apiRead');
     Route::get('/users', 'AdminController@apiUserList');
     Route::get('/users/names', 'AdminController@apiListAllUserByName');
     Route::get('/nodes', 'NodesController@apiList');

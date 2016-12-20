@@ -1,47 +1,68 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+@section('title', 'Reset Your Password')
 
-<!-- Main Content -->
+@section('page-css')
+<link rel="stylesheet" href="{{ asset('assets/css/forgot-page/forgot.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets/css/validation/validation.css') }}" type="text/css" />
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+    <body class="page-forgot page-forgot-image1">
+        <div class="main-forgot-pass1">
+            <div class="content-forgot">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+                <div class="forgot-page1 text-center">
+                    <h3 class="forgot-heading">Reset Password</h3>
+                    <p class="text-left">
+                        Enter your email address and we'll send you link to reset your password. <small><i>(all fields with an * are required)</i></small>
+                    </p>
+                    <!-- Start Forgot password Form -->
+                    <form action="{{ route('auth.forgot.store') }}" class="login-form" method="post" id="forgot-form">
                         {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
+                        <div class="input-box">
+                            <div class="textbox-forgot1" style="width:337px">
+                                <input type="text" id='email' name='email' value="{{ old('email') }}" class="form-control right-textbox1" placeholder="Email Address *" required />
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
+                            <div class="submit btn-forgot2"> 
+                                <button class="btn btn-info btn-sign waves-effect waves-light" type="submit">GO</button> 
                             </div>
                         </div>
                     </form>
+                    <!-- End Forgot password Form -->
+                    <p>Already have an account? <a href="{{ route('auth.login.show') }}" class="forgot-signin"> Sign In </a></p>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        @include('partials.global-js')
+        @include('partials.global-template-js')
+        <!-- Page Template JavaScript -->
+        <script src="{{ asset('assets/js/validation/jquery.validate.min.js') }}"></script>
+        @section('scripts')
+        <script>
+            $('#forgot-form').validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    email: {
+                        required: 'Please enter your email address.',
+                        email: 'Your email must be in the form of name@example.com'
+                    }
+                }
+            });
+        </script>
+        @endsection
+    </body>
 @endsection

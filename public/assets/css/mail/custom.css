@@ -1,0 +1,357 @@
+/**************App-mailbox************/
+
+.app-mailbox .checkbox-custom{
+    padding-left:0;
+}
+
+.mailbox{
+    padding: 20px;
+}
+
+.app-mailbox .list-group-item:hover .media-body
+{
+    cursor: pointer;
+}
+.app-mailbox .message-box a:hover
+{
+    background: #fff;
+}
+.app-mailbox .page-left-side
+{
+    width: 230px;
+}
+.app-mailbox .page-left-side+.page-main-content
+{
+    margin-left: 230px !important;
+}
+.site-action-buttons {
+    position: absolute;
+    bottom: 56px;
+    left: 0;
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+.site-action.active .back-icon {
+    display: block;
+}
+.site-action .back-icon {
+    display: none;
+}
+.fab {
+    cursor: pointer;
+}
+.fab-backdrop {
+    color: rgba(255, 255, 255, 0);
+}
+.fab-primary, .fab-secondary {
+    transition: all 0.35s ease-in-out;
+    width: 100% !important;
+    position: absolute !important;
+    margin-left: -29px !important;
+}
+.fab.active .fab-primary {
+    opacity: 0;
+    transform: rotate(225deg); 
+
+}
+.fa-stack {
+    position: relative !important;
+    display: inline-block !important;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+.fab-secondary {
+    margin-right: 15px;
+    opacity: 0;
+    transform: rotate(-225deg);
+}
+.fab.active .fab-secondary {
+    opacity: 1;
+    transform: rotate(0);
+    margin-top: -2px;
+
+}
+.differentmenu button
+{
+    background-color: transparent;
+    border: none;
+}
+
+.fab.show-on-click {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+}
+.fab.btn-io{
+    border-radius: 50%;
+    height: 54px;
+    width: 54px;
+    padding: 0 !important;
+    box-shadow: 0px 3px 7px 0px rgba(202, 124, 124, 0.72);
+}
+
+
+.dropdown-menu-right {
+    right: 0 !Important;
+    left: auto !Important;
+}
+.dropdown-menu.differentmenu > li
+{
+    margin-bottom: 10px;
+}
+.dropdown-menu.differentmenu {
+    position: absolute;
+    top: -202px;
+    left: 0;
+    z-index: 1000;
+
+    float: left;
+    min-width:50px;
+    /*padding: 5px 0;*/
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: center;
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0) !Important;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: none;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !Important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0) !Important;
+}
+
+.dropdown-menu.differentmenu > li > a {
+    display: block;
+    padding: 0;
+    padding-top: 4px;
+
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+
+    white-space: nowrap;
+    width: 40px;
+    height: 40px;
+    border: solid 1px #ccc;
+    border-radius: 50px;
+    font-size: 21px;
+    box-shadow: 0px 3px 7px 0px rgba(203, 203, 203, 0.72);
+}
+.compose{
+    background: #6E4320 !important;
+    color: #fff !important;
+}
+.delete{
+    background: #D3A516;
+    color: #fff !important;
+}
+.reminder{
+    background: #3C80F6;
+    color: #fff !important;
+}
+.invite {
+    background: #2CAC26;
+    color: #fff !important;
+}
+.inbox .fa-iosm{
+
+    margin-top: 7px;
+}
+
+.top-btn 
+{
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    opacity: 1 !important;   
+}
+.bottom-btn
+{
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+}
+.mailbox-sidelink
+{
+    position: absolute;
+    right: 5px;
+    top: 2px;
+}
+.app-mailbox .list-group-item.active, .app-mailbox .list-group-item.active:focus, .app-mailbox .list-group-item.active:hover{
+    color: inherit;
+    background-color: #fff;
+}
+.fab.btn.active.focus, .fab.btn.active:focus, .fab.btn.focus, .fab.btn:active.focus, .fab.btn:active:focus, .fab.btn:focus, .differentmenu button:focus{
+    outline-width: 0px;
+}
+.mail-inbox .checkbox-custom label::before, .mail-inbox .checkbox-custom label::after, .mail-inbox .checkbox-custom input[type=checkbox] {
+    margin-left: -8px;
+    cursor: pointer;
+}
+.app-mailbox .btn-danger.focus, .btn-danger:focus, .btn-danger:hover{
+    background-color: #ef5350 !important;
+    border-color: #ef5350;
+}
+.app-mailbox .checkbox-important input[type=checkbox]:checked+label:before {
+    background-color: transparent;
+    color:#fb8c00;
+}
+.app-mailbox .checkbox-important label:before{
+    color: #e0e0e0;
+    content: '\f27d';
+    display: inline-block;
+    font-family: Material-Design-Iconic-Font;
+    font-size: 16px;
+    height: 16px;
+    left: 4px;
+    line-height: 1;
+    margin-top: -4px;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    font-weight: 700;
+
+
+}
+
+.app-mailbox .checkbox-important input[type=checkbox]{
+    cursor: pointer;
+    position: absolute;
+    margin-top: 0;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    margin-bottom: 0;
+}
+.mailbox-subject span{
+    color: #332;
+}
+
+select.input-sm
+{
+    line-height: 1.5;
+}
+.middle-height
+{
+    line-height: 40px;
+}
+.no-border
+{
+    border: none !important;
+}
+.floatlabl label.active {
+    top: -14.2px !important;
+    font-size: 11.2px !important;
+
+
+}
+
+.according
+{
+    color: black;
+    font-weight: 500;
+    font-size: 15px;
+}
+.according ul li
+{
+    list-style: none;
+
+
+}
+.attachment-infor ul li
+{
+    position: relative;
+    width: 200px;
+    float: left;
+    margin: 0px 15px 0px 15px;
+
+}
+.attachment-infor ul li a
+{
+    padding: 0px;
+
+}
+.attachment-infor ul li span
+{
+    font-size: 13px;
+    color: #aaa;   
+}
+.attachment-infor ul li .dnld
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 48px;
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    transform: translate(-50%, 100%);
+    transition: all 0.3s ease;
+}
+.attachment-infor ul li a:hover,  .attachment-infor ul li a:focus
+{
+    background-color: inherit;
+}
+
+.site-action {
+    position: fixed;
+    right: 32px;
+    bottom: 55px;
+    z-index: 1290;
+    -webkit-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    animation-duration: 3s;
+}
+
+.site-action .btn-icon .icon {
+    margin: -1px 0 0;
+}
+.site-action .btn .icon {
+    width: 1em;
+    margin: -1px 3px 0;
+    line-height: inherit;
+    text-align: center;
+}
+
+.site-action i{
+    vertical-align: initial;
+}
+
+.mail-top button
+{
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.app-mailbox .top-description
+{
+    height: 25%;
+    background-color: rgba(5, 5, 5, 0.59);
+}
+.app-mailbox  .bottom-overlay {
+    bottom: -25%;
+}
+.font-22
+{
+    font-size: 22px;
+}
+.margin-left-8
+{
+    margin-left: 8px;
+}
+.line-height-2p5
+{
+    line-height: 2.5;
+}
+.relative
+{
+    position: relative;
+}
+
+/**************App-mail************/

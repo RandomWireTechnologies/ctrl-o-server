@@ -1,0 +1,312 @@
+/*   
+  SmartWizard 2.0 plugin 
+  jQuery Wizard control Plugin
+  by Dipu
+  
+  http://www.techlaboratory.net
+  http://tech-laboratory.blogspot.com
+*/
+.swMain {
+    position:relative;
+    display:block;
+    margin:0;
+    padding:0;
+    border: 0 solid #CCC;
+    overflow:visible;
+    float:left;
+    width:100%;
+}
+.swMain .stepContainer {
+    display:block;
+    position: relative;
+    margin: 0;
+    padding:0;    
+    clear:both;
+    height:100px !important;
+    width: 100%;
+}
+.actionBar .buttonFinish{
+    display: none;
+}
+.swMain .stepContainer div.content {
+    display:block;
+    position: absolute;  
+    float:left;
+    margin: 0;
+    padding:5px;     
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
+    color: #d9534f;
+    height:300px;
+    text-align:left;
+    overflow:visible;    
+    z-index:88; 
+    -webkit-border-radius: 5px;
+    -moz-border-radius  : 5px;
+    width:100%;
+    clear:both;
+    line-height: 50px;
+    margin-top: 20px;
+}
+
+.swMain div.actionBar {
+    display:block;
+    position: relative; 
+    clear:both;
+    margin: 3px 0 0 0;   
+    padding: 0;    
+    color: #5A5655;   
+    height:40px;
+    text-align:left;
+    z-index:88; 
+    left:0;
+}
+
+.swMain .stepContainer .StepTitle {
+    display:none;
+    position: relative;
+    margin:0;   
+    border:1px solid #E0E0E0;
+    padding:10px;   
+    font: bold 16px Verdana, Arial, Helvetica, sans-serif; 
+    color:#5A5655;   
+    background-color:#E0E0E0;
+    clear:both;
+    text-align:left; 
+    z-index:88;
+    -webkit-border-radius: 5px;
+    -moz-border-radius  : 5px;    
+}
+.swMain ul.anchor {
+    position: relative;
+    display:block;
+    float:left;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;      
+    clear: both;
+    border: 0 solid #CCCCCC;
+    background: transparent; /*#EEEEEE */
+    width: 100%;
+}
+.swMain ul.anchor li{ 
+    position: relative; 
+    display:block;
+    margin: 0;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    border: 0 solid #E0E0E0;
+    float: left;
+}
+
+/* Anchor Element Style */
+.swMain ul.anchor li a {
+    display:block;
+    position:relative;
+    float:left;
+    margin: 5px 0 0 0;
+    padding: 10px;
+    height: 70px;
+    width:100%;
+    text-decoration: none;
+    outline-style:none;
+    z-index:99;
+}
+.swMain ul.anchor li a .stepNumber{
+    position: relative;
+    float: left;
+    width: 21px;
+    text-align: center;
+    padding: 0px 0px 1px;
+    font: bold 16px Verdana, Arial, Helvetica, sans-serif;
+    border: 1px solid;
+    border-radius: 3px;
+    margin-top: 8px;
+}
+.swMain ul.anchor li a .stepDesc{
+    position: relative;
+    display: block;
+    float: left;
+    text-align: left;
+    padding: 6px 0px 6px 12px;
+    font: 20px Verdana, Arial, Helvetica, sans-serif;
+    line-height: 18px;
+}
+.swMain ul.anchor li a .stepDesc small{
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+}
+.swMain ul.anchor li a.selected{
+    color:#fff;
+    background: #36a9e1;  /* EA8511 */
+    border: 1px solid #36a9e1;
+    cursor:text;
+}
+.swMain ul.anchor li a.selected:hover {
+    color:#fff;
+    background: #36a9e1;  
+}
+
+.swMain ul.anchor li a.done { 
+    position:relative;
+    color:#FFF;  
+    background: #5cb85c;  
+    border: 1px solid #5cb85c;   
+    z-index:99;
+}
+.swMain ul.anchor li a.disabled {
+    color: #fff;
+    background: #ccc;
+    border: 1px solid #CCC;  
+    cursor:text;   
+}
+.swMain ul.anchor li a.disabled:hover {
+    color:#CCCCCC;  
+    background: #F8F8F8;     
+}
+
+.swMain ul.anchor li a.error {
+    color:#fff !important;  
+    background: #d9534f !important;
+    border: 1px solid #d9534f !important;      
+}
+.swMain ul.anchor li a.error:hover {
+    color:#fff !important;       
+}
+
+.swMain .buttonNext {
+    display:block;
+    float:right;
+    margin:5px 3px 0 3px;
+    padding:6px;
+    text-decoration: none;
+    text-align: center;
+    font: bold 13px Verdana, Arial, Helvetica, sans-serif;
+    width:100px;
+    color:#FFF;
+    outline-style:none;
+    background-color:   #36A9E1;
+    border: 1px solid #36A9E1;    
+    line-height: 22px;
+}
+.swMain .buttonDisabled {
+    color:#F8F8F8  !important;
+    background-color: #CCCCCC !important;
+    border: 1px solid #CCCCCC  !important;
+    cursor:text;    
+}
+.swMain .buttonPrevious {
+    display:block;
+    float:left;
+    margin:5px 3px 0 3px;
+    padding:5px;
+    text-decoration: none;
+    text-align: center;
+    font: bold 13px Verdana, Arial, Helvetica, sans-serif;
+    width:100px;
+    color:#FFF;
+    outline-style:none;
+    background-color:   #36A9E1;
+    border: 1px solid #36A9E1;
+    line-height: 22px;
+}
+.swMain .buttonFinish {
+    display:none;
+    float:right;
+    margin:5px 10px 0 3px;
+    padding:5px;
+    text-decoration: none;
+    text-align: center;
+    font: bold 13px Verdana, Arial, Helvetica, sans-serif;
+    width:100px;
+    color:#FFF;
+    outline-style:none;
+    background-color:   #5A5655;
+    border: 1px solid #5A5655;
+    -moz-border-radius  : 5px; 
+    -webkit-border-radius: 5px;    
+}
+
+/* Form Styles */
+
+.txtBox {
+    border:1px solid #CCCCCC;
+    font:13px Verdana,Arial,Helvetica,sans-serif;
+    padding:2px;
+}
+.txtBox:focus {
+    border:1px solid #EA8511;
+}
+
+.swMain .loader {
+    position:relative;  
+    display:none;
+    float:left;  
+    margin: 2px 0 0 2px;
+    padding:8px 10px 8px 40px;
+    border: 1px solid #FFD700; 
+    font: bold 13px Verdana, Arial, Helvetica, sans-serif; 
+    color:#5A5655;       
+    background: #FFF;  
+    -moz-border-radius  : 5px;
+    -webkit-border-radius: 5px;
+    z-index:998;
+}
+.swMain .msgBox {
+    position:relative;  
+    display:none !important;
+    float:left;
+    margin: 4px 0 0 5px;
+    padding:5px;
+    border: 1px solid #FFD700; 
+    background-color: #FFFFDD;  
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
+    color:#5A5655;         
+    -moz-border-radius  : 5px;
+    -webkit-border-radius: 5px;
+    z-index:999;
+    min-width:200px;  
+}
+.swMain .msgBox .content {
+    font: normal 12px Verdana,Arial,Helvetica,sans-serif;
+    padding: 0;
+    float:left;
+    line-height: 20px;
+}
+.swMain .msgBox .close {
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    color: #CCC;
+    display: block;
+    float: right;
+    margin: 0 0 0 5px;
+    outline-style: none;
+    padding: 0 2px 0 2px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+.swMain .msgBox .close:hover{
+    color: #EA8511;
+    border: 1px solid #EA8511;  
+}
+
+@media (max-width: 1599px) {
+    .swMain ul.anchor li a {
+        width: 254px;
+    }
+}
+@media (max-width: 991px) {
+    .swMain ul.anchor li a {
+        width: 100%;
+    }
+
+}
+@media (max-width: 767px) {
+    .swMain .stepContainer {
+        height: 260px !important;
+    }
+}
+@media (max-width: 479px) {
+    .swMain ul.anchor li a {
+        width: 246px;
+    }
+}

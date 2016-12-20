@@ -1,0 +1,142 @@
+/****** ajax datatable *******/
+
+table-checkable tr>td:first-child, .table-checkable tr>th:first-child {
+    text-align: center;
+    max-width: 50px;
+    min-width: 40px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.input-inline, .radio-list>label.radio-inline {
+    display: inline-block;
+}
+
+.btn.default:not(.btn-outline) {
+    color: #666;
+    background-color: #e1e5ec;
+    border-color: #e1e5ec;
+}
+
+.btn.btn-outline.grey-salsa {
+    border-color: #EEEEEE;
+    color: #868788;
+    background: 0 0;
+    border: 1px solid !important;
+}
+
+.btn.btn-outline.grey-salsa:hover {
+    color: white;
+    background: #BBBAB9;
+}
+
+.input-inline .input-group-btn{
+    position: absolute;
+    right: 37px;
+}
+.input-inline .input-group-btn button{
+    line-height: 15px
+}
+
+td>.mt-checkbox.mt-checkbox-single, td>.mt-radio.mt-radio-single, th>.mt-checkbox.mt-checkbox-single, th>.mt-radio.mt-radio-single {
+    right: -5px;
+}
+
+.mt-checkbox, .mt-radio {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.mt-checkbox>input, .mt-radio>input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.mt-checkbox.mt-checkbox-outline:hover>input:not([disabled]):checked~span, .mt-checkbox.mt-checkbox-outline:hover>input:not([disabled])~span, .mt-checkbox.mt-checkbox-outline>input:checked~span, .mt-checkbox.mt-checkbox-outline>input:focus~span, .mt-checkbox.mt-checkbox-outline>span, .mt-checkbox.mt-radio-outline:hover>input:not([disabled]):checked~span, .mt-checkbox.mt-radio-outline:hover>input:not([disabled])~span, .mt-checkbox.mt-radio-outline>input:checked~span, .mt-checkbox.mt-radio-outline>input:focus~span, .mt-checkbox.mt-radio-outline>span, .mt-radio.mt-checkbox-outline:hover>input:not([disabled]):checked~span, .mt-radio.mt-checkbox-outline:hover>input:not([disabled])~span, .mt-radio.mt-checkbox-outline>input:checked~span, .mt-radio.mt-checkbox-outline>input:focus~span, .mt-radio.mt-checkbox-outline>span, .mt-radio.mt-radio-outline:hover>input:not([disabled]):checked~span, .mt-radio.mt-radio-outline:hover>input:not([disabled])~span, .mt-radio.mt-radio-outline>input:checked~span, .mt-radio.mt-radio-outline>input:focus~span, .mt-radio.mt-radio-outline>span {
+    border: 1px solid #d9d9d9;
+    background: 0 0;
+}
+
+.mt-checkbox>span, .mt-radio>span {
+    border: 1px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 19px;
+    width: 19px;
+    background: #E6E6E6;
+}
+
+.mt-checkbox>span:after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid #666;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.input-icon>i, .mt-checkbox-list .mt-checkbox, .mt-checkbox-list .mt-radio, .mt-checkbox>input:checked~span:after, .mt-radio-list .mt-checkbox, .mt-radio-list .mt-radio, .mt-radio>input:checked~span:after {
+    display: block;
+}
+
+.input-small {
+    width: 145px!important;
+}
+
+.mt-checkbox>span:after, .mt-radio>span:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.dataTables_extended_wrapper div.dataTables_info,.dataTables_extended_wrapper div.dataTables_length,.dataTables_extended_wrapper div.dataTables_paginate {
+    display:inline-block;
+    float:none!important;
+    position:static!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.dataTables_extended_wrapper.DTS .dataTables_info {
+    display:inline-block;
+    padding-top:8px!important;
+}
+
+.dataTables_extended_wrapper div.dataTables_length label {
+    font-size:13px;
+    float:none!important;
+    display:inline-block!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.dataTables_extended_wrapper .seperator {
+    padding:0 2px;
+}
+
+/************/
+
+
+@media (max-width: 991px){
+    .mt-checkbox > span, .mt-radio > span{
+        width: 17px;
+        height: 17px;
+    }
+    .mt-checkbox > span::after{
+        height: 8px;
+        width: 4px;
+    }
+}

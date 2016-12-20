@@ -1,0 +1,174 @@
+/*********** vector map **********/
+
+.jvectormap-container path {
+    fill-opacity: 1;
+    stroke: none;
+    stroke-width: 0;
+    stroke-opacity: 1;
+    fill-rule: evenodd;
+}
+
+.map-size{
+    width: 100%;
+    height: 435px;
+}
+
+.jvectormap-container {
+    background-color: #fff !important;
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.jvectormap-container svg {
+    /*    height: 650px !important;*/
+    width: 100% !important;
+}
+.jvectormap-container circle,.jvectormap-container fill {
+    fill: black !important;
+}
+
+.jvectormap-container svg {
+    -ms-touch-action:none;
+    touch-action:none;
+}
+
+.jvectormap-tip {
+    position:absolute;
+    display:none;
+    font-family:sans-serif,Verdana;
+    font-size:smaller;
+    color:#fff;
+    background:#292929;
+    border:solid 1px #cdcdcd;
+    border-radius:3px;
+    padding:3px;
+}
+
+.jvectormap-goback,.jvectormap-zoomin,.jvectormap-zoomout {
+    position:absolute;
+    left:20px;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    font-weight:700;
+    line-height:16px;
+    color:#fff;
+    text-align:center;
+    cursor:pointer;
+    background:black;
+    border-radius:3px;
+    padding:3px;
+}
+
+.jvectormap-zoomin,.jvectormap-zoomout {
+    font-size: 20px;
+    height: 20px !important;
+    line-height: 20px !important;
+    width: 20px !important;
+}
+
+.jvectormap-zoomin {
+    top:20px;
+}
+
+.jvectormap-zoomout {
+    top:20px;
+    left:50px;
+}
+
+.jvectormap-goback {
+    bottom:10px;
+    z-index:1000;
+    padding:6px;
+}
+
+.jvectormap-spinner {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background:center no-repeat;
+}
+
+.jvectormap-legend-title {
+    font-size:14px;
+    font-weight:700;
+    text-align:center;
+}
+
+.jvectormap-legend-cnt {
+    position:absolute;
+}
+
+.jvectormap-legend-cnt-h {
+    right:0;
+    bottom:0;
+}
+
+.jvectormap-legend-cnt-v {
+    top:0;
+    right:0;
+}
+
+.jvectormap-legend {
+    color:#fff;
+    background:#000;
+    border-radius:3px;
+}
+
+.jvectormap-legend-cnt-h .jvectormap-legend {
+    float:left;
+    margin:0 10px 10px 0;
+    padding:3px 3px 1px;
+}
+
+.jvectormap-legend-cnt-h .jvectormap-legend .jvectormap-legend-tick {
+    float:left;
+}
+
+.jvectormap-legend-cnt-v .jvectormap-legend {
+    margin:10px 10px 0 0;
+    padding:3px;
+}
+
+.jvectormap-legend-cnt-h .jvectormap-legend-tick {
+    width:40px;
+}
+
+.jvectormap-legend-cnt-h .jvectormap-legend-tick-sample {
+    height:15px;
+}
+
+.jvectormap-legend-cnt-v .jvectormap-legend-tick-sample {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    vertical-align:middle;
+}
+
+.jvectormap-legend-tick-text {
+    font-size:12px;
+}
+
+.jvectormap-legend-cnt-h .jvectormap-legend-tick-text {
+    text-align:center;
+}
+
+.jvectormap-legend-cnt-v .jvectormap-legend-tick-text {
+    display:inline-block;
+    padding-left:3px;
+    line-height:20px;
+    vertical-align:middle;
+}
+
+@media (max-width: 991px) {
+    .vectormap-size {
+        height: 500px !important;
+    }
+}

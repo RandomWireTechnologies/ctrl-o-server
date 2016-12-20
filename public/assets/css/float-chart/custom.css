@@ -1,0 +1,51 @@
+/*----- START-FLOT -----*/
+
+.chart-float {
+    box-sizing: border-box;
+    height: 450px;
+    padding: 20px 15px 15px 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    background: linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.placeholder-float {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+.left-chart-flot { margin-bottom:40px;}
+.chart-flot { padding-bottom:0px;}
+
+.main-pie-float {box-sizing: border-box;
+                 height: 450px;
+                 padding: 20px 15px 100px 15px;
+                 border: 1px solid #ddd;
+                 background: #fff;
+                 background: linear-gradient(#f6f6f6 0, #fff 50px);
+                 background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+                 background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+                 box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+                 -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+                 -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);}
+#menu-button { margin-top:40px; text-align:center;}
+.button-pie-flot button { border:none; color:#FFF; padding:7px 15px; border-radius:3px;}
+
+#navigation .button {
+    position: absolute;
+    cursor: pointer;
+}
+
+#navigation div.button {
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}

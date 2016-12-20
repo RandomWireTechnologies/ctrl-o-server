@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * config/services.php
+ *
+ * Config for services.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 return [
 
     /*
@@ -20,7 +31,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -30,8 +41,8 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => CtrlServer\Models\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 

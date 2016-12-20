@@ -1,6 +1,17 @@
 <?php
 
-namespace App\Exceptions;
+/**
+ * app/Exceptions/Handler.php
+ *
+ * Local exception handler extends Illuminate handler.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
+namespace CtrlServer\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

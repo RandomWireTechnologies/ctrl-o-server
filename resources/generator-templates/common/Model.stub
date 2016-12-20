@@ -1,0 +1,44 @@
+<?php 
+
+namespace $NAMESPACE_MODEL$;
+
+use $NAMESPACE_MODEL_EXTEND$;
+$IMPORT_TRAIT$
+class $MODEL_NAME$ extends Model$AUTH_IMPLEMENTS$
+{
+    $USE_TRAIT$
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    public $table = "$TABLE_NAME$";
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = [
+        $FIELDS$
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        $CAST$
+    ];
+
+    /**
+     * The rules that are used to validate.
+     *
+     * @var array
+     */
+    public static $rules = [
+        $RULES$
+    ];
+    $RELATIONSHIPS$
+}

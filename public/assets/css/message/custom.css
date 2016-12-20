@@ -1,0 +1,89 @@
+/****************** messages *********************/
+.chat-message .code-toggle-button span {
+    color:#fff;
+}
+.image-height{
+    width: 40px !important;
+    border-radius: 3px;
+}
+.message-list .list-group .active h3{
+    color: #fff !important;
+}
+.message-list .list-group-item:hover h3{
+    color: #fff;
+}
+.message-list .list-group-item {
+    padding: 10px 10px 5px;
+}
+.chat-title-padding{
+    padding: 0 5px 5px 15px !important;
+}
+.message-list .list-group-item:hover {
+    color: #fff !important;
+    background-color: #36A9E1;
+    border-color: #36A9E1;
+}
+.message-list .list-group-item span{
+    font-size: 14px;
+}
+.page-main-editor .chat_box{
+    height: 490px;
+    padding-right: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.chat-message .page-main-editor {
+    position: relative;
+}
+.chat-message .chat_footer{
+    overflow: hidden;
+}
+.chat-message{
+    position: relative;
+    top: 0;
+    background: #fff;
+}
+.chat-padding{
+    padding: 20px;
+}
+.chat-padding-left{
+    padding: 20px 0px;
+}
+.media-time-right{
+    font-size: 11px;
+    font-weight: bold;
+}
+.chat-message .media-right{
+    width: 30%;
+    text-align: right;
+    padding-left: 0;
+}
+.page-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    background: #fff;
+    border-right: 1px solid #e0e0e0;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.page-left-switch {
+    position: fixed;
+    right: 145px;
+    height: 25px;
+    display: none;
+    padding: 5px 8px 5px 8px;
+    line-height: 1;
+    z-index: 9999;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0px 0 10px rgba(0,0,0,.2);
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}

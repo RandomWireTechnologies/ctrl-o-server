@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * database/migrations/2016_09_11_191017_add_more_user_details.php
+ *
+ * Add more details to user table.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -14,7 +25,6 @@ class AddMoreUserDetails extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            // 
             $table->string('company')->nullable()->after('password');
             $table->string('phone',24)->after('company');
             $table->string('address_street')->after('phone');
@@ -33,7 +43,6 @@ class AddMoreUserDetails extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
             $table->dropColumn('company');
             $table->dropColumn('phone');
             $table->dropColumn('address_street');

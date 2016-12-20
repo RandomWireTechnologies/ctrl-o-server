@@ -1,6 +1,17 @@
 <?php
 
-namespace App\Providers;
+/**
+ * app/Providers/BroadcastServiceProvider.php
+ *
+ * Broadcasting service provider.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
+namespace CtrlServer\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

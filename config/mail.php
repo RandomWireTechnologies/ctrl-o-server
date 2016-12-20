@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * config/mail.php
+ *
+ * Config for mail.
+ *
+ * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
+ * @author    Vince Kronlein <vkronlein@cvitechnologies.com>
+ * @license   https://github.com/RandomWireTechnologies/ctrl-o-server/blob/master/LICENSE
+ * @copyright Random Wire Technologies. All Rights Reserved.
+ */
+
 return [
 
     /*
@@ -57,7 +68,7 @@ return [
 
     'from' => [
         'address' => env('APP_EMAIL_ADDRESS','ctrl-o@randomwire.biz'),
-        'name' => env('APP_EMAIL_NAME', 'Ctrl-O'),
+        'name'    => env('APP_EMAIL_NAME', 'Ctrl-O'),
     ],
     /*
     |--------------------------------------------------------------------------

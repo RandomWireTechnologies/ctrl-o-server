@@ -1,0 +1,16 @@
+* {
+    outline: none !important; 
+}
+.has-feedback .form-control-feedback {
+    top: 4px;
+    width: 40px;
+    font-size: 18px;
+    color: #6fd653;
+    opacity: 0; }
+.error { color:#d74242; margin-bottom:0px; padding-top:3px;}
+
+@media (max-width:340px){
+    .error{
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,218 @@
+/****************Calendar*********************/
+.fc-header-right{
+    padding: 0;
+    padding-right: 15px;
+}
+.fc-header-title h2{
+    font-size: 20px;
+    text-align: center;
+}
+.bg-danger {
+    background-color: #d9534f;
+}
+.bg-info {
+    background-color: #36a9e1;
+}
+.bg-warning {
+    background-color: #ffa726;
+}
+.bg-success {
+    background-color: #66bb6a;
+}
+.bg-primary {
+    background-color: #5E95C5;
+}
+.c-checkbox,.c-radio {
+    margin-right: 4px
+}
+.c-checkbox *,.c-radio * {
+    cursor: pointer;
+    margin-top: 11px;
+}
+.c-checkbox input,.c-radio input {
+    opacity: 0;
+    position: absolute;
+    margin-left: 0!important
+}
+.c-checkbox span,.c-radio span {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+.c-checkbox:hover span,.c-radio:hover span {
+    border-color: #3498db
+}
+.form-inline .c-checkbox span,.form-inline .c-radio span {
+    margin-left: 0
+}
+.c-checkbox.c-checkbox-rounded span,.c-radio.c-checkbox-rounded span,.c-checkbox.c-radio-rounded span,.c-radio.c-radio-rounded span {
+    border-radius: 500px
+}
+.c-radio span {
+    border-radius: 500px
+}
+.c-checkbox span:before,.c-radio span:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    text-align: center!important;
+    font-size: 12px;
+    line-height: 18px;
+    vertical-align: middle
+}
+input[type=checkbox]:checked + span:before,input[type=radio]:checked + span:before {
+    color: #fff;
+    opacity: 1;
+    background-color: #36a9e1;
+}
+input[type=checkbox]:checked + span,input[type=radio]:checked + span {
+    border-color: #3498db;
+    background-color: #3498db
+}
+input[type=radio]:checked + span {
+    background-color: #fff
+}
+input[type=radio]:checked + span:before {
+    color: #3498db
+}
+input[type=checkbox]:disabled + span,input[type=radio]:disabled + span {
+    border-color: #ddd!important;
+    background-color: #ddd!important
+}
+input[type=radio]:disabled + span {
+    background-color: #fff!important
+}
+input[type=radio]:disabled + span:before {
+    color: #ddd
+}
+.page-events {
+    margin: 0
+}
+.page-events > div {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.page-events:empty {
+    content: "EMRTPUY"
+}
+.page-events-trash {
+    position: relative;
+    min-height: 74px
+}
+.page-events-trash:after {
+    content: "\f00d";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2d2d2d;
+    opacity: 0;
+    font-family: FontAwesome;
+    color: #fff;
+    text-align: center;
+    font-size: 50px;
+    padding: 8%;
+    max-height: 100%;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    z-index: -1
+}
+.page-events-trash.active:after {
+    opacity: 1;
+    z-index: 1
+}
+.page-events-trash.hovered:after {
+    background-color: #fb797e
+}
+.page-event-color-selector .point.selected {
+    border: 3px solid rgba(255, 255, 255, 0.7) !important;
+}
+.point {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 3px;
+    margin: 0 2px;
+    background-color: #ddd;
+    vertical-align: baseline
+}
+.point.text-left {
+    margin-left: 0
+}
+.point.text-right {
+    margin-right: 0
+}
+.point-primary {
+    background-color: #5e95c5
+}
+.point-success {
+    background-color: #66bb6a
+}
+.point-info {
+    background-color: #36a9e1
+}
+.point-warning {
+    background-color: #ffa726
+}
+.point-danger {
+    background-color: #d9534f
+}
+.point-green {
+    background-color: #01b6ad
+}
+.point-pink {
+    background-color: #f36
+}
+.point-inverse {
+    background-color: #2d2d2d
+}
+.point-purple {
+    background-color: #9b59b6
+}
+.point-sm {
+    width: 3px;
+    height: 3px
+}
+.point-lg {
+    width: 8px;
+    height: 8px
+}
+.point-xl {
+    width: 16px;
+    height: 16px
+}
+.point-outline {
+    background-color: transparent
+}
+.point-outline.point-primary {
+    border: 1px solid #3498db
+}
+.point-outline.point-success {
+    border: 1px solid #27ae60
+}
+.point-outline.point-info {
+    border: 1px solid #00afd1
+}
+.point-outline.point-warning {
+    border: 1px solid #ffc61d
+}
+.point-outline.point-danger {
+    border: 1px solid #f6504d
+}
