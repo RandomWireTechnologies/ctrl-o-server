@@ -13,9 +13,7 @@
 
 namespace CtrlServer\Controllers;
 
-use Validator;
 use CtrlServer\Models\User;
-use Illuminate\Http\Request;
 use CtrlServer\Base\Controller;
 use CtrlServer\Requests\UpdateProfileRequest;
 use CtrlServer\Requests\UpdatePasswordRequest;

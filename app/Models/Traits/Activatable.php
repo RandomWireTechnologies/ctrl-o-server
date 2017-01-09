@@ -3,7 +3,7 @@
 /**
  * app/Models/Traits/Activatable.php
  *
- * Activatable trait for adding email activation to User model.
+ * Trait for adding email activation to User model.
  *
  * @author    Gary Belvin    <gbelvin@cvitechnologies.com>
  * @author    Vince Kronlein <vkronlein@cvitechnologies.com>

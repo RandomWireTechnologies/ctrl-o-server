@@ -6,7 +6,7 @@ use $NAMESPACE_MODEL_EXTEND$;
 $IMPORT_TRAIT$
 class $MODEL_NAME$ extends Model$AUTH_IMPLEMENTS$
 {
-    $USE_TRAIT$
+    $USE_TRAIT$use Traits\Griddable;
     /**
      * The database table used by the model.
      *
@@ -33,6 +33,15 @@ class $MODEL_NAME$ extends Model$AUTH_IMPLEMENTS$
     ];
 
     /**
+     * The grid array for creating jsGrids.
+     *
+     * @var array
+     */
+    protected static $grids = [
+        $GRID$
+    ];
+
+    /**
      * The rules that are used to validate.
      *
      * @var array
@@ -40,5 +49,56 @@ class $MODEL_NAME$ extends Model$AUTH_IMPLEMENTS$
     public static $rules = [
         $RULES$
     ];
+
+    /**
+     * The rules used for jsGrid validation.
+     * 
+     * @var array
+     */
+    public static $validationRules = [
+        $VALIDATION_RULES$
+    ];
+
+    /**
+     * Messages used for jsGrid validation.
+     * 
+     * @var array
+     */
+    public static $validationMessages = [
+        $VALIDATION_MESSAGES$
+    ];
+    
     $RELATIONSHIPS$
+
+    /**
+     * Process searches for $MODEL_NAME$s.
+     * 
+     * @param  Request $request
+     * @return Collection
+     */
+    public function search($request)
+    {
+        $query = $this;
+
+        $items = [
+            $FIELDS$
+        ];
+
+        foreach($request->only($this->fillable) as $key => $value) {
+            if ($value) {
+                switch($key) {
+                    case 'true':
+                    case 'false':
+                        $val   = ($value == 'true') ? true : false;
+                        $query = $query->where($key, $val);
+                        break;
+                    default:
+                        $query = $query->where($key, 'like', '%' . $value . '%');
+                        break;
+                }
+            }
+        }
+
+        return $query->get();
+    }
 }

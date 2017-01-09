@@ -75,7 +75,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Phoenix',
 
     /*
     |--------------------------------------------------------------------------
@@ -190,6 +190,7 @@ return [
         CtrlServer\Providers\EventServiceProvider::class,
         CtrlServer\Providers\RouteServiceProvider::class,
         CtrlServer\Providers\BreadcrumbServiceProvider::class,
+        CtrlServer\Providers\GridServiceProvider::class,
 
     ],
 

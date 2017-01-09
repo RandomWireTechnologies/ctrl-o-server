@@ -4,7 +4,7 @@
     <div class="sidebar-menu">
         <ul>
             <li class="has-sub">
-                <a class="waves-effect waves-light" href="{{ route('cards.index') }}"> 
+                <a class="waves-effect waves-light" href=""> 
                     <i class="layout-icon icon_id-2" aria-hidden="true"></i> <span>Cards</span>
                 </a>
             </li>
@@ -13,6 +13,13 @@
                     <i class="layout-icon icon_creditcard" aria-hidden="true"></i> <span>Membership</span>
                 </a>
             </li>
+            @can('admin-tools')
+            <li class="has-sub">
+                <a class="waves-effect waves-light" href="{{ route('admin.dashboard') }}"> 
+                    <i class="layout-icon icon_cog" aria-hidden="true"></i> <span>Admin</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
     <div class="clearfix"></div>

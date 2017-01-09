@@ -1,0 +1,25 @@
+Route::get('$RESOURCE_URL$', [
+    'as'   => '$RESOURCE_URL$.index',
+    'uses' => '$MODEL_NAME$Controller@index'
+]);
+
+Route::post('$RESOURCE_URL$', [
+    'as'   => '$RESOURCE_URL$.store',
+    'uses' => '$MODEL_NAME$Controller@store'
+]);
+
+Route::post('$RESOURCE_URL$/{id}', [
+    'as'   => '$RESOURCE_URL$.update',
+    'uses' => '$MODEL_NAME$Controller@update'
+]);
+
+Route::post('$RESOURCE_URL$/{id}/destroy', [
+    'as'   => '$RESOURCE_URL$.destroy',
+    'uses' => '$MODEL_NAME$Controller@destroy'
+]);
+
+// API
+Route::get('$RESOURCE_URL$', [
+    'as'   => 'api.$RESOURCE_URL$.list',
+    'uses' => '$MODEL_NAME$Controller@list'
+]);

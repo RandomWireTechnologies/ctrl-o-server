@@ -12,6 +12,7 @@
   -moz-border-radius: 4px;
   border-radius: 4px;
   direction: ltr;
+  z-index: 9999999 !important;
 }
 .datepicker-inline {
   width: 220px;
@@ -67,6 +68,9 @@
   bottom: -7px;
   border-bottom: 0;
   border-top: 7px solid #999;
+}
+.datepicker-dropdown.datepicker-orient-top {
+  z-index: 9999999 !important;
 }
 .datepicker-dropdown.datepicker-orient-top:after {
   bottom: -6px;

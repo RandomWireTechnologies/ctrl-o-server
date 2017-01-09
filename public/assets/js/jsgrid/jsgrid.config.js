@@ -11,6 +11,19 @@
         }
     });
 
+    jsGrid.setDefaults("date", {
+        _createTextBox: function() {
+            var picker = $("<input>").attr("type", "text").attr("class", "form-control input-md datepicker");
+            
+            $(picker).datepicker({
+                'format': 'm/d/yyyy',
+                'autoclose': true
+            });
+
+            return picker;
+        }
+    });
+
     jsGrid.setDefaults("number", {
         _createTextBox: function() {
             return $("<input>").attr("type", "number").attr("class", "form-control input-md")

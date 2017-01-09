@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
+        <meta name="token" content="{{ csrf_token() }}">
         <title>{{ config('app.name') }} | @yield('title')</title>
         @include('admin.partials.favicons')
 
@@ -33,6 +34,8 @@
         @yield('page-js')
 
         @yield('page-template-js')
+
+        @yield('scripts')
 
     </body>
 </html>

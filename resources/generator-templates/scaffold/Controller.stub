@@ -2,14 +2,14 @@
 
 namespace $NAMESPACE_CONTROLLER$;
 
-use Flash;
+use Illuminate\Http\Request;
+use $BASE_CONTROLLER$;
 use $NAMESPACE_MODEL$\$MODEL_NAME$;
 use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
 use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
-use $BASE_CONTROLLER$ as BaseController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class $MODEL_NAME$Controller extends BaseController
+class $MODEL_NAME$Controller extends Controller
 {
     /**
      * Display a listing of the $MODEL_NAME$.
@@ -18,23 +18,27 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function index()
     {
-        bcs('');
+        bcs('$MODEL_NAME_PLURAL_CAMEL$');
 
-        $$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::$RENDER_TYPE$;
+        $data['fields']   = $MODEL_NAME$::grid();
+        $data['rules']    = encode($MODEL_NAME$::$validationRules);
+        $data['messages'] = encode($MODEL_NAME$::$validationMessages);
 
-        return view('$VIEW_PATH$$VIEW_FOLDER_NAME$.index', compact('$MODEL_NAME_PLURAL_CAMEL$'));
+        return view('$VIEW_PATH$$VIEW_FOLDER_NAME$.index', $data);
     }
 
     /**
-     * Show the form for creating a new $MODEL_NAME$.
-     *
+     * Return an API listing of $MODEL_NAME_PLURAL_CAMEL$.
+     * 
+     * @param  Request $request
+     * @param  $MODEL_NAME$ $$MODEL_NAME_LOWER$
      * @return Response
      */
-    public function create()
+    public function list(Request $request, $MODEL_NAME$ $$MODEL_NAME_LOWER$)
     {
-        bcs([]);
+        $$MODEL_NAME_LOWER_PLURAL$ = $$MODEL_NAME_LOWER$->search($request);
 
-        return view('$VIEW_PATH$$VIEW_FOLDER_NAME$.create');
+        return response()->json($$MODEL_NAME_LOWER_PLURAL$);
     }
 
     /**
@@ -45,43 +49,21 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function store(Create$MODEL_NAME$Request $request)
     {
-        $input = $request->all();
+        $json = [
+            'type'    => 'error',
+            'title'   => 'Whoops',
+            'message' => 'Your $MODEL_NAME$ could not be created at this time. Please try again.',
+            'item'    => null
+        ];
 
-        $MODEL_NAME$::create($input);
-        
-        Flash::success($MESSAGE_STORE$);
-        
-        return redirect(route('$ROUTE_PREFIX$$RESOURCE_URL$.index'));
-    }
+        if ($$MODEL_NAME_LOWER$ = $MODEL_NAME$::create($request->all())) {
+            $json['type']    = 'success';
+            $json['title']   = '$MODEL_NAME$ Created';
+            $json['message'] = 'Your $MODEL_NAME$ was created successfully, super sweet!';
+            $json['item']    = $$MODEL_NAME_LOWER$->toJson();
+        }
 
-    /**
-     * Show the specified $MODEL_NAME$.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        bcs([]);
-
-        $$MODEL_NAME_CAMEL$ = $this->exist($id);
-        
-        return view('$VIEW_PATH$$VIEW_FOLDER_NAME$.show')->with(compact('$MODEL_NAME_CAMEL$'));
-    }
-
-    /**
-     * Show the form for editing the specified $MODEL_NAME$.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        bcs([]);
-        
-        $$MODEL_NAME_CAMEL$ = $this->exist($id);
-        
-        return view('$VIEW_PATH$$VIEW_FOLDER_NAME$.edit')->with(compact('$MODEL_NAME_CAMEL$'));
+        return response()->json($json);
     }
 
     /**
@@ -93,15 +75,23 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function update($id, Update$MODEL_NAME$Request $request)
     {
-        $$MODEL_NAME_CAMEL$ = $this->exist($id);
+        $json = [
+            'type'    => 'error',
+            'title'   => 'Whoops',
+            'message' => 'Your $MODEL_NAME$ could not be updated at this time. Please try again.'
+        ];
 
+        $$MODEL_NAME_CAMEL$ = $this->exist($id);
+        
         $$MODEL_NAME_CAMEL$->fill($request->all());
 
-        $$MODEL_NAME_CAMEL$->save();
+        if ($$MODEL_NAME_CAMEL$->save()) {
+            $json['type']    = 'success';
+            $json['title']   = '$MODEL_NAME$ Saved';
+            $json['message'] = 'Your $MODEL_NAME$ was updated successfully, nice job!';
+        }
 
-        Flash::success($MESSAGE_UPDATE$);
-
-        return redirect(route('$ROUTE_PREFIX$$RESOURCE_URL$.index'));
+        return response()->json($json);
     }
 
     /**
@@ -112,13 +102,21 @@ class $MODEL_NAME$Controller extends BaseController
      */
     public function destroy($id)
     {
+        $json = [
+            'type'    => 'error',
+            'title'   => 'Whoops',
+            'message' => 'Your $MODEL_NAME$ could not be deleted at this time. Please try again.'
+        ];
+
         $$MODEL_NAME_CAMEL$ = $this->exist($id);
 
-        $$MODEL_NAME_CAMEL$->delete();
+        if ($$MODEL_NAME_CAMEL$->delete()) {
+            $json['type']    = 'success';
+            $json['title']   = '$MODEL_NAME$ Deleted';
+            $json['message'] = 'Your $MODEL_NAME$ was deleted successfully, WOOT!';
+        }
 
-        Flash::success($MESSAGE_DELETE$);
-
-        return redirect(route('$ROUTE_PREFIX$$RESOURCE_URL$.index'));
+        return response()->json($json);
     }
 
     /**
@@ -131,8 +129,10 @@ class $MODEL_NAME$Controller extends BaseController
     {
         try {
             $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::findOrFail($id);
+
         } catch (ModelNotFoundException $e) {
-            Flash::error($MESSAGE_NOT_FOUND$);
+            
+            flash($MESSAGE_NOT_FOUND$, 'danger');
 
             return redirect(route('$ROUTE_PREFIX$$RESOURCE_URL$.index'));
         }

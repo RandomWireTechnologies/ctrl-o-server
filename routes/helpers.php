@@ -85,20 +85,45 @@ if (! function_exists('lastname')) {
 	}
 }
 
-if (! function_exists('activateUsers')) {
+if (! function_exists('encode')) {
 
 	/**
-	 * Helper function to update all users to active.
+	 * JSON encode an item.
 	 * 
-	 * @return void
+	 * @param  mixed $item
+	 * @return object
 	 */
-	function activateUsers()
+	function encode($item)
 	{
-		$users = \CtrlServer\Models\User::all();
+		return json_encode($item);
+	}
+}
 
-	    foreach($users as $user) {
-	        $user->activated_at = (new \Carbon\Carbon)->now();
-	        $user->save();
-	    }
+if (! function_exists('decode')) {
+
+	/**
+	 * JSON decode and item.
+	 * 
+	 * @param  mixed  $item
+	 * @param  boolean $array
+	 * @return object|array
+	 */
+	function decode($item, $array = TRUE)
+	{
+		return json_decode($item, $array);
+	}
+}
+
+if (! function_exists('dec_enc')) {
+
+	/**
+	 * Create an object from an array using JSON.
+	 * 
+	 * @param  mixed $item
+	 * @return object
+	 */
+	function dec_enc($item)
+	{
+		return json_decode(json_encode($item), FALSE);
 	}
 }

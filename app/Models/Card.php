@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
+    use Traits\Griddable;
+    
     /**
      * The database table used by the model.
      *
@@ -51,6 +53,41 @@ class Card extends Model
     ];
 
     /**
+     * The grid array for creating jsGrids.
+     *
+     * @var array
+     */
+    protected static $grids = [
+        [
+            'name'     => 'name',
+            'title'    => 'Name',
+            'type'     => 'text',
+            'validate' => 'required',
+            'width'    => 150
+        ],
+        [
+            'name'     => 'serial',
+            'title'    => 'Serial',
+            'type'     => 'text',
+            'validate' => 'required',
+            'width'    => 150
+        ],
+        [
+            'name'     => 'hash',
+            'title'    => 'Hash',
+            'type'     => 'text',
+            'validate' => 'required',
+            'width'    => 200
+        ],
+        [
+            'name'  => 'enabled',
+            'title' => 'Enabled',
+            'type'  => 'checkbox',
+            'width' => 50
+        ]
+    ];
+
+    /**
      * The rules that are used to validate.
      *
      * @var array
@@ -61,6 +98,40 @@ class Card extends Model
         'serial'  => 'required|string',
         'hash'    => 'required|string',
         'enabled' => 'required'
+    ];
+
+    /**
+     * The rules used for jsGrid validation.
+     * 
+     * @var array
+     */
+    public static $validationRules = [
+        'name' => [
+            'required' => true
+        ],
+        'serial' => [
+            'required' => true
+        ],
+        'hash' => [
+            'required' => true
+        ],
+    ];
+
+    /**
+     * Messages used for jsGrid validation.
+     * 
+     * @var array
+     */
+    public static $validationMessages = [
+        'name' => [
+            'required' => 'Please enter a Name for this Card.'
+        ],
+        'serial' => [
+            'required' => 'Please enter a Serial for this Card.'
+        ],
+        'hash' => [
+            'required' => 'Please enter a Hash for this Card.'
+        ],
     ];
 
     /**
@@ -82,5 +153,34 @@ class Card extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Process searches for Cards.
+     * 
+     * @param  Request $request
+     * @return Collection
+     */
+    public function search($request)
+    {
+        $query = $this;
+        
+        foreach($request->only($this->fillable) as $key => $value) {
+            if ($value) {
+                switch($key) {
+                    case 'enabled':
+                        $val   = $value == 'true' ? true : false;
+                        $query = $query->where($key, $val);
+                        break;
+                    case 'name':
+                    case 'serial':
+                    case 'hash':
+                        $query = $query->where($key, 'like', '%' . $value . '%');
+                    break;
+                }
+            }
+        }
+
+        return $query->get();
     }
 }

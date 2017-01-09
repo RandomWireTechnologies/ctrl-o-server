@@ -215,11 +215,11 @@ ul.pagination li a.active{
 }
 
 .breadcrumb>li+li:before{
-    color: #006064;
+    color: #fff;
 }
 
 .breadcrumb li a {
-    color: #006064;
+    color: #fff;
 }
 
 .label-info {

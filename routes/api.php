@@ -24,18 +24,44 @@ Route::group(['middleware' => ['auth:api']], function() {
 });
 Route::group(['middleware' => ['auth']], function() {
     
-    Route::get('/cards', [
+    Route::get('/admin/cards', [
         'as'   => 'api.cards.list',
-        'uses' => 'CardController@list'
+        'uses' => 'Admin\CardController@list'
     ]);
-    Route::get('/cards/{card}', 'CardController@apiRead');
-    Route::get('/users', 'AdminController@apiUserList');
-    Route::get('/users/names', 'AdminController@apiListAllUserByName');
-    Route::get('/nodes', 'NodesController@apiList');
-    Route::get('/schedules', 'SchedulesController@apiList');
-    Route::get('/memberships', 'MembershipController@apiMembershipList');
-    Route::get('/membership_types', 'MembershipController@apiMembershipTypeList');
-    Route::get('/membership_credits', 'MembershipController@apiMembershipCreditList');
-    Route::get('/membership_subscriptions', 'MembershipController@apiMembershipSubscriptionList');
+
+    Route::get('/admin/memberships', [
+        'as'   => 'api.memberships.list',
+        'uses' => 'Admin\MembershipController@list'
+    ]);
+
+    Route::get('/admin/membership-credits', [
+        'as'   => 'api.membership-credits.list',
+        'uses' => 'Admin\MembershipCreditController@list'
+    ]);
+
+    Route::get('/admin/membership-subscriptions', [
+        'as'   => 'api.membership-subscriptions.list',
+        'uses' => 'Admin\MembershipSubscriptionController@list'
+    ]);
+
+    Route::get('/admin/membership-types', [
+        'as'   => 'api.membership-types.list',
+        'uses' => 'Admin\MembershipTypeController@list'
+    ]);
+
+    Route::get('/admin/nodes', [
+        'as'   => 'api.nodes.list',
+        'uses' => 'Admin\NodeController@list'
+    ]);
+
+    Route::get('/admin/schedules', [
+        'as'   => 'api.schedules.list',
+        'uses' => 'Admin\ScheduleController@list'
+    ]);
+
+    Route::get('/admin/users', [
+        'as'   => 'api.users.list',
+        'uses' => 'Admin\UserController@list'
+    ]);
 });
     
