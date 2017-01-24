@@ -11,13 +11,14 @@
  * @copyright Random Wire Technologies. All Rights Reserved.
  */
 
+
 namespace CtrlServer\Controllers\Admin;
 
+use CtrlServer\Models\Membership;
+use CtrlServer\Models\MembershipType;
 use CtrlServer\Models\User;
 use Illuminate\Http\Request;
 use CtrlServer\Base\Controller;
-use CtrlServer\Models\Membership;
-use CtrlServer\Models\MembershipType;
 use CtrlServer\Requests\CreateMembershipRequest;
 use CtrlServer\Requests\UpdateMembershipRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -34,7 +35,6 @@ class MembershipController extends Controller
         bcs('Memberships');
 
         $fields = Membership::grid();
-
         $users = app('grid')->users();
         $types = app('grid')->membershipTypes();
         
