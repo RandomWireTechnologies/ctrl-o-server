@@ -52,4 +52,9 @@ class NodesController extends Controller
 	{
 		return $node;
 	}
+
+	public function getAccess(Node $node)
+	{
+		return $node;
+	}
 }

@@ -63,5 +63,15 @@ Route::group(['middleware' => ['auth']], function() {
         'as'   => 'api.users.list',
         'uses' => 'Admin\UserController@list'
     ]);
+
+    Route::get('/nodes/{node}', [
+        'as'   => 'api.nodes.apiRead',
+        'uses' => 'NodesController@apiRead'
+    ]);
+
+    Route::get('/nodes/{node}/access', [
+        'as'   => 'api.nodes.getAccess',
+        'uses' => 'NodesController@getAccess'
+    ]);
 });
     
